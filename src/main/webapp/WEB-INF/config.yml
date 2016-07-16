@@ -1,0 +1,8 @@
+jdbc_url: jdbc:mysql://120.27.100.98:3306/car
+jdbc_user: root
+jdbc_password: 246260
+
+wx_appId: wxe1f745f9ac6a37a6
+wx_appSecret: de73fb1b199b13b3853a23897633df69
+
+domain_url: http://120.27.100.98
