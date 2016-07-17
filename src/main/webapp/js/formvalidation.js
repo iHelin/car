@@ -10,7 +10,7 @@ $(function() {
                 return $(el).closest('.form-group,.am-form-group');
             },
             errorsWrapper: '<ul class=\"help-block list-unstyled\"></ul>',
-            errorElem: '<li></li>'
+            errorElem: "<li></li>"
         },
 	    messages: {
             defaultMessage: "此栏填写似乎不合格式。",
@@ -26,7 +26,7 @@ $(function() {
             },
             notnull: "此栏不能留空。",
             notblank: "此栏不能留空。",
-            required: "此栏不能留空。",
+            required: "<i class='fa fa-exclamation-triangle'></i> 此栏不能留空。",
             regexp: "请填写正确的金额。",
             min: "此栏的值必须大于等于 %s。",
             max: "此栏的值必须小于等于 %s。",

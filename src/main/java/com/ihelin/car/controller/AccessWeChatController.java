@@ -12,8 +12,8 @@ import org.dom4j.DocumentException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.ihelin.car.db.entity.ServiceMenu;
 import com.ihelin.car.message.entity.LocationMessage;
-import com.ihelin.car.message.manager.EventMessageManager;
 import com.ihelin.car.message.manager.TextMessageManager;
 import com.ihelin.car.utils.CheckUtil;
 import com.ihelin.car.utils.MessageUtil;
@@ -50,7 +50,7 @@ public class AccessWeChatController extends BaseController {
 				} else if (MessageUtil.MESSAGE_IMAGE.equals(msgType)) {
 					message = MessageUtil.initText(toUserName, fromUserName, "我已经收到了你的图片！");
 				} else if (MessageUtil.MESSAGE_EVNET.equals(msgType)) {
-					message = EventMessageManager.eventMessage(toUserName, fromUserName, msgMap);
+					message = eventMessage(toUserName, fromUserName, msgMap);
 				} else if (MessageUtil.MESSAGE_LOCATION.equals(msgType)) {
 					LocationMessage locationMsg = WechatUtil.MapToLocation(msgMap);
 					message = MessageUtil.initText(toUserName, fromUserName, locationMsg.getLabel());
@@ -61,6 +61,25 @@ public class AccessWeChatController extends BaseController {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public String eventMessage(String toUserName, String fromUserName,Map<String, String> map){
+		String eventType = map.get("Event");
+		String message = "";
+		if (MessageUtil.MESSAGE_SUBSCRIBE.equals(eventType)) {
+			message = MessageUtil.initText(toUserName, fromUserName, "欢迎关注");
+		} else if (MessageUtil.MESSAGE_CLICK.equals(eventType)) {
+			Integer id = Integer.parseInt(map.get("EventKey"));
+			ServiceMenu sMenu = serviceMenuMannger.getMenuById(id);
+			message = MessageUtil.initText(toUserName, fromUserName, sMenu.getContent());
+		} else if (MessageUtil.MESSAGE_VIEW.equals(eventType)) {
+			String url = map.get("EventKey");
+			message = MessageUtil.initText(toUserName, fromUserName, url);
+		} else if (MessageUtil.MESSAGE_SCANCODE.equals(eventType)) {
+			String key = map.get("EventKey");
+			message = MessageUtil.initText(toUserName, fromUserName, key);
+		}
+		return message;
 	}
 
 }

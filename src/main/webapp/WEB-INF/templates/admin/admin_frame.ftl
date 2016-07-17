@@ -9,9 +9,9 @@
 	<meta name="description" content="" />
 	<meta name="author" content="" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-   <link href="${request.contextPath}/fonts/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet">
-   <link href="${request.contextPath}/css/styles.min.css" rel="stylesheet" type='text/css' media="all" />
-   <script type='text/javascript' src='${request.contextPath}/js/jquery-2.2.1.min.js'></script>
+   	<link href="${request.contextPath}/css/styles.min.css" rel="stylesheet" type='text/css' media="all" />
+   	<link rel="stylesheet" type="text/css" href="${request.contextPath}/plugins/sweetalert/dist/sweetalert.css">
+   	<script type='text/javascript' src='${request.contextPath}/js/jquery-2.2.1.min.js'></script>
 </head>
 <body class="">
     <header class="navbar navbar-inverse navbar-fixed-top" role="banner">
@@ -35,12 +35,6 @@
         			</li>
         			<li class="userlinks">
         				<ul class="dropdown-menu">
-        					<#--
-        					<li><a href="#">Edit Profile <i class="pull-right icon-pencil"></i></a></li>
-        					<li><a href="#">Account <i class="pull-right icon-cog"></i></a></li>
-        					<li><a href="#">Help <i class="pull-right icon-question-sign"></i></a></li>
-        					<li class="divider"></li>
-        					-->
         					<li><a href="${request.contextPath}/admin/logout" class="text-right">退出</a></li>
         				</ul>
         			</li>
@@ -54,8 +48,19 @@
                 <!-- BEGIN SIDEBAR MENU -->
             <ul class="acc-menu" id="sidebar">
                 <li>
-                	<a href="${request.contextPath}/index"><i class="fa fa-home"></i><span>首页</span></a>
+                	<a href="${request.contextPath}/admin/index"><i class="fa fa-home"></i><span>首页</span></a>
                 </li>
+                <li class="hasChild">
+                	<a href ="javascript:void(0);">
+                		<i class ="fa fa-th"></i> 
+		                <span>菜单管理</span>
+		            </a>
+		            <ul class="acc-menu">
+						<li><a href="${request.contextPath}/admin/menu_admin">
+							<span>自定义菜单</span></a>
+						</li>
+			        </ul>
+			    </li>
             </ul>
             <!-- END SIDEBAR MENU -->
         </nav> 
@@ -67,8 +72,7 @@
 	    <footer role="contentinfo">
 	        <div class="clearfix">
 	            <ul class="list-unstyled list-inline">
-	                <li>E品居 &copy; 2016</li>
-	                <!--li class="pull-right"><a href="javascript:;" id="back-to-top">Top <i class="icon-arrow-up"></i></a></li-->
+	                <li>E品居 &copy; ${.now?string('yyyy')}</li>
 	                <button class="pull-right btn btn-inverse btn-xs" id="back-to-top" style="margin-top: -1px; text-transform: uppercase;"><i class="fa fa-arrow-up"></i></button>
 	            </ul>
 	        </div>
@@ -83,9 +87,6 @@
 <script type='text/javascript' src='${request.contextPath}/js/application.js'></script>
 <script type='text/javascript' src='${request.contextPath}/plugins/form-parsley/parsley.min.js'></script> 
 <script type='text/javascript' src='${request.contextPath}/js/formvalidation.js'></script> 
-
-<!--弹出框引用-->
-<link rel="stylesheet" type="text/css" href="${request.contextPath}/plugins/sweetalert/dist/sweetalert.css">
 <script src="${request.contextPath}/plugins/sweetalert/dist/sweetalert.min.js"></script>
 <script type='text/javascript'>
 

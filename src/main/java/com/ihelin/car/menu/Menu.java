@@ -1,13 +1,16 @@
 package com.ihelin.car.menu;
 
-public class Menu {
-	private Button[] button;
+import java.util.List;
 
-	public Button[] getButton() {
+public class Menu {
+	private List<Button> button;
+
+	public List<Button> getButton() {
 		return button;
 	}
 
-	public void setButton(Button[] button) {
+	public void setButton(List<Button> button) {
 		this.button = button;
 	}
+
 }

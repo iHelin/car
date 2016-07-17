@@ -13,6 +13,7 @@ import java.net.URL;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.http.HttpEntity;
@@ -26,6 +27,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
+import com.google.common.collect.Lists;
 import com.ihelin.car.config.CommonConfig;
 import com.ihelin.car.menu.Button;
 import com.ihelin.car.menu.ClickButton;
@@ -80,31 +82,38 @@ public class WechatUtil {
 	// 组装菜单
 	public static Menu initMenu() {
 		Menu menu = new Menu();
+		List<Button> buttons = Lists.newArrayList();
 		ClickButton button11 = new ClickButton();
 		button11.setName("click菜单");
 		button11.setType("click");
 		button11.setKey("11");
+		buttons.add(button11);
 
-		ViewButton button21 = new ViewButton();
-		button21.setName("view菜单");
-		button21.setType("view");
-		button21.setUrl("http://www.imooc.com");
-
+		ViewButton button2 = new ViewButton();
+		button2.setName("官方网站");
+		button2.setType("view");
+		button2.setUrl("http://www.tcqcw.cn");
+		buttons.add(button2);
+		
+		List<Button> subButtons = Lists.newArrayList();
 		ClickButton button31 = new ClickButton();
 		button31.setName("扫码");
 		button31.setType("scancode_push");
 		button31.setKey("31");
+		subButtons.add(button31);
 
 		ClickButton button32 = new ClickButton();
 		button32.setName("地理位置");
 		button32.setType("location_select");
 		button32.setKey("32");
+		subButtons.add(button32);
 
 		Button button = new Button();
 		button.setName("新菜单");
-		button.setSub_button(new Button[] { button31, button32 });
+		button.setSub_button(subButtons);
+		buttons.add(button);
 
-		menu.setButton(new Button[] { button11, button21, button });
+		menu.setButton(buttons);
 		return menu;
 	}
 

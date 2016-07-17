@@ -1,13 +1,15 @@
 package com.ihelin.car.controller.admin;
 
+import java.io.IOException;
+
+import org.apache.http.ParseException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.ihelin.car.controller.BaseController;
 @Controller
-public class AdminIndexController extends BaseController{
-	@RequestMapping(value="index")
-	public String index(){
+public class AdminIndexController extends AdminBaseController {
+	@RequestMapping(value = "index")
+	public String index() throws ParseException, IOException {
 		return "admin/index";
 	}
 }
