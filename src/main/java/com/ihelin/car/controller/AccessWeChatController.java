@@ -8,13 +8,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.http.ParseException;
 import org.dom4j.DocumentException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ihelin.car.db.entity.ServiceMenu;
 import com.ihelin.car.message.entity.LocationMessage;
-import com.ihelin.car.message.manager.TextMessageManager;
 import com.ihelin.car.utils.CheckUtil;
 import com.ihelin.car.utils.MessageUtil;
 import com.ihelin.car.utils.WechatUtil;
@@ -46,7 +46,7 @@ public class AccessWeChatController extends BaseController {
 				String message = "";
 				if (MessageUtil.MESSAGE_TEXT.equals(msgType)) {
 					System.out.println("用户发送的消息是：" + content);
-					message = TextMessageManager.textMessage(content, toUserName, fromUserName);
+					message = textMessage(content, toUserName, fromUserName);
 				} else if (MessageUtil.MESSAGE_IMAGE.equals(msgType)) {
 					message = MessageUtil.initText(toUserName, fromUserName, "我已经收到了你的图片！");
 				} else if (MessageUtil.MESSAGE_EVNET.equals(msgType)) {
@@ -61,6 +61,29 @@ public class AccessWeChatController extends BaseController {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public static String otherText(String content, String fromUserName) throws ParseException, IOException {
+		String message = "你好";
+		return message;
+	}
+
+	public static String textMessage(String content, String toUserName, String fromUserName)
+			throws ParseException, IOException {
+		String message = "";
+		switch (content) {
+		case "1":
+			message = MessageUtil.initText(toUserName, fromUserName, "Java是一种简单的，跨平台的，面向对象的，分布式的，解释的，健壮的安全的，结构的中立的，可移植的，性能很优异的多线程的，动态的语言。");
+			break;
+		case "?":
+		case "？":
+			message = MessageUtil.initText(toUserName, fromUserName, MessageUtil.menuText());
+			break;
+		default:
+			message = MessageUtil.initText(toUserName, fromUserName, otherText(content, fromUserName));
+			break;
+		}
+		return message;
 	}
 	
 	public String eventMessage(String toUserName, String fromUserName,Map<String, String> map){

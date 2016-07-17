@@ -2,11 +2,14 @@ package com.ihelin.car.controller.admin;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ihelin.car.db.entity.ServiceMenu;
+import com.ihelin.car.utils.ResponseUtil;
 
 @Controller
 public class AdminMenuController extends AdminBaseController {
@@ -17,17 +20,17 @@ public class AdminMenuController extends AdminBaseController {
 		model.addAttribute("menus", menus);
 		return "admin/menu_admin";
 	}
-	
-	@RequestMapping(value="service_menu_sync")
-	public String syncMenu(){
+
+	@RequestMapping(value = "service_menu_sync")
+	public String syncMenu() {
 		try {
 			serviceMenuMannger.syncServiceMenuToWeiXin();
 		} catch (Exception e) {
-			
+			e.printStackTrace();
 		}
 		return "redirect:/admin/menu_admin";
 	}
-	
+
 	@RequestMapping(value = "/service_menu_update")
 	public String updateServiceMenu(String menuName, String content, String url, Integer articleId, Integer menuType,
 			Integer parentId, Integer sort) {
@@ -50,6 +53,19 @@ public class AdminMenuController extends AdminBaseController {
 		menu.setSort(sort);
 		serviceMenuMannger.insertMenu(menu);
 		return "redirect:/admin/menu_admin";
+	}
+
+	@RequestMapping(value = "delete_menu")
+	public void deleteMenu(Integer id, HttpServletResponse response) {
+		ServiceMenu menu = serviceMenuMannger.getMenuById(id);
+		if (menu.getParentId() == null) {
+			List<ServiceMenu> subMenus = serviceMenuMannger.getMenusByParentId(id);
+			for (ServiceMenu serviceMenu : subMenus) {
+				serviceMenuMannger.deleteMenu(serviceMenu.getId());
+			}
+		}
+		serviceMenuMannger.deleteMenu(id);
+		ResponseUtil.writeSuccessJSON(response);
 	}
 
 }

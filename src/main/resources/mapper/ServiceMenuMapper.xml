@@ -20,6 +20,13 @@
 		from ServiceMenu
 		where id = #{id,jdbcType=INTEGER}
 	</select>
+	<select id="getMenustByParentId" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		*
+		from ServiceMenu
+		where parent_id = #{parentId,jdbcType=INTEGER}
+	</select>
 	<select id="getAllMenus" resultMap="BaseResultMap">
 		select
 		*

@@ -12,6 +12,23 @@
 		});
 	}
 	
+	function deleteMenu(id){
+		layer.confirm('确定要删除吗？', {
+			btn: ['确定','取消'] //按钮
+		}, function(){
+			var index = layer.load(2, {
+	            shade: [0.3, '#000']
+	        });
+			$.post("${request.contextPath}/admin/delete_menu",{id:id},function(data){
+				if(data.status=="success"){
+					window.location.reload();
+				}
+			});
+		}, function(){
+			layer.msg('您取消了删除！');
+		});
+	}
+	
 	function changeContentType(typeId) {
 		if (typeId == 0) {
 			$("#text_content").show();
@@ -64,9 +81,8 @@
 						</div>
 					-->
 					<div class="alert alert-info">
-						菜单最后编辑时间： <#if modify_time??>${modify_time!}<#else>N/A</#if>, 最后同步时间： <#if sync_time??>${sync_time!}<#else>N/A</#if>
-						<br/>
-						自定义菜单最多包括3个一级菜单，每个一级菜单最多包含5个二级菜单。
+						<p>1.自定义菜单最多包括3个一级菜单，每个一级菜单最多包含5个二级菜单。</p>
+						<p>2.若设有二级菜单，则该二级菜单的父菜单即一级菜单的功能将只是用来展开/折叠二级菜单。</p>
 					</div>
 					<div>
 						<table class="table table-striped">
@@ -80,9 +96,9 @@
 							   	</tr>
 						  	</thead>
 						  	<tbody>
-						  		<#list menus as menu>
-						  			<#if menu??>
-										<tr  class="text-center">
+						  		<#list menus?sort_by("sort")?reverse as menu>
+						  			<#if !menu.parentId??>
+										<tr class="text-center">
 											<td><#if menu.parentId??>-----</#if>${menu.name!}</td>
 											<td><#if menu.contentType==0>文本<#elseif menu.contentType==1>链接<#elseif menu.contentType==2>图文</#if></td>
 											<td>${menu.content!}</td>
@@ -92,6 +108,20 @@
 												<a href="javascript:;" onclick="deleteMenu(${menu.id!});" class="btn btn-default btn-sm"><i class="fa fa-times-circle"></i>删除</a>
 											</td>
 										</tr>
+										<#list menus?sort_by("sort")?reverse as subMenu>
+											<#if subMenu.parentId?? && subMenu.parentId == menu.id>
+												<tr class="text-center">
+													<td class="text-right"><i class="fa fa-chevron-right"></i> ${subMenu.name!}</td>
+													<td><#if subMenu.contentType==0>文本<#elseif subMenu.contentType==1>链接<#elseif subMenu.contentType==2>图文</#if></td>
+													<td>${subMenu.content!}</td>
+													<td>${subMenu.sort!}</td>
+													<td>
+														<a href="javascript:;" onclick="editMenu(${subMenu.id!});" class="btn btn-default btn-sm"><i class="fa fa-pencil-square-o"></i>编辑</a>
+														<a href="javascript:;" onclick="deleteMenu(${subMenu.id!});" class="btn btn-default btn-sm"><i class="fa fa-times-circle"></i>删除</a>
+													</td>
+												</tr>
+											</#if>
+										</#list>
 									</#if>
 								</#list>
 						  	</tbody>
@@ -132,7 +162,9 @@
 	                		<select id="" name="parentId" class="form-control">
 								<option value="">--根菜单--</option>
 								<#list menus as menu>
-					  			<option value="${menu.id!}">${menu.name!}</option>
+									<#if !(menu.parentId)??>
+					  					<option value="${menu.id!}">${menu.name!}</option>
+					  				</#if>
 								</#list>
 							</select>
 	                	</div>

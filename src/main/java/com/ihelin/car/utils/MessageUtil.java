@@ -10,13 +10,10 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.http.ParseException;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
-import org.json.JSONObject;
-
 import com.ihelin.car.message.entity.ImageMessage;
 import com.ihelin.car.message.entity.Article;
 import com.ihelin.car.message.entity.ArticleMessage;
@@ -71,21 +68,8 @@ public class MessageUtil {
 	public static String menuText() {
 		StringBuffer sb = new StringBuffer();
 		sb.append("欢迎关注E品居，请按照菜单提示进行操作：\n\n");
-		sb.append("1、介绍\n");
-		sb.append("2、也是介绍\n");
+		sb.append("1、E品居介绍\n\n");
 		sb.append("回复？调出此菜单");
-		return sb.toString();
-	}
-
-	public static String firstMenu() {
-		StringBuffer sb = new StringBuffer();
-		sb.append("欢迎关注此账号");
-		return sb.toString();
-	}
-
-	public static String secondMenu() {
-		StringBuffer sb = new StringBuffer();
-		sb.append("再次感谢您的关注");
 		return sb.toString();
 	}
 
@@ -179,17 +163,6 @@ public class MessageUtil {
 		return message;
 	}*/
 
-	public static String getWeather() throws ParseException, IOException {
-		String res = WechatUtil
-				.doGetStr("http://v.juhe.cn/weather/index?format=1&cityname=上海&key=80a107e67f0dbb1da04f939f479d6f26");
-		JSONObject jsonObject = new JSONObject(res);
-		String result = "这里是上海天气\n温度：" + ((JSONObject) ((JSONObject) jsonObject.get("result")).get("sk")).get("temp")
-				+ "\n";
-		result += "风向：" + ((JSONObject) ((JSONObject) jsonObject.get("result")).get("sk")).get("wind_direction") + "\n";
-		result += "风力：" + ((JSONObject) ((JSONObject) jsonObject.get("result")).get("sk")).get("wind_strength") + "\n";
-		result += "发布时间：" + ((JSONObject) ((JSONObject) jsonObject.get("result")).get("sk")).get("time");
-		return result;
-	}
 
 	/**
 	 * 文本消息转为xml

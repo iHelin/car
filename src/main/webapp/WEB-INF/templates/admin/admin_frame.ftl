@@ -10,8 +10,8 @@
 	<meta name="author" content="" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
    	<link href="${request.contextPath}/css/styles.min.css" rel="stylesheet" type='text/css' media="all" />
-   	<link rel="stylesheet" type="text/css" href="${request.contextPath}/plugins/sweetalert/dist/sweetalert.css">
    	<script type='text/javascript' src='${request.contextPath}/js/jquery-2.2.1.min.js'></script>
+   	<script src="${request.contextPath}/plugins/layer/layer.js"></script>
 </head>
 <body class="">
     <header class="navbar navbar-inverse navbar-fixed-top" role="banner">
@@ -87,7 +87,6 @@
 <script type='text/javascript' src='${request.contextPath}/js/application.js'></script>
 <script type='text/javascript' src='${request.contextPath}/plugins/form-parsley/parsley.min.js'></script> 
 <script type='text/javascript' src='${request.contextPath}/js/formvalidation.js'></script> 
-<script src="${request.contextPath}/plugins/sweetalert/dist/sweetalert.min.js"></script>
 <script type='text/javascript'>
 
 </script>

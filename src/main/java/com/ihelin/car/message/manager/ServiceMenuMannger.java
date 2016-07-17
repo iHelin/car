@@ -27,8 +27,12 @@ public class ServiceMenuMannger {
 	public int insertMenu(ServiceMenu menu) {
 		return serviceMenuMapper.insert(menu);
 	}
-	
-	public ServiceMenu getMenuById(Integer id){
+
+	public int deleteMenu(Integer id) {
+		return serviceMenuMapper.deleteByPrimaryKey(id);
+	}
+
+	public ServiceMenu getMenuById(Integer id) {
 		return serviceMenuMapper.selectByPrimaryKey(id);
 	}
 
@@ -36,6 +40,7 @@ public class ServiceMenuMannger {
 		return serviceMenuMapper.getAllMenus();
 	}
 
+	// 同步微信菜单
 	public int syncServiceMenuToWeiXin() throws ParseException, IOException {
 		AccessToken token = WechatUtil.getAccessToken();
 		Menu menu = new Menu();
@@ -43,20 +48,60 @@ public class ServiceMenuMannger {
 		List<Button> parBtns = Lists.newArrayList();
 		for (ServiceMenu serviceMenu : sMenus) {
 			if (serviceMenu.getParentId() == null) {
+				List<ServiceMenu> subMenus = getMenusByParentId(serviceMenu.getId());
+				List<Button> subBtns = Lists.newArrayList();
 				if (serviceMenu.getContentType() == ServiceMenu.TEXT_MENU) {
-					ClickButton button = new ClickButton();
-					button.setName(serviceMenu.getName());
-					button.setType("click");
-					button.setKey(serviceMenu.getId() + "");
-					parBtns.add(button);
+					ClickButton parBtn = new ClickButton();
+					parBtn.setName(serviceMenu.getName());
+					if (subMenus.size() > 0) {
+						for (ServiceMenu subMenu : subMenus) {
+							if (subMenu.getContentType() == ServiceMenu.TEXT_MENU) {
+								ClickButton subBtn = new ClickButton();
+								subBtn.setName(subMenu.getName());
+								subBtn.setType("click");
+								subBtn.setKey(subMenu.getId() + "");
+								subBtns.add(subBtn);
+							} else if (subMenu.getContentType() == ServiceMenu.LINK_MENU) {
+								ViewButton subBtn = new ViewButton();
+								subBtn.setName(subMenu.getName());
+								subBtn.setType("view");
+								subBtn.setUrl(subMenu.getContent());
+								subBtns.add(subBtn);
+							}
+						}
+						parBtn.setSub_button(subBtns);
+					} else {
+						parBtn.setType("click");
+						parBtn.setKey(serviceMenu.getId() + "");
+					}
+					parBtns.add(parBtn);
 				} else if (serviceMenu.getContentType() == ServiceMenu.LINK_MENU) {
-					ViewButton button = new ViewButton();
-					button.setName(serviceMenu.getName());
-					button.setType("view");
-					button.setUrl(serviceMenu.getContent());
-					parBtns.add(button);
+					ViewButton patBtn = new ViewButton();
+					patBtn.setName(serviceMenu.getName());
+					if (subMenus.size() > 0) {
+						for (ServiceMenu subMenu : subMenus) {
+							if (subMenu.getContentType() == ServiceMenu.TEXT_MENU) {
+								ClickButton subBtn = new ClickButton();
+								subBtn.setName(subMenu.getName());
+								subBtn.setType("click");
+								subBtn.setKey(subMenu.getId() + "");
+								subBtns.add(subBtn);
+							} else if (subMenu.getContentType() == ServiceMenu.LINK_MENU) {
+								ViewButton subBtn = new ViewButton();
+								subBtn.setName(subMenu.getName());
+								subBtn.setType("view");
+								subBtn.setUrl(subMenu.getContent());
+								subBtns.add(subBtn);
+							}
+						}
+						patBtn.setSub_button(subBtns);
+					} else {
+						patBtn.setType("view");
+						patBtn.setUrl(serviceMenu.getContent());
+					}
+					parBtns.add(patBtn);
 				} else if (serviceMenu.getContentType() == ServiceMenu.PIC_MENU) {
-
+					// 图文消息
 				}
 			}
 		}
@@ -69,6 +114,10 @@ public class ServiceMenuMannger {
 			System.out.println("错误码：" + result);
 		}
 		return result;
+	}
+
+	public List<ServiceMenu> getMenusByParentId(Integer parentId) {
+		return serviceMenuMapper.getMenustByParentId(parentId);
 	}
 
 }
