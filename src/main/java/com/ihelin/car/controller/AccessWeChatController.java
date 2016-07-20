@@ -23,7 +23,7 @@ import com.ihelin.car.utils.WechatUtil;
 public class AccessWeChatController extends BaseController {
 	private static final Log logger = LogFactory.getLog(AccessWeChatController.class);
 
-	@RequestMapping(value = "ihelin")
+	@RequestMapping(value = "access_wechat")
 	public void test(String signature, String timestamp, String nonce, String echostr, HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
 		boolean isGet = request.getMethod().toLowerCase().equals("get");
@@ -31,7 +31,7 @@ public class AccessWeChatController extends BaseController {
 			logger.info("进入验证access");
 			if (CheckUtil.checkSignature(signature, timestamp, nonce)) {
 				response.getWriter().write(echostr);
-				logger.info("成功返回 echostr：" + echostr);
+				logger.info("验证成功，echostr：" + echostr);
 			} else {
 				logger.info("认证失败");
 			}

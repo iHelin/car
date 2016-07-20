@@ -469,3 +469,16 @@ freemarker.core.NonHashException: [... Exception message was already printed; se
 	at org.mortbay.jetty.HttpConnection.handle(HttpConnection.java:404)
 	at org.mortbay.io.nio.SelectChannelEndPoint.run(SelectChannelEndPoint.java:410)
 	at org.mortbay.thread.QueuedThreadPool$PoolThread.run(QueuedThreadPool.java:582)
+ INFO [650023597@qtp-1268650975-0] 16-07-18 08:56:29 AccessWeChatController (line 31) - 进入验证access
+ INFO [650023597@qtp-1268650975-0] 16-07-18 08:56:29 AccessWeChatController (line 34) - 成功返回 echostr：6714535418708094911
+ INFO [650023597@qtp-1268650975-0] 16-07-18 09:07:02 AccessWeChatController (line 31) - 进入验证access
+ INFO [650023597@qtp-1268650975-0] 16-07-18 09:07:02 AccessWeChatController (line 34) - 验证成功，echostr：4457598678108826551
+ INFO [650023597@qtp-1268650975-0] 16-07-18 09:07:02 AccessWeChatController (line 31) - 进入验证access
+ INFO [650023597@qtp-1268650975-0] 16-07-18 09:07:05 AccessWeChatController (line 31) - 进入验证access
+ INFO [650023597@qtp-1268650975-0] 16-07-18 09:08:44 AccessWeChatController (line 31) - 进入验证access
+ INFO [650023597@qtp-1268650975-0] 16-07-18 09:08:44 AccessWeChatController (line 34) - 验证成功，echostr：853787792943918847
+ INFO [650023597@qtp-1268650975-0] 16-07-18 09:10:20 AccessWeChatController (line 31) - 进入验证access
+ INFO [650023597@qtp-1268650975-0] 16-07-19 09:33:06 AccessWeChatController (line 31) - 进入验证access
+ INFO [650023597@qtp-1268650975-0] 16-07-19 09:33:06 AccessWeChatController (line 34) - 验证成功，echostr：115765231544686555
+ INFO [2062125161@qtp-1268650975-9] 16-07-19 22:06:18 AccessWeChatController (line 31) - 进入验证access
+ INFO [2062125161@qtp-1268650975-9] 16-07-19 22:06:22 AccessWeChatController (line 31) - 进入验证access

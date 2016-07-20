@@ -1,6 +1,7 @@
 package com.ihelin.car.controller.admin;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.google.common.collect.Maps;
 import com.ihelin.car.db.entity.ServiceMenu;
 import com.ihelin.car.utils.ResponseUtil;
 
@@ -32,26 +34,30 @@ public class AdminMenuController extends AdminBaseController {
 	}
 
 	@RequestMapping(value = "/service_menu_update")
-	public String updateServiceMenu(String menuName, String content, String url, Integer articleId, Integer menuType,
-			Integer parentId, Integer sort) {
-		ServiceMenu menu = new ServiceMenu();
-		menu.setName(menuName);
-		if (menuType == ServiceMenu.TEXT_MENU) {
-			menu.setContent(content);
-		} else if (menuType == ServiceMenu.LINK_MENU) {
-			if (url != null && !url.startsWith("http")) {
-				url = "http://" + url;
+	public String updateServiceMenu(Integer menuId, String menuName, String content, String url, Integer articleId,
+			Integer menuType, Integer parentId, Integer sort) {
+		if (menuId == null) {
+			ServiceMenu menu = new ServiceMenu();
+			menu.setName(menuName);
+			if (menuType == ServiceMenu.TEXT_MENU) {
+				menu.setContent(content);
+			} else if (menuType == ServiceMenu.LINK_MENU) {
+				if (url != null && !url.startsWith("http")) {
+					url = "http://" + url;
+				}
+				menu.setContent(url);
+			} else if (menuType == ServiceMenu.PIC_MENU) {
+				menu.setContent(String.valueOf(articleId));
 			}
-			menu.setContent(url);
-		} else if (menuType == ServiceMenu.PIC_MENU) {
-			menu.setContent(String.valueOf(articleId));
+			menu.setContentType(menuType);
+			menu.setParentId(parentId);
+			if (sort == null)
+				sort = 100;
+			menu.setSort(sort);
+			serviceMenuMannger.insertMenu(menu);
+		}else{
+			
 		}
-		menu.setContentType(menuType);
-		menu.setParentId(parentId);
-		if (sort == null)
-			sort = 100;
-		menu.setSort(sort);
-		serviceMenuMannger.insertMenu(menu);
 		return "redirect:/admin/menu_admin";
 	}
 
@@ -66,6 +72,14 @@ public class AdminMenuController extends AdminBaseController {
 		}
 		serviceMenuMannger.deleteMenu(id);
 		ResponseUtil.writeSuccessJSON(response);
+	}
+
+	@RequestMapping("get_menu_by_id")
+	public void getMenuById(Integer id, HttpServletResponse response) {
+		ServiceMenu menu = serviceMenuMannger.getMenuById(id);
+		Map<String, Object> res = Maps.newHashMap();
+		res.put("menu", menu);
+		ResponseUtil.writeSuccessJSON(response, res);
 	}
 
 }

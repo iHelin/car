@@ -2,18 +2,47 @@
 <#assign html_other_script in main>
 <script>
 	$(function(){
-		var a = $('input[name=menuType]').val();
-		changeContentType(a);
+		
 	});
 	
 	function addMenu(){
+		$("#menu_id_inp").val("");
+		changeContentType(0);
 		$('#add_menu').modal({
 			keyboard: false
 		});
 	}
 	
+	function editMenu(id){
+		$("#menu_id_inp").val(id);
+		var index = layer.load(2, {
+	    	shade: [0.3, '#000']
+	    });
+	    $.post("${request.contextPath}/admin/get_menu_by_id",{id,id},function(data){
+	    	layer.close(index);
+	    	if(data.status=="success"){
+	    		$("input[name=menuName]").val(data.menu.name);
+	    		$("input[name=sort]").val(data.menu.sort);
+	    		$("#far_menu_id").val(data.menu.parentId);
+	    		if(data.menu.contentType==0){
+	    			$('#textType').attr("checked","true");
+	    			$("#textarea_inp").val(data.menu.content);
+	    		}else if(data.menu.contentType==1){
+	    			$('#linkType').attr("checked","true");
+	    			$("#url_inp").val(data.menu.content);
+	    		}else if(data.menu.contentType==2){
+	    			$('#picType').attr("checked","true");
+	    		}
+	    		changeContentType(data.menu.contentType);
+	    		$('#add_menu').modal({
+					keyboard: false
+				});
+	    	}
+	    });
+	}
+	
 	function deleteMenu(id){
-		layer.confirm('确定要删除吗？', {
+		layer.confirm('确定要删除该菜单吗？', {
 			btn: ['确定','取消'] //按钮
 		}, function(){
 			var index = layer.load(2, {
@@ -111,7 +140,7 @@
 										<#list menus?sort_by("sort")?reverse as subMenu>
 											<#if subMenu.parentId?? && subMenu.parentId == menu.id>
 												<tr class="text-center">
-													<td class="text-right"><i class="fa fa-chevron-right"></i> ${subMenu.name!}</td>
+													<td class="text-right"><i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i> ${subMenu.name!}</td>
 													<td><#if subMenu.contentType==0>文本<#elseif subMenu.contentType==1>链接<#elseif subMenu.contentType==2>图文</#if></td>
 													<td>${subMenu.content!}</td>
 													<td>${subMenu.sort!}</td>
@@ -141,6 +170,7 @@
       		</div>
       		<div class="modal-body">
       			<form class="form-horizontal myform" method="post" id="edit_menu_modal_form" data-validate="parsley" action="${request.contextPath}/admin/service_menu_update" onsubmit="return $('#edit_menu_modal_form').parsley( 'validate' );">
+	            	<input type="hidden" name="menuId" id="menu_id_inp">
 	            	<div class="form-group">
 	                	<label for="task_project_id_inp" class="col-sm-3 control-label">菜单名称</label>
 	                	<div class="col-sm-6">
@@ -159,7 +189,7 @@
 	           		<div class="form-group">
 	                	<label class="col-sm-3 control-label">上级菜单</label>
 	                	<div class="col-sm-6">
-	                		<select id="" name="parentId" class="form-control">
+	                		<select id="far_menu_id" name="parentId" class="form-control">
 								<option value="">--根菜单--</option>
 								<#list menus as menu>
 									<#if !(menu.parentId)??>
@@ -189,13 +219,13 @@
 					<div class="form-group" id="text_content">
 				    	<label class="col-sm-3 control-label">文本内容:</label>
 				       	<div class="col-sm-6">
-				      		<textarea name="content"  rows="3" class="form-control"></textarea>
+				      		<textarea name="content" id="textarea_inp" rows="3" class="form-control"></textarea>
 						</div>
 				    </div>
 					<div class="form-group" id="url_content">
 				    	<label class="col-sm-3 control-label">链接地址:</label>
 				       	<div class="col-sm-6">
-				       		<input name="url" class="form-control" value="">
+				       		<input name="url" id="url_inp" class="form-control" value="">
 				      	</div>
 				        <div class="col-md-9 col-md-offset-3">
 				        	<p class="help-block"><i class="fa fa-info-circle"></i>URL必须以http://或https://开头</p>
