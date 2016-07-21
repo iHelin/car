@@ -69,8 +69,8 @@ public class WechatUtil {
 	// 获取access_token
 	public static AccessToken getAccessToken() throws ParseException, IOException {
 		AccessToken token = new AccessToken();
-		String url = ACCESS_TOKEN_URL.replace("APPID", CommonConfig.getTestAppID()).replace("APPSECRET",
-				CommonConfig.getTestAppSecret());
+		String url = ACCESS_TOKEN_URL.replace("APPID", CommonConfig.getAppID()).replace("APPSECRET",
+				CommonConfig.getAppSecret());
 		JSONObject jsonObject = new JSONObject(doGetStr(url));
 		if (jsonObject != null) {
 			token.setToken(jsonObject.getString("access_token"));

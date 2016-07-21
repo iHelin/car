@@ -2,7 +2,6 @@ package com.ihelin.car.utils;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -36,7 +35,7 @@ public class MessageUtil {
 	public static final String MESSAGE_CLICK = "CLICK";
 	public static final String MESSAGE_VIEW = "VIEW";
 	public static final String MESSAGE_SCANCODE = "scancode_push";
-	
+
 	/**
 	 * xml转为Map
 	 * 
@@ -81,7 +80,7 @@ public class MessageUtil {
 	 * @param content
 	 * @return
 	 */
-	public static String initText(String toUserName, String fromUserName, String content) {
+	public static String sendTextMsg(String toUserName, String fromUserName, String content) {
 		TextMessage text = new TextMessage();
 		text.setFromUserName(toUserName);
 		text.setToUserName(fromUserName);
@@ -98,22 +97,10 @@ public class MessageUtil {
 	 * @param fromUserName
 	 * @return
 	 */
-	public static String initNewsMessage(String toUserName, String fromUserName) {
-		String message = null;
-		List<Article> newsList = new ArrayList<Article>();
-		ArticleMessage newsMessage = new ArticleMessage();
-		Article news = new Article();
-		news.setTitle("xxx介绍");
-		news.setDescription("这里是xxx的描述");
-		news.setPicUrl("http://ihelin.ngrok.natapp.cn/seven/image/imooc.jpg");
-		news.setUrl("www.imooc.com");
-		newsList.add(news);
+	public static String sendNewsMsg(String toUserName, String fromUserName, ArticleMessage newsMessage) {
+		String message = "";
 		newsMessage.setToUserName(fromUserName);
 		newsMessage.setFromUserName(toUserName);
-		newsMessage.setCreateTime(new Date().getTime());
-		newsMessage.setMsgType(MESSAGE_NEWS);
-		newsMessage.setArticles(newsList);
-		newsMessage.setArticleCount(newsList.size());
 		message = newsMessageToXml(newsMessage);
 		return message;
 	}
@@ -125,14 +112,10 @@ public class MessageUtil {
 	 * @param fromUserName
 	 * @return
 	 */
-	public static String initImageMessage(String toUserName, String fromUserName) {
+	public static String sendImageMsg(String toUserName, String fromUserName, ImageMessage imageMessage) {
 		String message = null;
-		ImageMessage imageMessage = new ImageMessage();
-		imageMessage.setMediaId("cgTPHYq0HdIjI5aW9Jm_inxauWIsianFzOYJplmQ9mwyP2Q_U4P5JAAkMq38RGCy");
 		imageMessage.setFromUserName(toUserName);
 		imageMessage.setToUserName(fromUserName);
-		imageMessage.setMsgType(MESSAGE_IMAGE);
-		imageMessage.setCreateTime(new Date().getTime());
 		message = imageMessageToXml(imageMessage);
 		return message;
 	}
@@ -144,25 +127,24 @@ public class MessageUtil {
 	 * @param fromUserName
 	 * @return
 	 */
-	/*public static String initMusicMessage(String toUserName, String fromUserName) {
-		String message = null;
-		Music music = new Music();
-		music.setThumbMediaId("1iUQ5e0XvA3HajCgef6Q9mtUz0JKVyb-3cT7UNQMm07cArgxflOGFy61QWqYDXT4");
-		music.setTitle("see you again");
-		music.setDescription("速度与激情");
-		music.setMusicUrl("http://ihelin.ngrok.natapp.cn/seven/resource/See You Again.mp3");
-		music.setHQMusicUrl("http://ihelin.ngrok.natapp.cn/seven/resource/See You Again.mp3");
-
-		MusicMessage musicMessage = new MusicMessage();
-		musicMessage.setFromUserName(toUserName);
-		musicMessage.setToUserName(fromUserName);
-		musicMessage.setMsgType(MESSAGE_MUSIC);
-		musicMessage.setCreateTime(new Date().getTime());
-		musicMessage.setMusic(music);
-		message = musicMessageToXml(musicMessage);
-		return message;
-	}*/
-
+	/*
+	 * public static String initMusicMessage(String toUserName, String
+	 * fromUserName) { String message = null; Music music = new Music();
+	 * music.setThumbMediaId(
+	 * "1iUQ5e0XvA3HajCgef6Q9mtUz0JKVyb-3cT7UNQMm07cArgxflOGFy61QWqYDXT4");
+	 * music.setTitle("see you again"); music.setDescription("速度与激情");
+	 * music.setMusicUrl(
+	 * "http://ihelin.ngrok.natapp.cn/seven/resource/See You Again.mp3");
+	 * music.setHQMusicUrl(
+	 * "http://ihelin.ngrok.natapp.cn/seven/resource/See You Again.mp3");
+	 * 
+	 * MusicMessage musicMessage = new MusicMessage();
+	 * musicMessage.setFromUserName(toUserName);
+	 * musicMessage.setToUserName(fromUserName);
+	 * musicMessage.setMsgType(MESSAGE_MUSIC); musicMessage.setCreateTime(new
+	 * Date().getTime()); musicMessage.setMusic(music); message =
+	 * musicMessageToXml(musicMessage); return message; }
+	 */
 
 	/**
 	 * 文本消息转为xml
@@ -195,11 +177,11 @@ public class MessageUtil {
 	 * @param musicMessage
 	 * @return
 	 */
-	/*public static String musicMessageToXml(MusicMessage musicMessage) {
-		XStream xstream = new XStream();
-		xstream.alias("xml", musicMessage.getClass());
-		return xstream.toXML(musicMessage);
-	}*/
+	/*
+	 * public static String musicMessageToXml(MusicMessage musicMessage) {
+	 * XStream xstream = new XStream(); xstream.alias("xml",
+	 * musicMessage.getClass()); return xstream.toXML(musicMessage); }
+	 */
 
 	/**
 	 * 图片消息转XML

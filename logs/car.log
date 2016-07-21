@@ -482,3 +482,5 @@ freemarker.core.NonHashException: [... Exception message was already printed; se
  INFO [650023597@qtp-1268650975-0] 16-07-19 09:33:06 AccessWeChatController (line 34) - 验证成功，echostr：115765231544686555
  INFO [2062125161@qtp-1268650975-9] 16-07-19 22:06:18 AccessWeChatController (line 31) - 进入验证access
  INFO [2062125161@qtp-1268650975-9] 16-07-19 22:06:22 AccessWeChatController (line 31) - 进入验证access
+ INFO [72420136@qtp-1268650975-25] 16-07-21 14:47:00 AccessWeChatController (line 31) - 进入验证access
+ INFO [72420136@qtp-1268650975-25] 16-07-21 14:47:00 AccessWeChatController (line 31) - 进入验证access
