@@ -20,7 +20,7 @@ public class AdminMenuController extends AdminBaseController {
 	public String menuAdmin(Model model) {
 		List<ServiceMenu> menus = serviceMenuMannger.getAllMenus();
 		model.addAttribute("menus", menus);
-		return "admin/menu_admin";
+		return ftl("menu_admin");
 	}
 
 	@RequestMapping(value = "service_menu_sync")
@@ -30,10 +30,10 @@ public class AdminMenuController extends AdminBaseController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "redirect:/admin/menu_admin";
+		return "redirect:" + ftl("menu_admin");
 	}
 
-	@RequestMapping(value = "/service_menu_update")
+	@RequestMapping(value = "service_menu_update")
 	public String updateServiceMenu(Integer menuId, String menuName, String content, String url, Integer articleId,
 			Integer menuType, Integer parentId, Integer sort) {
 		if (menuId == null) {
@@ -55,10 +55,10 @@ public class AdminMenuController extends AdminBaseController {
 				sort = 100;
 			menu.setSort(sort);
 			serviceMenuMannger.insertMenu(menu);
-		}else{
-			
+		} else {
+
 		}
-		return "redirect:/admin/menu_admin";
+		return "redirect:" + ftl("menu_admin");
 	}
 
 	@RequestMapping(value = "delete_menu")
