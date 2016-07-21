@@ -1,6 +1,6 @@
 package com.ihelin.car.message.entity;
 
-public class BaseMessage {
+public abstract class BaseMessage {
 	private String ToUserName;// 开发者微信号
 	private String FromUserName;// 发送方帐号（一个OpenID）
 	private long CreateTime;// 消息创建时间（整型）
