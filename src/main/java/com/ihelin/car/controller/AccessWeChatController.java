@@ -28,7 +28,7 @@ public class AccessWeChatController extends BaseController {
 			HttpServletResponse response) throws IOException {
 		boolean isGet = request.getMethod().toLowerCase().equals("get");
 		if (isGet) {
-			logger.info("进入验证access");
+			logger.info("get请求，进入验证access");
 			if (CheckUtil.checkSignature(signature, timestamp, nonce)) {
 				response.getWriter().write(echostr);
 				logger.info("验证成功，echostr：" + echostr);
