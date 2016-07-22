@@ -11,4 +11,9 @@ public class IndexConroller extends BaseController {
 		return "redirect:index";
 	}
 
+	@RequestMapping(value = "index")
+	public String index() {
+		return "index";
+	}
+
 }
