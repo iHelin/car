@@ -5,9 +5,8 @@
 		<meta charset="utf-8" />
 		<title>首页</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<link rel="stylesheet" href="${request.contextPath}/plugins/mui/css/mui.min.css">
+		<link rel="stylesheet" href="${request.contextPath}/plugins/mui/css/iconfont.css">
 		<!--App自定义的css-->
 		<link rel="stylesheet" type="text/css" href="${request.contextPath}/plugins/mui/css/app.css" />
 		<style type="text/css">
@@ -76,22 +75,30 @@
 		<div class="mui-content" style="padding-top: 0;">
 			<ul class="mui-table-view mui-table-view-chevron" style="margin-top: 10px;">
 				<li class="mui-table-view-cell">
-					<a class="mui-navigate-right" href="javascript:;">
+					<a class="mui-navigate-right" href="${request.contextPath}/h5/car_manager">
 						<span class="mui-icon mui-icon-plus"></span>添加车辆
 					</a>
 				</li>
 			</ul>
 			<div class="icondiv" style="margin-top: 10px;">
 				<ul class="mui-table-view mui-grid-view mui-grid-9" style="background-color: #fff;">
-		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+		            	<a href="${request.contextPath}/h5/user_center">
 		                    <span class="mui-icon mui-icon-home"></span>
-		                    <div class="mui-media-body">Home</div></a></li>
-		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+		                    <div class="mui-media-body">个人中心</div>
+		            	</a>
+					</li>
+		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+		            	<a href="">
 		                    <span class="mui-icon mui-icon-email"><span class="mui-badge">5</span></span>
-		                    <div class="mui-media-body">Email</div></a></li>
-		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+		                    <div class="mui-media-body">Email</div>
+		            	</a>
+		           	</li>
+		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+		            	<a href="#">
 		                    <span class="mui-icon mui-icon-chatbubble"></span>
-		                    <div class="mui-media-body">Chat</div></a></li>
+		                    <div class="mui-media-body">Chat</div>
+		            </a></li>
 		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
 		                    <span class="mui-icon mui-icon-location"></span>
 		                    <div class="mui-media-body">location</div></a></li>
@@ -107,7 +114,8 @@
 		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
 		                    <span class="mui-icon mui-icon-info"></span>
 		                    <div class="mui-media-body">about</div></a></li>
-		           <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+		           <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+		         		<a href="#">
 		                    <span class="mui-icon mui-icon-more"></span>
 		                    <div class="mui-media-body">more</div></a></li>
 		        </ul>

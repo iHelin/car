@@ -30,7 +30,7 @@ public class AdminMenuController extends AdminBaseController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "redirect:" + ftl("menu_admin");
+		return "redirect:menu_admin";
 	}
 
 	@RequestMapping(value = "service_menu_update")
@@ -56,9 +56,26 @@ public class AdminMenuController extends AdminBaseController {
 			menu.setSort(sort);
 			serviceMenuMannger.insertMenu(menu);
 		} else {
-
+			ServiceMenu menu = serviceMenuMannger.getMenuById(menuId);
+			menu.setName(menuName);
+			if (menuType == ServiceMenu.TEXT_MENU) {
+				menu.setContent(content);
+			} else if (menuType == ServiceMenu.LINK_MENU) {
+				if (url != null && !url.startsWith("http")) {
+					url = "http://" + url;
+				}
+				menu.setContent(url);
+			} else if (menuType == ServiceMenu.PIC_MENU) {
+				menu.setContent(String.valueOf(articleId));
+			}
+			menu.setContentType(menuType);
+			menu.setParentId(parentId);
+			if (sort == null)
+				sort = 100;
+			menu.setSort(sort);
+			serviceMenuMannger.updateMenu(menu);
 		}
-		return "redirect:" + ftl("menu_admin");
+		return "redirect:menu_admin";
 	}
 
 	@RequestMapping(value = "delete_menu")

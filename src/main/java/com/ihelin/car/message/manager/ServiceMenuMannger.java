@@ -28,6 +28,10 @@ public class ServiceMenuMannger {
 		return serviceMenuMapper.insert(menu);
 	}
 
+	public int updateMenu(ServiceMenu menu) {
+		return serviceMenuMapper.updateByPrimaryKey(menu);
+	}
+
 	public int deleteMenu(Integer id) {
 		return serviceMenuMapper.deleteByPrimaryKey(id);
 	}

@@ -6,11 +6,18 @@
 	});
 	
 	function addMenu(){
-		$("#menu_id_inp").val("");
-		changeContentType(0);
-		$('#add_menu').modal({
-			keyboard: false
-		});
+		if(15!=${menus?size}){
+			var left = 15-${menus?size};
+			layer.msg("您当前共创建了${menus?size}个菜单，还可以创建"+left+"个！");
+			$("#menu_id_inp").val("");
+			changeContentType(0);
+			$('#add_menu').modal({
+				keyboard: false
+			});
+		}
+		else{
+			layer.alert("您已创建了15个自定义菜单，不能再继续创建，请编辑或删除菜单！");
+		}
 	}
 	
 	function editMenu(id){
