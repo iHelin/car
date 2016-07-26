@@ -97,7 +97,7 @@ public class MessageUtil {
 	 * @param fromUserName
 	 * @return
 	 */
-	public static String sendNewsMsg(String toUserName, String fromUserName, ArticleMessage newsMessage) {
+	public static String sendArticleMsg(String toUserName, String fromUserName, ArticleMessage newsMessage) {
 		String message = "";
 		newsMessage.setToUserName(fromUserName);
 		newsMessage.setFromUserName(toUserName);
