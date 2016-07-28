@@ -39,7 +39,7 @@ public class AdminQRCodeController extends AdminBaseController {
 		int width = 300;
 		int height = 300;
 		String format = "png";
-		String newFileName = content + "_" + new Random().nextInt(1000000) + "." + format;
+		String newFileName = new Random().nextInt(1000000) + "." + format;
 
 		HashMap<EncodeHintType, Object> hints = new HashMap<EncodeHintType, Object>();
 		hints.put(EncodeHintType.CHARACTER_SET, "utf-8");
@@ -50,11 +50,11 @@ public class AdminQRCodeController extends AdminBaseController {
 			BitMatrix bitMatrix = new MultiFormatWriter().encode(content, BarcodeFormat.QR_CODE, width, height, hints);
 			Path file = new File(saveRealFilePath, newFileName).toPath();
 			MatrixToImageWriter.writeToPath(bitMatrix, format, file);
-			res.put("url", request.getContextPath() + path + newFileName);
+			path = request.getContextPath() + path + newFileName;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		res.put("url", path);
 		ResponseUtil.writeSuccessJSON(response, res);
 	}
 

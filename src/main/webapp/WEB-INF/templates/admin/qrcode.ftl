@@ -53,7 +53,7 @@
 											</div>
 										</form>
 										<div align="center">
-											<button class="btn btn-default" onclick="generate()">生成</button>
+											<button class="btn btn-primary" onclick="generate()">生成</button>
 										</div>
 									</div>
 								</div>
@@ -72,7 +72,9 @@
 				</div>
 		    </div>
 		</div>
+		<div align="center">powered by <a href="http://weibo.com/378920717" target="_blank">iHelin</a></div>
 	</div>
+	
 	<script type='text/javascript' src='${request.contextPath}/js/bootstrap.min.js'></script> 
 	<script type='text/javascript' src='${request.contextPath}/js/enquire.js'></script> 
 	<script type='text/javascript' src='${request.contextPath}/js/jquery.cookie.js'></script> 
@@ -80,6 +82,6 @@
 	<script type='text/javascript' src='${request.contextPath}/js/jquery.nicescroll.min.js'></script>
 	<script type='text/javascript' src='${request.contextPath}/js/application.js'></script>
 	<script type='text/javascript' src='${request.contextPath}/plugins/form-parsley/parsley.min.js'></script> 
-	<script type='text/javascript' src='${request.contextPath}/js/formvalidation.js'></script> 
+	<script type='text/javascript' src='${request.contextPath}/js/formvalidation.js'></script>
 </body>
 </html>
