@@ -20,9 +20,12 @@
 			layer.alert("请输入内容！");
 			return false;
 		}
+		var index = layer.load(1, {
+		  	shade: [0.1,'#000']
+		});
 		$.post('${request.contextPath}/admin/generate_img',{content:content},function(data){
+			layer.close(index);
 			if(data.status=='success'){
-				layer.msg("成功");
 				$('#img_id').attr("src",data.url);
 			}else{
 				layer.msg("生成失败");
