@@ -3,7 +3,8 @@ package com.ihelin.car.db.plugin;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * @author hecong
+ * @author ihelin
+ *
  */
 public abstract class Dialect {
 
@@ -19,7 +20,8 @@ public abstract class Dialect {
 
 		public static Dialect getDialet(String dialectType) {
 			if (StringUtils.isBlank(dialectType)) {
-				throw new RuntimeException("The value of the dialect property of plugin in mybatis-config.xml is not defined!");
+				throw new RuntimeException(
+						"The value of the dialect property of plugin in mybatis-config.xml is not defined!");
 			}
 			switch (valueOf(dialectType.trim().toUpperCase())) {
 			case MYSQL:
@@ -39,7 +41,8 @@ public abstract class Dialect {
 	}
 
 	/**
-	 * getLimitString(sql, offset, Integer.toString(offset), limit, Integer.toString(limit))
+	 * getLimitString(sql, offset, Integer.toString(offset), limit,
+	 * Integer.toString(limit))
 	 * 
 	 * @param sql
 	 * @param offset
@@ -60,6 +63,7 @@ public abstract class Dialect {
 	 * @param limitPlaceholder
 	 * @return
 	 */
-	public abstract String getLimitString(String sql, int offset, String offsetPlaceholder, int limit, String limitPlaceholder);
+	public abstract String getLimitString(String sql, int offset, String offsetPlaceholder, int limit,
+			String limitPlaceholder);
 
 }

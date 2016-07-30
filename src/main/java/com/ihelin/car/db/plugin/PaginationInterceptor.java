@@ -24,12 +24,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * mybatis pagination plugin
- * 
- * @author 
+ * @author ihelin 分页实现
  */
-@Intercepts({ @Signature(type = Executor.class, method = "query", args = { MappedStatement.class, Object.class, RowBounds.class,
-		ResultHandler.class }) })
+@Intercepts({ @Signature(type = Executor.class, method = "query", args = { MappedStatement.class, Object.class,
+		RowBounds.class, ResultHandler.class }) })
 public class PaginationInterceptor implements Interceptor {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(PaginationInterceptor.class);
@@ -131,8 +129,8 @@ public class PaginationInterceptor implements Interceptor {
 		statementBuilder.keyColumn(ArrayUtils.toString(ms.getKeyColumns(), null));
 		statementBuilder.databaseId(ms.getDatabaseId());
 		statementBuilder.timeout(ms.getTimeout());
-		statementBuilder.parameterMap(new ParameterMap.Builder(ms.getConfiguration(), ms.getId(), List.class, newBoundSql
-				.getParameterMappings()).build());
+		statementBuilder.parameterMap(new ParameterMap.Builder(ms.getConfiguration(), ms.getId(), List.class,
+				newBoundSql.getParameterMappings()).build());
 		statementBuilder.resultMaps(ms.getResultMaps());
 		statementBuilder.resultSetType(ms.getResultSetType());
 		statementBuilder.cache(ms.getCache());

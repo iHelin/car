@@ -3,7 +3,8 @@
 <generatorConfiguration>
 
 	<!-- load driver jar, must config local maven repo dir -->
-	<classPathEntry location="/Users/ihelin/Documents/tools/mysql-connector-java-5.0.8-bin.jar" />
+	<classPathEntry
+		location="/Users/ihelin/Documents/tools/mysql-connector-java-5.0.8-bin.jar" />
 
 	<context id="Tuna" targetRuntime="MyBatis3">
 		<commentGenerator>
