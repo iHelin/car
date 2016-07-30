@@ -36,15 +36,6 @@
 		<beans:property name="requestContextAttribute" value="request" />
 	</beans:bean>
 	
-	<!-- 注册拦截器 
-	<mvc:interceptors>
-		<mvc:interceptor>
-			<mvc:mapping path="/error"/>
-			<beans:bean class="com.seven.interceptor.TestInterceptor"></beans:bean>
-		</mvc:interceptor>
-		
-	</mvc:interceptors>-->
-
 	<beans:bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<!-- the maximum file size in bytes : 10M -->
