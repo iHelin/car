@@ -19,7 +19,6 @@ import java.util.Map;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.ParseException;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
@@ -44,25 +43,35 @@ public class WechatUtil {
 	private static final String DELETE_MENU_URL = "https://api.weixin.qq.com/cgi-bin/menu/delete?access_token=ACCESS_TOKEN";
 
 	// get请求，返回String
-	public static String doGetStr(String url) throws ClientProtocolException, IOException {
+	public static String doGetStr(String url) {
 		DefaultHttpClient client = new DefaultHttpClient();
 		HttpGet httpGet = new HttpGet(url);
 		String result = null;
-		HttpResponse httpResponse = client.execute(httpGet);
-		HttpEntity entity = httpResponse.getEntity();
-		if (entity != null) {
-			result = EntityUtils.toString(entity, "UTF-8");
+		HttpResponse httpResponse;
+		try {
+			httpResponse = client.execute(httpGet);
+			HttpEntity entity = httpResponse.getEntity();
+			if (entity != null) {
+				result = EntityUtils.toString(entity, "UTF-8");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return result;
 	}
 
 	// post请求
-	public static String doPostStr(String url, String outStr) throws ParseException, IOException {
+	public static String doPostStr(String url, String outStr){
 		DefaultHttpClient client = new DefaultHttpClient();
 		HttpPost httpPost = new HttpPost(url);
-		httpPost.setEntity(new StringEntity(outStr, "UTF-8"));
-		HttpResponse response = client.execute(httpPost);
-		String result = EntityUtils.toString(response.getEntity(), "UTF-8");
+		String result = null;
+		try {
+			httpPost.setEntity(new StringEntity(outStr, "UTF-8"));
+			HttpResponse response = client.execute(httpPost);
+			result = EntityUtils.toString(response.getEntity(), "UTF-8");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return result;
 	}
 
@@ -78,7 +87,7 @@ public class WechatUtil {
 		}
 		return token;
 	}
-	
+
 	// 组装菜单
 	public static Menu initMenu() {
 		Menu menu = new Menu();
@@ -94,7 +103,7 @@ public class WechatUtil {
 		button2.setType("view");
 		button2.setUrl("http://www.tcqcw.cn");
 		buttons.add(button2);
-		
+
 		List<Button> subButtons = Lists.newArrayList();
 		ClickButton button31 = new ClickButton();
 		button31.setName("扫码");
