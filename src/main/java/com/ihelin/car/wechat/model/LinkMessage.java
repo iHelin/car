@@ -1,10 +1,10 @@
-package com.ihelin.car.wechat.entity;
+package com.ihelin.car.wechat.model;
 
-public class Article {
+public class LinkMessage extends BaseMessage {
 	private String Title;
 	private String Description;
-	private String PicUrl;
 	private String Url;
+	private String MsgId;
 
 	public String getTitle() {
 		return Title;
@@ -22,14 +22,6 @@ public class Article {
 		Description = description;
 	}
 
-	public String getPicUrl() {
-		return PicUrl;
-	}
-
-	public void setPicUrl(String picUrl) {
-		PicUrl = picUrl;
-	}
-
 	public String getUrl() {
 		return Url;
 	}
@@ -37,4 +29,13 @@ public class Article {
 	public void setUrl(String url) {
 		Url = url;
 	}
+
+	public String getMsgId() {
+		return MsgId;
+	}
+
+	public void setMsgId(String msgId) {
+		MsgId = msgId;
+	}
+
 }

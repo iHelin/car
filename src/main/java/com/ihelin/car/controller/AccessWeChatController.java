@@ -17,7 +17,7 @@ import com.ihelin.car.db.entity.ServiceMenu;
 import com.ihelin.car.utils.CheckUtil;
 import com.ihelin.car.utils.MessageUtil;
 import com.ihelin.car.utils.WechatUtil;
-import com.ihelin.car.wechat.entity.LocationMessage;
+import com.ihelin.car.wechat.model.LocationMessage;
 
 @Controller
 public class AccessWeChatController extends BaseController {

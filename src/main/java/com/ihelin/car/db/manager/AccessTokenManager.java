@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import com.ihelin.car.db.entity.AccessToken;
 import com.ihelin.car.db.mapper.AccessTokenMapper;
 import com.ihelin.car.utils.WechatUtil;
-import com.ihelin.car.wechat.entity.WXAccessToken;
+import com.ihelin.car.wechat.model.WXAccessToken;
 
 @Service
 public class AccessTokenManager {

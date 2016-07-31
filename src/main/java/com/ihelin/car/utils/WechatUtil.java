@@ -32,8 +32,8 @@ import com.ihelin.car.menu.Button;
 import com.ihelin.car.menu.ClickButton;
 import com.ihelin.car.menu.Menu;
 import com.ihelin.car.menu.ViewButton;
-import com.ihelin.car.wechat.entity.WXAccessToken;
-import com.ihelin.car.wechat.entity.LocationMessage;
+import com.ihelin.car.wechat.model.LocationMessage;
+import com.ihelin.car.wechat.model.WXAccessToken;
 
 public class WechatUtil {
 	private static final String ACCESS_TOKEN_URL = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET";
