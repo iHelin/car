@@ -13,11 +13,16 @@
 		<div class="mui-content">
 			<ul class="mui-table-view mui-table-view-chevron">
 				<li class="mui-table-view-cell mui-media">
-					<a class="mui-navigate-right" href="">
-						<img class="mui-media-object mui-pull-left head-img" id="head-img" src="${(wxUser.headimgurl)!(request.contextPath)+"/plugins/mui/img/logo.png"}">
+					<a class="mui-navigate-right" href="${request.contextPath}/h5/user_info">
+						<img class="mui-media-object mui-pull-left head-img" id="head-img" src="${(wxUser.headimgurl)!}">
 						<div class="mui-media-body">
 							${(wxUser.nickName)!}
-							<p class='mui-ellipsis'>地区:${(wxUser.province)!}</p>
+							<#if wxUser.status==0>
+								<span class="mui-badge">普通用户</span>
+							<#elseif wxUser.status==1>
+								<span class="mui-badge mui-badge-danger">会员</span>
+							</#if>
+							<p class='mui-ellipsis'>账号:${(wxUser.name)!"未设置"}</p>
 						</div>
 					</a>
 				</li>

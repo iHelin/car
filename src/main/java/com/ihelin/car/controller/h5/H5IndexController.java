@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.ihelin.car.config.CommonConfig;
 import com.ihelin.car.db.entity.User;
 
 @Controller
@@ -23,12 +24,17 @@ public class H5IndexController extends H5BaseController {
 		if (wxUser == null) {
 			String usercenterUrl = "h5/user_center";
 			usercenterUrl = URLEncoder.encode(usercenterUrl, "utf-8");
-			String url = "http://ihelin.vip.natapp.cn/oauth_url?url=REDIRECT_URI";
+			String url = CommonConfig.getDomainUrl()+"/oauth_url?url=REDIRECT_URI";
 			url = url.replace("REDIRECT_URI",
-					URLEncoder.encode("http://ihelin.vip.natapp.cn/weixin_login.do?from=" + usercenterUrl, "utf-8"));
+					URLEncoder.encode(CommonConfig.getDomainUrl()+"/weixin_login.do?from=" + usercenterUrl, "utf-8"));
 			return "redirect:" + url;
 		}
 		return ftl("user_center");
+	}
+	
+	@RequestMapping(value = "user_info")
+	public String userInfo() {
+		return ftl("user_info");
 	}
 
 	@RequestMapping(value = "car_manager")

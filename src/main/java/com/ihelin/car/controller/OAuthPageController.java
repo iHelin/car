@@ -20,34 +20,33 @@ import com.ihelin.car.wechat.entity.WeixinUserInfo;
 @Controller
 public class OAuthPageController extends BaseController {
 	private static final Log LOGGER = LogFactory.getLog(OAuthPageController.class);
-	
+
 	@RequestMapping(value = "oauth_url")
 	public String oauthRedirectUrl(String url, String scope) throws Exception {
-		String callbackUrl = "http://ihelin.vip.natapp.cn/oauth_url_callback?" + "url="
+		String callbackUrl = CommonConfig.getDomainUrl() + "/oauth_url_callback?" + "url="
 				+ URLEncoder.encode(url, "UTF-8");
 		if (StringUtils.isEmpty(scope))
 			scope = "snsapi_userinfo"; // or: snsapi_userinfo
 		String wxUrl = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + CommonConfig.getAppID()
 				+ "&redirect_uri=" + URLEncoder.encode(callbackUrl, "UTF-8") + "&response_type=code&scope=" + scope
 				+ "&state=#wechat_redirect";
-		LOGGER.info("Oauth redirect wxUrl: " + wxUrl);
+		LOGGER.info("Oauth redirect url: " + wxUrl);
 		return "redirect:" + wxUrl;
 	}
 
 	@RequestMapping(value = "oauth_url_callback")
 	public String oauthUrlCallback(String url, String code, String state) {
-		LOGGER.info("url: " + url + ", code: " + code + ", state: " + state);
-		OauthJSON oauthRes = null;
+		//LOGGER.info("url: " + url + ", code: " + code + ", state: " + state);
+		OauthModel oauthRes = null;
 		int retryCount = 0;
 		String api = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + CommonConfig.getAppID() + "&secret="
 				+ CommonConfig.getAppSecret() + "&code=" + code + "&grant_type=authorization_code";
 		while (retryCount < 3) {
 			String res = HtmlUtil.getUrlContent(api);
-			LOGGER.info("res: " + res);
 			if (StringUtils.isEmpty(res)) {
 				retryCount++;
 			} else {
-				oauthRes = JSON.parseObject(res, OauthJSON.class);
+				oauthRes = JSON.parseObject(res, OauthModel.class);
 				if (oauthRes != null)
 					break;
 			}
@@ -72,7 +71,7 @@ public class OAuthPageController extends BaseController {
 	@RequestMapping(value = "weixin_login.do")
 	public String doWeixinLogin(String openId, String from, String accessToken, String code, String state,
 			HttpSession session) {
-		LOGGER.info("进入微信登录请求: weixin_login.do, openid: " + openId);
+		LOGGER.info("请求微信登录，openid: " + openId);
 		if (StringUtils.isNotBlank(openId)) {
 			User user = userManager.selectUserByOpenId(openId);
 			if (user == null) {
@@ -89,16 +88,17 @@ public class OAuthPageController extends BaseController {
 				user.setLanguage(wxUser.getLanguage());
 				user.setNickName(wxUser.getNickname());
 				user.setOpenId(openId);
+				user.setStatus(0);
 				user.setProvince(wxUser.getProvince());
 				user.setRemark(wxUser.getRemark());
 				user.setSubscribe(wxUser.getSubscribe());
-				user.setSubscribeTime(new Date(wxUser.getSubscribe_time()));
+				user.setSubscribeTime(new Date(wxUser.getSubscribe_time() * 1000));
 				user.setTagidList(JSON.toJson(wxUser.getTagid_list()));
 				userManager.insertUser(user);
 			}
 			setWeixinUser(user);
 		} else {
-			LOGGER.warn("openid is blank");
+			LOGGER.error("openid is blank");
 			return "redirect:index";
 		}
 		if (StringUtils.isNotBlank(from))
@@ -106,7 +106,7 @@ public class OAuthPageController extends BaseController {
 		return "redirect:index";
 	}
 
-	static class OauthJSON {
+	static class OauthModel {
 		public String access_token;
 		public String openid;
 		public String scope;
