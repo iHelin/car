@@ -14,10 +14,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ihelin.car.db.entity.ServiceMenu;
-import com.ihelin.car.message.entity.LocationMessage;
 import com.ihelin.car.utils.CheckUtil;
 import com.ihelin.car.utils.MessageUtil;
 import com.ihelin.car.utils.WechatUtil;
+import com.ihelin.car.wechat.entity.LocationMessage;
 
 @Controller
 public class AccessWeChatController extends BaseController {

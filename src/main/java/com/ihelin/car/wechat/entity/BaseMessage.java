@@ -1,4 +1,4 @@
-package com.ihelin.car.message.entity;
+package com.ihelin.car.wechat.entity;
 
 public abstract class BaseMessage {
 	private String ToUserName;// 开发者微信号

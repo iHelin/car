@@ -1,4 +1,4 @@
-package com.ihelin.car.message.entity;
+package com.ihelin.car.wechat.entity;
 
 public class TextMessage extends BaseMessage {
 	private String Content;// 消息内容

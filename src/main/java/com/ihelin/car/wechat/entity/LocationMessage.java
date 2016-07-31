@@ -1,4 +1,4 @@
-package com.ihelin.car.message.entity;
+package com.ihelin.car.wechat.entity;
 
 public class LocationMessage extends BaseMessage {
 	private String Location_X;

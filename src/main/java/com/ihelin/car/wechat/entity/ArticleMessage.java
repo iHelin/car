@@ -1,4 +1,4 @@
-package com.ihelin.car.message.entity;
+package com.ihelin.car.wechat.entity;
 
 import java.util.List;
 

@@ -33,8 +33,8 @@ import com.ihelin.car.menu.Button;
 import com.ihelin.car.menu.ClickButton;
 import com.ihelin.car.menu.Menu;
 import com.ihelin.car.menu.ViewButton;
-import com.ihelin.car.message.entity.AccessToken;
-import com.ihelin.car.message.entity.LocationMessage;
+import com.ihelin.car.wechat.entity.WXAccessToken;
+import com.ihelin.car.wechat.entity.LocationMessage;
 
 public class WechatUtil {
 	private static final String ACCESS_TOKEN_URL = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET";
@@ -67,8 +67,8 @@ public class WechatUtil {
 	}
 
 	// 获取access_token
-	public static AccessToken getAccessToken() throws ParseException, IOException {
-		AccessToken token = new AccessToken();
+	public static WXAccessToken getAccessToken() throws ParseException, IOException {
+		WXAccessToken token = new WXAccessToken();
 		String url = ACCESS_TOKEN_URL.replace("APPID", CommonConfig.getTestAppID()).replace("APPSECRET",
 				CommonConfig.getTestAppSecret());
 		JSONObject jsonObject = new JSONObject(doGetStr(url));

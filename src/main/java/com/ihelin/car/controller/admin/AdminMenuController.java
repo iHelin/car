@@ -25,8 +25,9 @@ public class AdminMenuController extends AdminBaseController {
 
 	@RequestMapping(value = "service_menu_sync")
 	public String syncMenu() {
+		String token = accessTokenManager.getAccessToken().getToken();
 		try {
-			serviceMenuMannger.syncServiceMenuToWeiXin();
+			serviceMenuMannger.syncServiceMenuToWeiXin(token);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

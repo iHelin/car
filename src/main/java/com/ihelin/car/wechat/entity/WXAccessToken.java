@@ -1,8 +1,8 @@
-package com.ihelin.car.message.entity;
+package com.ihelin.car.wechat.entity;
 
-public class AccessToken {
+public class WXAccessToken {
 	private String token;
-	private int expiresIn;
+	private int expiresIn;// 凭证有效时间，单位：秒
 
 	public String getToken() {
 		return token;

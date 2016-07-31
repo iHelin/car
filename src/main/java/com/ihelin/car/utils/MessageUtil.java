@@ -13,10 +13,11 @@ import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
-import com.ihelin.car.message.entity.ImageMessage;
-import com.ihelin.car.message.entity.Article;
-import com.ihelin.car.message.entity.ArticleMessage;
-import com.ihelin.car.message.entity.TextMessage;
+
+import com.ihelin.car.wechat.entity.Article;
+import com.ihelin.car.wechat.entity.ArticleMessage;
+import com.ihelin.car.wechat.entity.ImageMessage;
+import com.ihelin.car.wechat.entity.TextMessage;
 import com.thoughtworks.xstream.XStream;
 
 public class MessageUtil {

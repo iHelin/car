@@ -1,4 +1,4 @@
-package com.ihelin.car.message.entity;
+package com.ihelin.car.wechat.entity;
 
 public class ImageMessage extends BaseMessage {
 	private String PicUrl;

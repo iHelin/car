@@ -16,7 +16,6 @@ import com.ihelin.car.menu.Button;
 import com.ihelin.car.menu.ClickButton;
 import com.ihelin.car.menu.Menu;
 import com.ihelin.car.menu.ViewButton;
-import com.ihelin.car.message.entity.AccessToken;
 import com.ihelin.car.utils.WechatUtil;
 
 @Service
@@ -45,8 +44,7 @@ public class ServiceMenuMannger {
 	}
 
 	// 同步微信菜单
-	public int syncServiceMenuToWeiXin() throws ParseException, IOException {
-		AccessToken token = WechatUtil.getAccessToken();
+	public int syncServiceMenuToWeiXin(String token) throws ParseException, IOException {
 		Menu menu = new Menu();
 		List<ServiceMenu> sMenus = getAllMenus();
 		List<Button> parBtns = Lists.newArrayList();
@@ -111,7 +109,7 @@ public class ServiceMenuMannger {
 		}
 		menu.setButton(parBtns);
 		String menuStr = new JSONObject(menu).toString();
-		int result = WechatUtil.createMenu(token.getToken(), menuStr);
+		int result = WechatUtil.createMenu(token, menuStr);
 		if (result == 0) {
 			System.out.println("创建菜单成功");
 		} else {
