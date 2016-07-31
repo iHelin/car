@@ -1,4 +1,4 @@
-package com.ihelin.car.message.manager;
+package com.ihelin.car.db.manager;
 
 import java.util.Date;
 import java.util.Timer;
@@ -22,24 +22,16 @@ public class AccessTokenManager {
 	private AccessTokenMapper accessTokenMapper;
 
 	// access token 剩余时间预留安全值，半小时
-	private static final long SAFE_TOKEN_RESERVE_TIME = 1800000;
+	private static final long SAFE_TOKEN_RESERVE_TIME = 1000L * 30 * 60;
 
-	public static final Logger LOGGER = LoggerFactory.getLogger(AccessTokenManager.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(AccessTokenManager.class);
 
 	// 从数据库中获取token
 	public AccessToken getAccessToken() {
 		return accessTokenMapper.selectAccessToken();
 	}
 
-	public int insertToken(AccessToken accessToken) {
-		return accessTokenMapper.insert(accessToken);
-	}
-
-	public int updateAccessToken(AccessToken accessToken) {
-		return accessTokenMapper.updateByPrimaryKey(accessToken);
-	}
-
-	// 设置定时器，每半小时进行一次检查一次
+	// 设置定时器，每20分钟进行一次检查一次
 	@PostConstruct
 	public void init() {
 		Timer t = new Timer("access-token-updater");
@@ -47,24 +39,25 @@ public class AccessTokenManager {
 			@Override
 			public void run() {
 				try {
+					LOGGER.info("check accessToken...");
 					checkAndUpdate();
 				} catch (Exception e) {
 					LOGGER.error("update access token error", e);
 				}
 			}
-		}, 0, 1000L * 60 * 30);
+		}, 0, 1000L * 60 * 20);
 
 	}
 
 	/**
 	 * 定期检测 access token，若过期时间不足半小时，则更新之
 	 */
-	public synchronized void checkAndUpdate() {
+	private synchronized void checkAndUpdate() {
 		AccessToken record = getAccessToken();
 		boolean needRefresh = false;
 		if (record == null) {
-			WXAccessToken wxToken = getAccessTokenFromWX();
 			record = new AccessToken();
+			WXAccessToken wxToken = getAccessTokenFromWX();
 			record.setToken(wxToken.getToken());
 			record.setGenTime(new Date());
 			Date validUntil = new Date(new Date().getTime() + (wxToken.getExpiresIn() * 1000L));
@@ -89,16 +82,23 @@ public class AccessTokenManager {
 	}
 
 	// 从微信服务器获取token
-	private WXAccessToken getAccessTokenFromWX() {
+	private static WXAccessToken getAccessTokenFromWX() {
 		WXAccessToken wxAccessToken = null;
 		try {
 			wxAccessToken = WechatUtil.getAccessToken();
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		LOGGER.info("从微信服务器获取token成功，有效期为" + wxAccessToken.getExpiresIn());
 		return wxAccessToken;
+	}
+
+	private int insertToken(AccessToken accessToken) {
+		return accessTokenMapper.insert(accessToken);
+	}
+	
+	private int updateAccessToken(AccessToken accessToken) {
+		return accessTokenMapper.updateByPrimaryKey(accessToken);
 	}
 
 }

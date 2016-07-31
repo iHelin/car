@@ -1,4 +1,4 @@
-package com.ihelin.car.message.manager;
+package com.ihelin.car.db.manager;
 
 import java.io.IOException;
 import java.util.List;

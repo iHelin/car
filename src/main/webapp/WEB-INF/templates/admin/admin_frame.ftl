@@ -48,16 +48,22 @@
                 <!-- BEGIN SIDEBAR MENU -->
             <ul class="acc-menu" id="sidebar">
                 <li>
-                	<a href="${request.contextPath}/admin/index"><i class="fa fa-home"></i><span>首页</span></a>
+                	<a href="${request.contextPath}/admin/index">
+                		<i class="fa fa-home"></i><span>首页</span></a>
                 </li>
-                <li class="hasChild">
+                <li>
+          			<a href="${request.contextPath}/admin/menu_admin"><i class ="fa fa-th"></i>
+							<span>自定义菜单</span>
+		            </a>
+			    </li>
+			    <li class="hasChild">
                 	<a href ="javascript:void(0);">
                 		<i class ="fa fa-th"></i> 
-		                <span>菜单管理</span>
+		                <span>xx管理</span>
 		            </a>
 		            <ul class="acc-menu">
-						<li><a href="${request.contextPath}/admin/menu_admin">
-							<span>自定义菜单</span></a>
+						<li><a href="">
+							<span>xxx</span></a>
 						</li>
 			        </ul>
 			    </li>

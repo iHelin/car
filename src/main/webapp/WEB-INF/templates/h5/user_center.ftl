@@ -13,11 +13,11 @@
 		<div class="mui-content">
 			<ul class="mui-table-view mui-table-view-chevron">
 				<li class="mui-table-view-cell mui-media">
-					<a class="mui-navigate-right" href="#account">
-						<img class="mui-media-object mui-pull-left head-img" id="head-img" src="${request.contextPath}/plugins/mui/img/logo.png">
+					<a class="mui-navigate-right" href="">
+						<img class="mui-media-object mui-pull-left head-img" id="head-img" src="${(wxUser.headimgurl)!(request.contextPath)+"/plugins/mui/img/logo.png"}">
 						<div class="mui-media-body">
-							iHelin
-							<p class='mui-ellipsis'>账号:Helinull</p>
+							${(wxUser.nickName)!}
+							<p class='mui-ellipsis'>地区:${(wxUser.province)!}</p>
 						</div>
 					</a>
 				</li>

@@ -39,7 +39,7 @@
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 
-		<table schema="car" tableName="AccessToken" domainObjectName="AccessToken"
+		<table schema="car" tableName="User" domainObjectName="User"
 			enableCountByExample="fasle" enableSelectByExample="false"
 			enableUpdateByExample="false" enableDeleteByExample="false">
 			<generatedKey column="id" sqlStatement="JDBC" />
