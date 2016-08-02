@@ -83,41 +83,59 @@
 			<div class="icondiv" style="margin-top: 10px;">
 				<ul class="mui-table-view mui-grid-view mui-grid-9" style="background-color: #fff;">
 		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-		            	<a href="${request.contextPath}/h5/user_center">
-		                    <span class="mui-icon mui-icon-home"></span>
-		                    <div class="mui-media-body">个人中心</div>
-		            	</a>
-					</li>
-		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
 		            	<a href="">
 		                    <span class="mui-icon mui-icon-email"><span class="mui-badge">5</span></span>
-		                    <div class="mui-media-body">Email</div>
+		                    <div class="mui-media-body">汽车美容</div>
 		            	</a>
 		           	</li>
 		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
 		            	<a href="#">
 		                    <span class="mui-icon mui-icon-chatbubble"></span>
-		                    <div class="mui-media-body">Chat</div>
-		            </a></li>
-		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+		                    <div class="mui-media-body">保养</div>
+		            	</a>
+		            </li>
+		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+		            	<a href="#">
 		                    <span class="mui-icon mui-icon-location"></span>
-		                    <div class="mui-media-body">location</div></a></li>
-		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+		                    <div class="mui-media-body">轮胎</div>
+		            	</a>
+		          	</li>
+		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+		            	<a href="#">
 		                    <span class="mui-icon mui-icon-search"></span>
-		                    <div class="mui-media-body">Search</div></a></li>
-		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+		                    <div class="mui-media-body">救援</div>
+		            	</a>
+		         	</li>
+		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+		            	<a href="#">
 		                    <span class="mui-icon mui-icon-phone"></span>
-		                    <div class="mui-media-body">Phone</div></a></li>
-		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+		                    <div class="mui-media-body">车务代办</div>
+		            	</a>
+		           	</li>
+		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+		            	<a href="#">
 		                    <span class="mui-icon mui-icon-gear"></span>
-		                    <div class="mui-media-body">Setting</div></a></li>
-		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+		                    <div class="mui-media-body">车友活动</div>
+		             	</a>
+		            </li>
+		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+		            	<a href="#">
 		                    <span class="mui-icon mui-icon-info"></span>
-		                    <div class="mui-media-body">about</div></a></li>
-		           <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+		                    <div class="mui-media-body">保险</div>
+		             	</a>
+		        	</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
 		         		<a href="#">
 		                    <span class="mui-icon mui-icon-more"></span>
-		                    <div class="mui-media-body">more</div></a></li>
+		                    <div class="mui-media-body">特惠商家</div>
+		            	</a>
+		        	</li>
+		        	<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+		            	<a href="${request.contextPath}/h5/user_center">
+		                    <span class="mui-icon mui-icon-home"></span>
+		                    <div class="mui-media-body">个人中心</div>
+		            	</a>
+					</li>
 		        </ul>
 			</div>
 		</div>

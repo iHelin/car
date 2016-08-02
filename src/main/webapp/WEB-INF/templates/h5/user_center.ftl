@@ -51,7 +51,7 @@
 			</ul>
 			<ul class="mui-table-view mui-table-view-chevron" style="margin-top: 20px;">
 				<li class="mui-table-view-cell">
-					<a href="#notifications" class="mui-navigate-right">
+					<a href="${request.contextPath}/h5/become_user" class="mui-navigate-right">
 						<i class="fa fa-user" style="color: #FF5053"></i> 成为会员
 					</a>
 				</li>
