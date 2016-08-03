@@ -132,7 +132,7 @@
 							   	</tr>
 						  	</thead>
 						  	<tbody>
-						  		<#list menus?sort_by("sort")?reverse as menu>
+						  		<#list menus as menu>
 						  			<#if !menu.parentId??>
 										<tr class="text-center">
 											<td><#if menu.parentId??>-----</#if>${menu.name!}</td>
@@ -144,7 +144,7 @@
 												<a href="javascript:;" onclick="deleteMenu(${menu.id!});" class="btn btn-default btn-sm"><i class="fa fa-times-circle"></i>删除</a>
 											</td>
 										</tr>
-										<#list menus?sort_by("sort")?reverse as subMenu>
+										<#list menus as subMenu>
 											<#if subMenu.parentId?? && subMenu.parentId == menu.id>
 												<tr class="text-center">
 													<td class="text-right"><i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i> ${subMenu.name!}</td>

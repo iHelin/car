@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ihelin.car.config.CommonConfig;
 import com.ihelin.car.utils.CommonUtils;
-import com.ihelin.model.AdminUser;
+import com.ihelin.car.wechat.model.AdminUser;
 
 @Controller
 public class AdminLoginController extends AdminBaseController {

@@ -26,10 +26,10 @@
         </ul>       
         <ul class="nav navbar-nav  pull-right toolbar">
         	<li id="right_dropdown" class="dropdown ">
-        		<a href="#"  class="dropdown-toggle username" data-toggle="dropdown"><#if (adminUser.nickName)??>${adminUser.nickName?html}</#if> <i class="fa fa-caret-down fa-scale"></i></a>
+        		<a href="javascript:;"  class="dropdown-toggle username" data-toggle="dropdown"><#if (adminUser.nickName)??>${adminUser.nickName?html}</#if> <i class="fa fa-caret-down fa-scale"></i></a>
         		<ul class="dropdown-menu userinfo arrow">
         			<li class="username">
-                        <a href="#">
+                        <a href="javascript:;">
         				    <div class="pull-left"><h5>您好, <#if (adminUser.nickName)??>${adminUser.nickName?html}<#else>未设置昵称</#if>!</h5></div>
                         </a>
         			</li>
@@ -49,21 +49,25 @@
             <ul class="acc-menu" id="sidebar">
                 <li>
                 	<a href="${request.contextPath}/admin/index">
-                		<i class="fa fa-home"></i><span>首页</span></a>
+                		<i class="fa fa-home"></i><span>首页</span>
+                	</a>
                 </li>
                 <li>
           			<a href="${request.contextPath}/admin/menu_admin"><i class ="fa fa-th"></i>
-							<span>自定义菜单</span>
+						<span>自定义菜单</span>
 		            </a>
 			    </li>
 			    <li class="hasChild">
                 	<a href ="javascript:void(0);">
                 		<i class ="fa fa-th"></i> 
-		                <span>xx管理</span>
+		                <span>加盟商管理</span>
 		            </a>
 		            <ul class="acc-menu">
 						<li><a href="">
-							<span>xxx</span></a>
+							<span>汽车美容</span></a>
+						</li>
+						<li><a href="">
+							<span>汽车保养</span></a>
 						</li>
 			        </ul>
 			    </li>

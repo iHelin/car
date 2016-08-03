@@ -7,6 +7,8 @@ import javax.annotation.Resource;
 
 import org.apache.http.ParseException;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
@@ -22,6 +24,8 @@ import com.ihelin.car.utils.WechatUtil;
 public class ServiceMenuMannger {
 	@Resource
 	private ServiceMenuMapper serviceMenuMapper;
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(ServiceMenuMannger.class);
 
 	public int insertMenu(ServiceMenu menu) {
 		return serviceMenuMapper.insert(menu);
@@ -111,9 +115,9 @@ public class ServiceMenuMannger {
 		String menuStr = new JSONObject(menu).toString();
 		int result = WechatUtil.createMenu(token, menuStr);
 		if (result == 0) {
-			System.out.println("创建菜单成功");
+			LOGGER.info("创建菜单成功");
 		} else {
-			System.out.println("错误码：" + result);
+			LOGGER.info("错误码：" + result);
 		}
 		return result;
 	}

@@ -25,25 +25,31 @@
 		select
 		*
 		from ServiceMenu
-		where parent_id = #{parentId,jdbcType=INTEGER}
+		where parent_id =
+		#{parentId,jdbcType=INTEGER} order by sort desc
 	</select>
 	<select id="getAllMenus" resultMap="BaseResultMap">
 		select
 		*
-		from ServiceMenu
+		from ServiceMenu order
+		by sort desc
 	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-		delete from ServiceMenu
+		delete from
+		ServiceMenu
 		where id = #{id,jdbcType=INTEGER}
 	</delete>
 	<insert id="insert" parameterType="com.ihelin.car.db.entity.ServiceMenu"
 		useGeneratedKeys="true" keyProperty="id">
-		insert into ServiceMenu (name, content, content_type,
+		insert into ServiceMenu (name,
+		content, content_type,
 		menu_rule, parent_id, sort
 		)
-		values (#{name,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR},
+		values
+		(#{name,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR},
 		#{contentType,jdbcType=INTEGER},
-		#{menuRule,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}
+		#{menuRule,jdbcType=VARCHAR},
+		#{parentId,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}
 		)
 	</insert>
 	<insert id="insertSelective" parameterType="com.ihelin.car.db.entity.ServiceMenu"
@@ -117,9 +123,12 @@
 	<update id="updateByPrimaryKey" parameterType="com.ihelin.car.db.entity.ServiceMenu">
 		update ServiceMenu
 		set name = #{name,jdbcType=VARCHAR},
-		content = #{content,jdbcType=VARCHAR},
-		content_type = #{contentType,jdbcType=INTEGER},
-		menu_rule = #{menuRule,jdbcType=VARCHAR},
+		content =
+		#{content,jdbcType=VARCHAR},
+		content_type =
+		#{contentType,jdbcType=INTEGER},
+		menu_rule =
+		#{menuRule,jdbcType=VARCHAR},
 		parent_id = #{parentId,jdbcType=INTEGER},
 		sort = #{sort,jdbcType=INTEGER}
 		where id = #{id,jdbcType=INTEGER}
