@@ -14,6 +14,13 @@
 
 	<!-- Spring mvc配置 -->
 	<context:annotation-config />
+	
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/admin/**" />
+			<beans:bean class="com.ihelin.car.interceptor.AdminAuthInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
 
 	<!-- 自动扫描且只扫描@Controller -->
 	<context:component-scan base-package="com.ihelin.car.controller"

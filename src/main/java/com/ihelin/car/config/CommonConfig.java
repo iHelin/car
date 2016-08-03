@@ -21,7 +21,6 @@ public class CommonConfig {
 
 		public String wx_appId;
 		public String wx_appSecret;
-
 		public String test_appId;
 		public String test_appSecret;
 	}
