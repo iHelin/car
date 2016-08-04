@@ -41,7 +41,7 @@ public class AdminLoginController extends AdminBaseController {
 			LOGGER.info("Admin user: " + username + " login success.");
 			if (StringUtils.isNotEmpty(from))
 				return "redirect:" + from;
-			return "redirect:index";
+			return "redirect:/admin/index";
 		} else {
 			model.addAttribute("error", "用户名密码不正确！");
 			model.addAttribute("from", from);

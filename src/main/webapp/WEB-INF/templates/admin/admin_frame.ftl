@@ -59,7 +59,7 @@
 			    </li>
 			    <li class="hasChild">
                 	<a href ="javascript:void(0);">
-                		<i class ="fa fa-th"></i> 
+                		<i class ="fa fa-users"></i> 
 		                <span>加盟商管理</span>
 		            </a>
 		            <ul class="acc-menu">
