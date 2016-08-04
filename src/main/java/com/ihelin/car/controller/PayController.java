@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.beust.jcommander.internal.Lists;
 import com.ihelin.car.config.CommonConfig;
-import com.ihelin.car.utils.CheckUtil;
+import com.ihelin.car.utils.CryptUtil;
 import com.ihelin.car.utils.GoodsDetail;
 import com.ihelin.car.utils.GoodsModel;
 import com.ihelin.car.utils.JSON;
@@ -128,7 +128,7 @@ public class PayController extends BaseController {
 			}
 		}
 		sb.append("key=" + key);
-		String sign = CheckUtil.GetMD5Code(sb.toString()).toUpperCase();
+		String sign = CryptUtil.md5(sb.toString()).toUpperCase();
 		return sign;
 	}
 

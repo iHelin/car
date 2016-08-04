@@ -42,7 +42,7 @@ public class AccessWeChatController extends BaseController {
 				String publicUserName = msgMap.get("ToUserName");
 				String msgType = msgMap.get("MsgType");
 				String content = msgMap.get("Content");
-				System.out.println("用户发送的消息类型为：" + msgType);
+				System.out.println("消息类型：" + msgType);
 				String message = "";
 				if (MessageUtil.MESSAGE_TEXT.equals(msgType)) {
 					// 处理文本消息

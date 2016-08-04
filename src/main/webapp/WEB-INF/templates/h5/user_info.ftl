@@ -16,9 +16,9 @@
 			<ul class="mui-table-view mui-table-view-chevron">
 				<li class="mui-table-view-cell mui-media">
 					<span class="" style="line-height: 40px;">
-						图像
+						头像
 						<span class="mui-media-body">
-							<img class="mui-media-object mui-pull-right head-img" style="float:right;right:40px;position:absolute" src="${(wxUser.headimgurl)!}">
+							<img class="mui-media-object mui-pull-right head-img" style="float:right;right:20px;position:absolute" src="${(wxUser.headimgurl)!}">
 						</span>
 					</span>
 				</li>
@@ -40,7 +40,7 @@
 					<a style="padding-right:15px;">
 						性别
 						<span class="mui-pull-right" style="color: #999;">
-							<#if wxUser.gender??>
+							<#if (wxUser.gender)??>
 								<#if wxUser.gender==1>
 									男
 								<#elseif wxUser.gender==2>

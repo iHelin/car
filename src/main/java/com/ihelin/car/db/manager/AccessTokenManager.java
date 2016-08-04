@@ -23,7 +23,6 @@ public class AccessTokenManager {
 
 	// access token 剩余时间预留安全值，半小时
 	private static final long SAFE_TOKEN_RESERVE_TIME = 1000L * 30 * 60;
-
 	private static final Logger LOGGER = LoggerFactory.getLogger(AccessTokenManager.class);
 
 	// 从数据库中获取token
@@ -50,7 +49,7 @@ public class AccessTokenManager {
 	}
 
 	/**
-	 * 定期检测 access token，若过期时间不足半小时，则更新之
+	 * 定期检测 access token，若过期时间不足半小时，则更新
 	 */
 	private synchronized void checkAndUpdate() {
 		AccessToken record = getAccessToken();
