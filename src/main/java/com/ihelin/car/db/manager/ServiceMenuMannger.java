@@ -48,7 +48,7 @@ public class ServiceMenuMannger {
 	}
 
 	// 同步微信菜单
-	public int syncServiceMenuToWeiXin(String token) throws ParseException, IOException {
+	public String syncServiceMenuToWeiXin(String token) throws ParseException, IOException {
 		Menu menu = new Menu();
 		List<ServiceMenu> sMenus = getAllMenus();
 		List<Button> parBtns = Lists.newArrayList();
@@ -113,13 +113,9 @@ public class ServiceMenuMannger {
 		}
 		menu.setButton(parBtns);
 		String menuStr = new JSONObject(menu).toString();
-		int result = WechatUtil.createMenu(token, menuStr);
-		if (result == 0) {
-			LOGGER.info("创建菜单成功");
-		} else {
-			LOGGER.info("错误码：" + result);
-		}
-		return result;
+		String res = WechatUtil.createMenu(token, menuStr);
+		LOGGER.info(res);
+		return res;
 	}
 
 	public List<ServiceMenu> getMenusByParentId(Integer parentId) {

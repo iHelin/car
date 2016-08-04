@@ -18,9 +18,9 @@ import java.util.Map;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.ParseException;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
@@ -47,9 +47,8 @@ public class WechatUtil {
 		DefaultHttpClient client = new DefaultHttpClient();
 		HttpGet httpGet = new HttpGet(url);
 		String result = null;
-		HttpResponse httpResponse;
 		try {
-			httpResponse = client.execute(httpGet);
+			HttpResponse httpResponse = client.execute(httpGet);
 			HttpEntity entity = httpResponse.getEntity();
 			if (entity != null) {
 				result = EntityUtils.toString(entity, "UTF-8");
@@ -61,14 +60,16 @@ public class WechatUtil {
 	}
 
 	// post请求
-	public static String doPostStr(String url, String outStr){
+	public static String doPostStr(String url, String outStr) {
 		DefaultHttpClient client = new DefaultHttpClient();
 		HttpPost httpPost = new HttpPost(url);
 		String result = null;
 		try {
-			httpPost.setEntity(new StringEntity(outStr, "UTF-8"));
+			HttpEntity reqEntity = new StringEntity(outStr, ContentType.APPLICATION_JSON);
+			httpPost.setEntity(reqEntity);
 			HttpResponse response = client.execute(httpPost);
-			result = EntityUtils.toString(response.getEntity(), "UTF-8");
+			HttpEntity respEntity = response.getEntity();
+			result = EntityUtils.toString(respEntity, "UTF-8");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -76,7 +77,7 @@ public class WechatUtil {
 	}
 
 	// 获取access_token
-	public static WXAccessToken getAccessToken() throws ParseException, IOException {
+	public static WXAccessToken getAccessToken() {
 		WXAccessToken token = new WXAccessToken();
 		String url = ACCESS_TOKEN_URL.replace("APPID", CommonConfig.getAppID()).replace("APPSECRET",
 				CommonConfig.getAppSecret());
@@ -127,32 +128,21 @@ public class WechatUtil {
 	}
 
 	// 创建菜单
-	public static int createMenu(String token, String menu) throws ParseException, IOException {
-		int result = 0;
+	public static String createMenu(String token, String menu) {
 		String url = CREATE_MENU_URL.replace("ACCESS_TOKEN", token);
-		JSONObject jsonObject = new JSONObject(doPostStr(url, menu));
-		if (jsonObject != null) {
-			result = jsonObject.getInt("errcode");
-		}
-		return result;
+		return doPostStr(url, menu);
 	}
 
 	// 查询菜单
-	public static JSONObject queryMenu(String token) throws ParseException, IOException {
+	public static String queryMenu(String token) {
 		String url = QUERY_MENU_URL.replace("ACCESS_TOKEN", token);
-		JSONObject jsonObject = new JSONObject(doGetStr(url));
-		return jsonObject;
+		return doGetStr(url);
 	}
 
 	// 删除菜单
-	public static int deleteMenu(String token) throws ParseException, IOException {
+	public static String deleteMenu(String token) {
 		String url = DELETE_MENU_URL.replace("ACCESS_TOKEN", token);
-		JSONObject jsonObject = new JSONObject(doGetStr(url));
-		int result = 0;
-		if (jsonObject != null) {
-			result = jsonObject.getInt("errcode");
-		}
-		return result;
+		return doGetStr(url);
 	}
 
 	// 组装地理位置消息
