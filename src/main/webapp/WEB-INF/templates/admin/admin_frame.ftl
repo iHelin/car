@@ -53,6 +53,11 @@
                 	</a>
                 </li>
                 <li>
+          			<a href="${request.contextPath}/admin/product_admin"><i class ="fa fa-gift"></i>
+						<span>商品管理</span>
+		            </a>
+			    </li>
+                <li>
           			<a href="${request.contextPath}/admin/menu_admin"><i class ="fa fa-th"></i>
 						<span>自定义菜单</span>
 		            </a>
