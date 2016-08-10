@@ -22,7 +22,8 @@ public class AdminLoginController extends AdminBaseController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(AdminLoginController.class);
 
 	@RequestMapping("login")
-	public String adminLogin() {
+	public String adminLogin(Model model,String from) {
+		model.addAttribute("from", from);
 		return ftl("login");
 	}
 

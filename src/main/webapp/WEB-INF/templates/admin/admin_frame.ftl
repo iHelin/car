@@ -68,13 +68,18 @@
 		                <span>加盟商管理</span>
 		            </a>
 		            <ul class="acc-menu">
-						<li><a href="">
+						<li><a href="javascript:;">
 							<span>汽车美容</span></a>
 						</li>
-						<li><a href="">
+						<li><a href="javascript:;">
 							<span>汽车保养</span></a>
 						</li>
 			        </ul>
+			    </li>
+			    <li>
+          			<a href="${request.contextPath}/admin/mall_admin"><i class ="fa fa-picture-o"></i>
+						<span>商城配置</span>
+		            </a>
 			    </li>
             </ul>
             <!-- END SIDEBAR MENU -->

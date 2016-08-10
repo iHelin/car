@@ -36,7 +36,7 @@
   </div>
 </div>
 <link rel="stylesheet" href="${request.contextPath}/css/jquery.fileupload-ui.css">
-<script type="text/javascript" src="${request.contextPath}/js/jquery.form.js"></script>
+<script src="${request.contextPath}/js/jquery.form.js"></script>
 <script type="text/javascript">
 
 var modalHasLoadedImg = false;
@@ -222,17 +222,17 @@ function upload_img(fileObj){
 	        type: 'post',
 	        url: updUrl,
 	        success: function(data){
-	        $("#uploading_process_div").hide();
-			data = data.replace(/<.?[Pp][Rr][Ee]>/g,""); /* ie8中的data字符串中会有<pre>标签包围，转json格式会失败*/
-			var uploadInfo = eval('(' + data + ')');
-			if(uploadInfo.state == "SUCCESS"){
-				addNewImgToList(uploadInfo.url);
-				++total;
-				++list_max_index;
-			}else {
-				alert("上传失败：" + uploadInfo.message);
-			}
-			replaceFileUploadObj(fileObj);
+	        	$("#uploading_process_div").hide();
+				data = data.replace(/<.?[Pp][Rr][Ee]>/g,""); /* ie8中的data字符串中会有<pre>标签包围，转json格式会失败*/
+				var uploadInfo = eval('(' + data + ')');
+				if(uploadInfo.state == "SUCCESS"){
+					addNewImgToList(uploadInfo.url);
+					++total;
+					++list_max_index;
+				}else {
+					alert("上传失败：" + uploadInfo.message);
+				}
+				replaceFileUploadObj(fileObj);
 	        },
 	        error: function(){
 	        	$("#uploading_process_div").hide();

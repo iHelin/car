@@ -83,14 +83,13 @@
 	
 </script>
 </#assign>
-<@main.page title="首页">
+<@main.page title="菜单管理">
 <div id="page-heading">
 	<ol class="breadcrumb">
 		<li><a href="index">首页</a></li>
 		<li>菜单管理</li>
-		<li>自定义菜单</li>
 	</ol>
-	<h1>自定义菜单</h1>
+	<h1>菜单管理</h1>
 </div>
 <div class="container">
 	<div class="row">

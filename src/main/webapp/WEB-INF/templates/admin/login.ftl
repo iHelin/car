@@ -12,6 +12,7 @@
 <div class="verticalcenter">
 	<div class="panel panel-primary">
 		<form action="${request.contextPath}/admin/login.do" method="post" class="form-horizontal" style="margin-bottom: 0px !important;">
+			<input type="hidden" name="from" value="${from!}">
 			<div class="panel-body">
 				<h4 class="text-center" style="margin-bottom: 25px;">管理后台</h4>
 				<div class="form-group">

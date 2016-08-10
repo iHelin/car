@@ -39,6 +39,7 @@ public class AccessTokenManager {
 			public void run() {
 				try {
 					LOGGER.info("check accessToken...");
+					LOGGER.info("检查accessToken...");
 					checkAndUpdate();
 				} catch (Exception e) {
 					LOGGER.error("update access token error", e);

@@ -7,6 +7,7 @@
 <script type="text/javascript" src="${request.contextPath}/plugins/simditor/uploader.js"></script>
 <script type="text/javascript" src="${request.contextPath}/plugins/simditor/simditor.js"></script>
 <script>
+	var simditor;
 	var blnCheckUnload = false;
 	window.onbeforeunload=function (event){
 		var tips = "本页面要求您确认您要离开 - 您输入的数据可能不会被保存？" ;
@@ -36,7 +37,7 @@
 	        imageButton: ['upload']
 	    });
 	
-		initImgSlt("thumbnailVal","${(product.thumbnail)!}", false);
+		initImgSlt("thumbnailVal","${(product.img)!}", false);
 		if("undefined" != typeof imagesjson && undefined != imagesjson){
 			initImgSlt("imagesVal",imagesjson, true);
 		}else{
@@ -154,7 +155,7 @@
 							<div class="col-sm-12">
 								<div class="form-group">
 									<label class="col-sm-2 control-label">商品图片：</label>
-									<input type="hidden" id="thumbnailVal" name="img" category = "product" sizeHint="" value=""/>
+									<input type="hidden" id="thumbnailVal" name="img" category="product" sizeHint="" value=""/>
 						   		</div>
 						   	</div>
 						</div>

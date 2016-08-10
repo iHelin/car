@@ -24,6 +24,9 @@ public abstract class BaseController {
 
 	protected static final int PAGE_LENGTH = 10;
 	protected static final int MAX_LENGTH = 1000;
+	
+	public static final String UNION_POSTAGE = "union_postage";// 包邮起始价
+	public static final String POSTAGE = "postage";// 邮费
 	public static final String SESSION_KEY_WEIXIN_USER = "wxUser";
 
 	public User getWeixinUser() {
