@@ -6,11 +6,19 @@
 <script type="text/javascript" src="${request.contextPath}/plugins/simditor/hotkeys.js"></script>
 <script type="text/javascript" src="${request.contextPath}/plugins/simditor/uploader.js"></script>
 <script type="text/javascript" src="${request.contextPath}/plugins/simditor/simditor.js"></script>
+<style>
+	img {
+		width: auto;
+		height:auto;
+	    max-height: 100%;
+	    max-width: 100%;
+	}
+</style>
 <script>
 	var simditor;
 	var blnCheckUnload = false;
 	window.onbeforeunload=function (event){
-		var tips = "本页面要求您确认您要离开 - 您输入的数据可能不会被保存？" ;
+		var tips = "本页面要求您确认您要离开 - 您输入的数据可能不会被保存？";
 		if (blnCheckUnload) {
 			return tips;
 		}
