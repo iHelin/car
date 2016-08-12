@@ -27,7 +27,6 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
 import com.google.common.collect.Lists;
-import com.ihelin.car.config.CommonConfig;
 import com.ihelin.car.menu.Button;
 import com.ihelin.car.menu.ClickButton;
 import com.ihelin.car.menu.Menu;
@@ -77,15 +76,16 @@ public class WechatUtil {
 	}
 
 	// 获取access_token
-	public static WXAccessToken getAccessToken() {
-		WXAccessToken token = new WXAccessToken();
-		String url = ACCESS_TOKEN_URL.replace("APPID", CommonConfig.getAppID()).replace("APPSECRET",
-				CommonConfig.getAppSecret());
-		JSONObject jsonObject = new JSONObject(doGetStr(url));
-		if (jsonObject != null) {
-			token.setToken(jsonObject.getString("access_token"));
-			token.setExpiresIn(jsonObject.getInt("expires_in"));
-		}
+	public static WXAccessToken getAccessToken(String appid, String secret) {
+		String url = ACCESS_TOKEN_URL.replace("APPID", appid).replace("APPSECRET", secret);
+		String res = doGetStr(url);
+		WXAccessToken token = JSON.parseObject(res, WXAccessToken.class);
+		/*
+		 * JSONObject jsonObject = new JSONObject(doGetStr(url)); if (jsonObject
+		 * != null) {
+		 * token.setAccess_token(jsonObject.getString("access_token"));
+		 * token.setExpires_in(jsonObject.getInt("expires_in")); }
+		 */
 		return token;
 	}
 
@@ -128,8 +128,8 @@ public class WechatUtil {
 	}
 
 	// 创建菜单
-	public static String createMenu(String token, String menu) {
-		String url = CREATE_MENU_URL.replace("ACCESS_TOKEN", token);
+	public static String createMenu(String accessToken, String menu) {
+		String url = CREATE_MENU_URL.replace("ACCESS_TOKEN", accessToken);
 		return doPostStr(url, menu);
 	}
 
@@ -156,7 +156,7 @@ public class WechatUtil {
 		return location;
 	}
 
-	// 文件上传
+	// 微信文件上传
 	public static String upload(String filePath, String accessToken, String type)
 			throws IOException, NoSuchAlgorithmException, NoSuchProviderException, KeyManagementException {
 		File file = new File(filePath);

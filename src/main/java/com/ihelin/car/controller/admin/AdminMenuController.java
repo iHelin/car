@@ -37,6 +37,8 @@ public class AdminMenuController extends AdminBaseController {
 	@RequestMapping(value = "service_menu_update")
 	public String updateServiceMenu(Integer menuId, String menuName, String content, String url, Integer articleId,
 			Integer menuType, Integer parentId, Integer sort) {
+		if (parentId == null)
+			parentId = 0;
 		if (menuId == null) {
 			ServiceMenu menu = new ServiceMenu();
 			menu.setName(menuName);
@@ -94,8 +96,8 @@ public class AdminMenuController extends AdminBaseController {
 
 	@RequestMapping("get_menu_by_id")
 	public void getMenuById(Integer id, HttpServletResponse response) {
-		ServiceMenu menu = serviceMenuMannger.getMenuById(id);
 		Map<String, Object> res = Maps.newHashMap();
+		ServiceMenu menu = serviceMenuMannger.getMenuById(id);
 		res.put("menu", menu);
 		ResponseUtil.writeSuccessJSON(response, res);
 	}

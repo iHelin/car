@@ -1,6 +1,7 @@
 package com.ihelin.car.db.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import com.ihelin.car.db.entity.ServiceMenu;
 
@@ -18,6 +19,8 @@ public interface ServiceMenuMapper {
 	int updateByPrimaryKey(ServiceMenu record);
 
 	List<ServiceMenu> getAllMenus();
+	
+	List<ServiceMenu> getMenuByCondition(Map<String,Object> res);
 
 	List<ServiceMenu> getMenustByParentId(Integer parentId);
 }

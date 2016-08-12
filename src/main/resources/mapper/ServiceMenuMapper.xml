@@ -20,6 +20,14 @@
 		from ServiceMenu
 		where id = #{id,jdbcType=INTEGER}
 	</select>
+	<select id="getMenuByCondition" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from ServiceMenu
+		<where>
+			<if test="parentId!=null">parent_id = #{parentId,jdbcType=INTEGER}</if>
+		</where>
+	</select>
 	<select id="getMenustByParentId" resultMap="BaseResultMap"
 		parameterType="java.lang.Integer">
 		select

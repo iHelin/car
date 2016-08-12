@@ -132,7 +132,7 @@
 						  	</thead>
 						  	<tbody>
 						  		<#list menus as menu>
-						  			<#if !menu.parentId??>
+						  			<#if menu.parentId==0>
 										<tr class="text-center">
 											<td><#if menu.parentId??>-----</#if>${menu.name!}</td>
 											<td><#if menu.contentType==0>文本<#elseif menu.contentType==1>链接<#elseif menu.contentType==2>图文</#if></td>
@@ -196,9 +196,9 @@
 	                	<label class="col-sm-3 control-label">上级菜单</label>
 	                	<div class="col-sm-6">
 	                		<select id="far_menu_id" name="parentId" class="form-control">
-								<option value="">--根菜单--</option>
+								<option value="0">--根菜单--</option>
 								<#list menus as menu>
-									<#if !(menu.parentId)??>
+									<#if !(menu.parentId)?? || (menu.parentId)==0>
 					  					<option value="${menu.id!}">${menu.name!}</option>
 					  				</#if>
 								</#list>

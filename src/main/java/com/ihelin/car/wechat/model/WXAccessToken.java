@@ -1,22 +1,23 @@
 package com.ihelin.car.wechat.model;
 
 public class WXAccessToken {
-	private String token;
-	private int expiresIn;// 凭证有效时间，单位：秒
+	private String access_token;
+	private int expires_in;// 凭证有效时间，单位：秒
 
-	public String getToken() {
-		return token;
+	public String getAccess_token() {
+		return access_token;
 	}
 
-	public void setToken(String token) {
-		this.token = token;
+	public void setAccess_token(String access_token) {
+		this.access_token = access_token;
 	}
 
-	public int getExpiresIn() {
-		return expiresIn;
+	public int getExpires_in() {
+		return expires_in;
 	}
 
-	public void setExpiresIn(int expiresIn) {
-		this.expiresIn = expiresIn;
+	public void setExpires_in(int expires_in) {
+		this.expires_in = expires_in;
 	}
+
 }
