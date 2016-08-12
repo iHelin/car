@@ -291,7 +291,7 @@
   text-decoration: none;
 }
 .simditor .simditor-toolbar > ul > li > .toolbar-item span {
-  opacity: 0.6;
+  opacity: 0.9;
 }
 .simditor .simditor-toolbar > ul > li > .toolbar-item span.simditor-icon {
   display: inline;

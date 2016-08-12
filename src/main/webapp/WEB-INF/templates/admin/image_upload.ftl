@@ -139,10 +139,10 @@ function addShowHtml(inpEleId, isMulti, isTdShow){
 					"</div></div>" + "<span sizeHint='" + getEleAttr(inpEleId,"sizeHint") + "' category='" + getEleAttr(inpEleId,"category") + "' title='" + inpEleId + "' id='single_img_select_span_" + inpEleId + "' class='btn btn-sm btn-primary fileinput-button' multiImg='false'>"+
 									"<i class='fa fa-picture-o'></i><span>选择图片...</span></span>" + getEleAttr(inpEleId,"sizeHint") + "</span></div>");
 		}else {
-			$("#" + inpEleId).after("<div class='col-sm-9' style='padding:'><div class='col-sm-12' id='single_img_show_div_" + inpEleId + "' style='display:none;padding:0px'><div style='padding:0px;border:3px solid #f2f2f2;background-color:#f2f2f2;margin-top:10px;margin-bottom:10px;float:left;overflow:hidden;height:100px;width:100px;'><img id='single_img_show_img_" + inpEleId + "' src='' width='100px'/>" +
+			$("#" + inpEleId).after("<div class='col-sm-12' id='single_img_show_div_" + inpEleId + "' style='display:none;padding:0px'><div style='padding:0px;border:3px solid #f2f2f2;background-color:#f2f2f2;margin-top:10px;margin-bottom:10px;float:left;overflow:hidden;height:100px;width:100px;'><img id='single_img_show_img_" + inpEleId + "' src='' width='100px'/>" +
 				"<input type='button' name='" + inpEleId + "' class='btn btn-danger btn-xs' value='删除' style='position:absolute;top:15px;left:53px' onclick='clearSingleSlt(this.name);' />" +
 				"</div></div>" + "<span sizeHint='" + getEleAttr(inpEleId,"sizeHint") + "' category='" + getEleAttr(inpEleId,"category") + "' title='" + inpEleId + "' id='single_img_select_span_" + inpEleId + "' class='btn btn-primary fileinput-button' multiImg='false'>"+
-								"<i class='fa fa-picture-o'></i><span>选择图片...</span></span><span style='color:#999999;display:block-inline;margin:0px 0px 0px 10px'>" + getEleAttr(inpEleId,"sizeHint") + "</span></div>");
+								"<i class='fa fa-picture-o'></i><span>选择图片...</span></span><span style='color:#999999;display:block-inline;margin:0px 0px 0px 10px'>" + getEleAttr(inpEleId,"sizeHint") + "</span>");
 		}
 		
 		$("#single_img_select_span_" + inpEleId).click(function(){
