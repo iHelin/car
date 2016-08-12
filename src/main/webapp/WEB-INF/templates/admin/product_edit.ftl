@@ -93,16 +93,15 @@
 						<div class="row">
 							<div class="col-sm-6">
 								<div class="form-group">
-									<label class="col-sm-4 control-label">名称：</label>
+									<label class="col-sm-4 control-label">名称</label>
 							  		<div class="col-sm-8">
 							 			<input type="text" name="name" id="product_name_inp" class="form-control" <#if product?? && product.name??>value="${product.name?html}"</#if> data-required="true" data-rangelength="[1,20]" />
 							  		</div>
 							  	</div>
 						  	</div>
-						  	
 						  	<div class="col-sm-6">
 								<div class="form-group">
-									<label class="col-sm-4 control-label">库存：</label>
+									<label class="col-sm-4 control-label">库存</label>
 							  		<div class="col-sm-8">
 							 			<input type="text" name="stock" <#if product?? && product.stock??>value="${product.stock?html}"</#if> class="form-control" data-required="true" data-trigger="keyup" data-type="number" />
 							  		</div>
@@ -110,7 +109,7 @@
 							</div>
 							<div class="col-sm-6" style="clear:left">
 							  	<div class="form-group">
-							  		<label class="col-sm-4 control-label">原价：</label>
+							  		<label class="col-sm-4 control-label">原价</label>
 							  		<div class="col-sm-8">
 							 			<input type="text" name="price" class="form-control" <#if product?? && product.price??>value="${product.price?html}"</#if> data-required="true" data-trigger="keyup" data-type="number" />
 							  		</div>
@@ -118,7 +117,7 @@
 							</div>
 							<div class="col-sm-6">
 							  	<div class="form-group">
-							  		<label class="col-sm-4 control-label">促销价：</label>
+							  		<label class="col-sm-4 control-label">促销价</label>
 							  		<div class="col-sm-8">
 							 			<input type="text" name="bargin" class="form-control" <#if product?? && product.bargin??>value="${product.bargin?html}"</#if> data-required="true" data-trigger="keyup" data-type="number" />
 							  		</div>
@@ -126,7 +125,7 @@
 							</div>
 						  	<div class="col-sm-6" style="clear:left">
 								<div class="form-group">
-									<label class="col-sm-4 control-label">分类：</label>
+									<label class="col-sm-4 control-label">分类</label>
 									<div class="col-sm-8">
 										<select name="catalogId" class="form-control" data-required="true">
 											<option value="1" <#if product?? && product.catalogId?? && product.catalogId==1>selected</#if>>商城产品</option>
@@ -138,7 +137,7 @@
 							</div>
 						  	<div class="col-sm-6">
 							  	<div class="form-group">
-									<label class="col-sm-4 control-label">状态：</label>
+									<label class="col-sm-4 control-label">状态</label>
 									<div class="col-sm-8">
 										<select name="status" class="form-control" data-required="true">
 											<option value="1" <#if product?? && product.status?? && product.status==1>selected</#if>>上架</option>
@@ -149,7 +148,7 @@
 							</div>
 							<div class="col-sm-6">
 							  	<div class="form-group">
-							  		<label class="col-sm-4 control-label">是否包邮：</label>
+							  		<label class="col-sm-4 control-label">是否包邮</label>
 							  		<div class="col-sm-8">
 							  			<label class="checkbox-inline">
 					                		<input type="checkbox" name="isFreePostage" value="1" <#if product?? && product.isFreePostage?? && product.isFreePostage==true>checked="checked"</#if> />包邮
@@ -162,7 +161,7 @@
 						<div class="row">
 							<div class="col-sm-12">
 								<div class="form-group">
-									<label class="col-sm-2 control-label">商品图片：</label>
+									<label class="col-sm-2 control-label">商品图片</label>
 									<input type="hidden" id="thumbnailVal" name="img" category="product" sizeHint="" value=""/>
 						   		</div>
 						   	</div>
@@ -171,7 +170,7 @@
 						<div class="row">
 							<div class="col-sm-12">
 								<div class="form-group">
-									<label class="col-sm-2 control-label">促销信息：</label>
+									<label class="col-sm-2 control-label">促销信息</label>
 									<textarea class="col-sm-9" name="promo">${(product.promo)!}</textarea>
 						   		</div>
 						   	</div>
@@ -179,7 +178,7 @@
 					   	<hr>
 					   	<div class="col-sm-12">
 					   		<div class="form-group">
-								<label class="col-sm-2 control-label">商品详情：</label>
+								<label class="col-sm-2 control-label">商品详情</label>
 								<div class="col-sm-9">
 						   		<textarea class="col-sm-9" id="editor_id" name="detail">${(product.detail)!}</textarea>
 						   		</div>
