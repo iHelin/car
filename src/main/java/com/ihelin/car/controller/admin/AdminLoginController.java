@@ -17,7 +17,7 @@ import com.ihelin.car.utils.CommonUtils;
 import com.ihelin.car.wechat.model.AdminUser;
 
 @Controller
-public class AdminLoginController extends AdminBaseController {
+public class AdminLoginController extends BaseAdminController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(AdminLoginController.class);
 

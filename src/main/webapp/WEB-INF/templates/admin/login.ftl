@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="iHelin">
     <link rel="stylesheet" href="${request.contextPath}/css/styles.min.css">
+    <link href="${request.contextPath}/fonts/font-awesome/css/font-awesome.css" rel="stylesheet" type='text/css' media="all" />
 </head>
 <body class="focusedform">
 <div class="verticalcenter">

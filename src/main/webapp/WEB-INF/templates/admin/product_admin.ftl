@@ -104,7 +104,7 @@
 													<td class="text-center">${product.id!}</td>
 													<td class="text-center">${product.name!}<#if product.isFreePostage>&nbsp;<small><span class="label label-warning">包邮</span></small></#if></td>
 													<td class="text-center">
-														<span class="link_tip" data-toggle="tooltip" title="原价：${product.price!?string.currency}" >${product.bargin!?string.currency}</span>
+														<span class="tips" data-toggle="tooltip" title="原价：${product.price!?string.currency}" >${product.bargin!?string.currency}</span>
 													</td>
 													<td class="text-center">
 														<#if product.createTime??>

@@ -1,31 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ihelin.car.db.mapper.ProductMapper" >
-  <resultMap id="BaseResultMap" type="com.ihelin.car.db.entity.Product" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="price" property="price" jdbcType="DECIMAL" />
-    <result column="bargin" property="bargin" jdbcType="DECIMAL" />
-    <result column="img" property="img" jdbcType="VARCHAR" />
-    <result column="sell_count" property="sellCount" jdbcType="INTEGER" />
-    <result column="detail" property="detail" jdbcType="VARCHAR" />
-    <result column="is_free_postage" property="isFreePostage" jdbcType="BIT" />
-    <result column="stock" property="stock" jdbcType="INTEGER" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="status" property="status" jdbcType="INTEGER" />
-    <result column="product_type" property="productType" jdbcType="INTEGER" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    id, name, price, bargin, img, sell_count, detail, is_free_postage, stock, create_time, 
-    status, product_type
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from Product
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <select id="listProductByCondition" resultMap="BaseResultMap">
+<mapper namespace="com.ihelin.car.db.mapper.ProductMapper">
+	<resultMap id="BaseResultMap" type="com.ihelin.car.db.entity.Product">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="price" property="price" jdbcType="DECIMAL" />
+		<result column="bargin" property="bargin" jdbcType="DECIMAL" />
+		<result column="img" property="img" jdbcType="VARCHAR" />
+		<result column="sell_count" property="sellCount" jdbcType="INTEGER" />
+		<result column="detail" property="detail" jdbcType="VARCHAR" />
+		<result column="is_free_postage" property="isFreePostage"
+			jdbcType="BIT" />
+		<result column="stock" property="stock" jdbcType="INTEGER" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+		<result column="promo" property="promo" jdbcType="VARCHAR" />
+		<result column="product_type" property="productType" jdbcType="INTEGER" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, name, price, bargin, img, sell_count, detail, is_free_postage, stock,
+		create_time,
+		status,promo, product_type
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from Product
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<select id="listProductByCondition" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
 		from Product
@@ -43,145 +47,156 @@
 			<if test="status!=null">and status = #{status,jdbcType=INTEGER}</if>
 		</where>
 	</select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from Product
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.ihelin.car.db.entity.Product" useGeneratedKeys="true" keyProperty="id" >
-    insert into Product (name, price, bargin, 
-      img, sell_count, detail, 
-      is_free_postage, stock, create_time, 
-      status, product_type)
-    values (#{name,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{bargin,jdbcType=DECIMAL}, 
-      #{img,jdbcType=VARCHAR}, #{sellCount,jdbcType=INTEGER}, #{detail,jdbcType=VARCHAR}, 
-      #{isFreePostage,jdbcType=BIT}, #{stock,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{status,jdbcType=INTEGER}, #{productType,jdbcType=INTEGER})
-  </insert>
-  <insert id="insertSelective" parameterType="com.ihelin.car.db.entity.Product" useGeneratedKeys="true" keyProperty="id" >
-    insert into Product
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="name != null" >
-        name,
-      </if>
-      <if test="price != null" >
-        price,
-      </if>
-      <if test="bargin != null" >
-        bargin,
-      </if>
-      <if test="img != null" >
-        img,
-      </if>
-      <if test="sellCount != null" >
-        sell_count,
-      </if>
-      <if test="detail != null" >
-        detail,
-      </if>
-      <if test="isFreePostage != null" >
-        is_free_postage,
-      </if>
-      <if test="stock != null" >
-        stock,
-      </if>
-      <if test="createTime != null" >
-        create_time,
-      </if>
-      <if test="status != null" >
-        status,
-      </if>
-      <if test="productType != null" >
-        product_type,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="price != null" >
-        #{price,jdbcType=DECIMAL},
-      </if>
-      <if test="bargin != null" >
-        #{bargin,jdbcType=DECIMAL},
-      </if>
-      <if test="img != null" >
-        #{img,jdbcType=VARCHAR},
-      </if>
-      <if test="sellCount != null" >
-        #{sellCount,jdbcType=INTEGER},
-      </if>
-      <if test="detail != null" >
-        #{detail,jdbcType=VARCHAR},
-      </if>
-      <if test="isFreePostage != null" >
-        #{isFreePostage,jdbcType=BIT},
-      </if>
-      <if test="stock != null" >
-        #{stock,jdbcType=INTEGER},
-      </if>
-      <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="status != null" >
-        #{status,jdbcType=INTEGER},
-      </if>
-      <if test="productType != null" >
-        #{productType,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ihelin.car.db.entity.Product" >
-    update Product
-    <set >
-      <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="price != null" >
-        price = #{price,jdbcType=DECIMAL},
-      </if>
-      <if test="bargin != null" >
-        bargin = #{bargin,jdbcType=DECIMAL},
-      </if>
-      <if test="img != null" >
-        img = #{img,jdbcType=VARCHAR},
-      </if>
-      <if test="sellCount != null" >
-        sell_count = #{sellCount,jdbcType=INTEGER},
-      </if>
-      <if test="detail != null" >
-        detail = #{detail,jdbcType=VARCHAR},
-      </if>
-      <if test="isFreePostage != null" >
-        is_free_postage = #{isFreePostage,jdbcType=BIT},
-      </if>
-      <if test="stock != null" >
-        stock = #{stock,jdbcType=INTEGER},
-      </if>
-      <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="status != null" >
-        status = #{status,jdbcType=INTEGER},
-      </if>
-      <if test="productType != null" >
-        product_type = #{productType,jdbcType=INTEGER},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.ihelin.car.db.entity.Product" >
-    update Product
-    set name = #{name,jdbcType=VARCHAR},
-      price = #{price,jdbcType=DECIMAL},
-      bargin = #{bargin,jdbcType=DECIMAL},
-      img = #{img,jdbcType=VARCHAR},
-      sell_count = #{sellCount,jdbcType=INTEGER},
-      detail = #{detail,jdbcType=VARCHAR},
-      is_free_postage = #{isFreePostage,jdbcType=BIT},
-      stock = #{stock,jdbcType=INTEGER},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      status = #{status,jdbcType=INTEGER},
-      product_type = #{productType,jdbcType=INTEGER}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from Product
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ihelin.car.db.entity.Product"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into Product (name, price, bargin,
+		img, sell_count, detail,
+		is_free_postage, stock, create_time,
+		status,promo, product_type)
+		values (#{name,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL},
+		#{bargin,jdbcType=DECIMAL},
+		#{img,jdbcType=VARCHAR}, #{sellCount,jdbcType=INTEGER}, #{detail,jdbcType=VARCHAR},
+		#{isFreePostage,jdbcType=BIT}, #{stock,jdbcType=INTEGER},
+		#{createTime,jdbcType=TIMESTAMP},
+		#{status,jdbcType=INTEGER},#{promo,jdbcType=VARCHAR}, #{productType,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ihelin.car.db.entity.Product"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into Product
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="name != null">
+				name,
+			</if>
+			<if test="price != null">
+				price,
+			</if>
+			<if test="bargin != null">
+				bargin,
+			</if>
+			<if test="img != null">
+				img,
+			</if>
+			<if test="sellCount != null">
+				sell_count,
+			</if>
+			<if test="detail != null">
+				detail,
+			</if>
+			<if test="isFreePostage != null">
+				is_free_postage,
+			</if>
+			<if test="stock != null">
+				stock,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="promo != null">
+				promo,
+			</if>
+			<if test="productType != null">
+				product_type,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="price != null">
+				#{price,jdbcType=DECIMAL},
+			</if>
+			<if test="bargin != null">
+				#{bargin,jdbcType=DECIMAL},
+			</if>
+			<if test="img != null">
+				#{img,jdbcType=VARCHAR},
+			</if>
+			<if test="sellCount != null">
+				#{sellCount,jdbcType=INTEGER},
+			</if>
+			<if test="detail != null">
+				#{detail,jdbcType=VARCHAR},
+			</if>
+			<if test="isFreePostage != null">
+				#{isFreePostage,jdbcType=BIT},
+			</if>
+			<if test="stock != null">
+				#{stock,jdbcType=INTEGER},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="productType != null">
+				#{productType,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ihelin.car.db.entity.Product">
+		update Product
+		<set>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="price != null">
+				price = #{price,jdbcType=DECIMAL},
+			</if>
+			<if test="bargin != null">
+				bargin = #{bargin,jdbcType=DECIMAL},
+			</if>
+			<if test="img != null">
+				img = #{img,jdbcType=VARCHAR},
+			</if>
+			<if test="sellCount != null">
+				sell_count = #{sellCount,jdbcType=INTEGER},
+			</if>
+			<if test="detail != null">
+				detail = #{detail,jdbcType=VARCHAR},
+			</if>
+			<if test="isFreePostage != null">
+				is_free_postage = #{isFreePostage,jdbcType=BIT},
+			</if>
+			<if test="stock != null">
+				stock = #{stock,jdbcType=INTEGER},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="promo != null">
+				promo = #{promo,jdbcType=VARCHAR},
+			</if>
+			<if test="productType != null">
+				product_type = #{productType,jdbcType=INTEGER},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ihelin.car.db.entity.Product">
+		update Product
+		set name = #{name,jdbcType=VARCHAR},
+		price = #{price,jdbcType=DECIMAL},
+		bargin = #{bargin,jdbcType=DECIMAL},
+		img = #{img,jdbcType=VARCHAR},
+		sell_count = #{sellCount,jdbcType=INTEGER},
+		detail = #{detail,jdbcType=VARCHAR},
+		is_free_postage = #{isFreePostage,jdbcType=BIT},
+		stock = #{stock,jdbcType=INTEGER},
+		create_time = #{createTime,jdbcType=TIMESTAMP},
+		status = #{status,jdbcType=INTEGER},
+		promo = #{promo,jdbcType=VARCHAR},
+		product_type = #{productType,jdbcType=INTEGER}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
 </mapper>

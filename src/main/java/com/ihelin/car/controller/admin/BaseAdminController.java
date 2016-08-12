@@ -7,7 +7,7 @@ import com.ihelin.car.controller.BaseController;
 
 @Controller
 @RequestMapping("admin")
-public class AdminBaseController extends BaseController {
+public class BaseAdminController extends BaseController {
 	protected static final String NAMESPACE = "admin";
 	public static final String SESSION_KEY_ADMIN = "adminUser";
 

@@ -1,270 +1,294 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ihelin.car.db.mapper.UserMapper" >
-  <resultMap id="BaseResultMap" type="com.ihelin.car.db.entity.User" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="password" property="password" jdbcType="VARCHAR" />
-    <result column="open_id" property="openId" jdbcType="VARCHAR" />
-    <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
-    <result column="gender" property="gender" jdbcType="INTEGER" />
-    <result column="city" property="city" jdbcType="VARCHAR" />
-    <result column="province" property="province" jdbcType="VARCHAR" />
-    <result column="country" property="country" jdbcType="VARCHAR" />
-    <result column="headimgurl" property="headimgurl" jdbcType="VARCHAR" />
-    <result column="subscribe_time" property="subscribeTime" jdbcType="TIMESTAMP" />
-    <result column="status" property="status" jdbcType="INTEGER" />
-    <result column="subscribe" property="subscribe" jdbcType="INTEGER" />
-    <result column="language" property="language" jdbcType="VARCHAR" />
-    <result column="unionid" property="unionid" jdbcType="VARCHAR" />
-    <result column="remark" property="remark" jdbcType="VARCHAR" />
-    <result column="groupid" property="groupid" jdbcType="INTEGER" />
-    <result column="tagid_list" property="tagidList" jdbcType="VARCHAR" />
-    <result column="phone" property="phone" jdbcType="VARCHAR" />
-    <result column="is_bind" property="isBind" jdbcType="BIT" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    id, name, password, open_id, nick_name, gender, city, province, country, headimgurl, 
-    subscribe_time, status, subscribe, language, unionid, remark, groupid, tagid_list, 
-    phone, is_bind
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from User
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <select id="selectByOpenId" resultMap="BaseResultMap" >
-    select 
-    <include refid="Base_Column_List" />
-    from User
-    where open_id = #{openId,jdbcType=VARCHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from User
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.ihelin.car.db.entity.User" useGeneratedKeys="true" keyProperty="id" >
-    insert into User (name, password, open_id, 
-      nick_name, gender, city, 
-      province, country, headimgurl, 
-      subscribe_time, status, subscribe, 
-      language, unionid, remark, 
-      groupid, tagid_list, phone, 
-      is_bind)
-    values (#{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{openId,jdbcType=VARCHAR}, 
-      #{nickName,jdbcType=VARCHAR}, #{gender,jdbcType=INTEGER}, #{city,jdbcType=VARCHAR}, 
-      #{province,jdbcType=VARCHAR}, #{country,jdbcType=VARCHAR}, #{headimgurl,jdbcType=VARCHAR}, 
-      #{subscribeTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, #{subscribe,jdbcType=INTEGER}, 
-      #{language,jdbcType=VARCHAR}, #{unionid,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
-      #{groupid,jdbcType=INTEGER}, #{tagidList,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
-      #{isBind,jdbcType=BIT})
-  </insert>
-  <insert id="insertSelective" parameterType="com.ihelin.car.db.entity.User" useGeneratedKeys="true" keyProperty="id" >
-    insert into User
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="name != null" >
-        name,
-      </if>
-      <if test="password != null" >
-        password,
-      </if>
-      <if test="openId != null" >
-        open_id,
-      </if>
-      <if test="nickName != null" >
-        nick_name,
-      </if>
-      <if test="gender != null" >
-        gender,
-      </if>
-      <if test="city != null" >
-        city,
-      </if>
-      <if test="province != null" >
-        province,
-      </if>
-      <if test="country != null" >
-        country,
-      </if>
-      <if test="headimgurl != null" >
-        headimgurl,
-      </if>
-      <if test="subscribeTime != null" >
-        subscribe_time,
-      </if>
-      <if test="status != null" >
-        status,
-      </if>
-      <if test="subscribe != null" >
-        subscribe,
-      </if>
-      <if test="language != null" >
-        language,
-      </if>
-      <if test="unionid != null" >
-        unionid,
-      </if>
-      <if test="remark != null" >
-        remark,
-      </if>
-      <if test="groupid != null" >
-        groupid,
-      </if>
-      <if test="tagidList != null" >
-        tagid_list,
-      </if>
-      <if test="phone != null" >
-        phone,
-      </if>
-      <if test="isBind != null" >
-        is_bind,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null" >
-        #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="openId != null" >
-        #{openId,jdbcType=VARCHAR},
-      </if>
-      <if test="nickName != null" >
-        #{nickName,jdbcType=VARCHAR},
-      </if>
-      <if test="gender != null" >
-        #{gender,jdbcType=INTEGER},
-      </if>
-      <if test="city != null" >
-        #{city,jdbcType=VARCHAR},
-      </if>
-      <if test="province != null" >
-        #{province,jdbcType=VARCHAR},
-      </if>
-      <if test="country != null" >
-        #{country,jdbcType=VARCHAR},
-      </if>
-      <if test="headimgurl != null" >
-        #{headimgurl,jdbcType=VARCHAR},
-      </if>
-      <if test="subscribeTime != null" >
-        #{subscribeTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="status != null" >
-        #{status,jdbcType=INTEGER},
-      </if>
-      <if test="subscribe != null" >
-        #{subscribe,jdbcType=INTEGER},
-      </if>
-      <if test="language != null" >
-        #{language,jdbcType=VARCHAR},
-      </if>
-      <if test="unionid != null" >
-        #{unionid,jdbcType=VARCHAR},
-      </if>
-      <if test="remark != null" >
-        #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="groupid != null" >
-        #{groupid,jdbcType=INTEGER},
-      </if>
-      <if test="tagidList != null" >
-        #{tagidList,jdbcType=VARCHAR},
-      </if>
-      <if test="phone != null" >
-        #{phone,jdbcType=VARCHAR},
-      </if>
-      <if test="isBind != null" >
-        #{isBind,jdbcType=BIT},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ihelin.car.db.entity.User" >
-    update User
-    <set >
-      <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null" >
-        password = #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="openId != null" >
-        open_id = #{openId,jdbcType=VARCHAR},
-      </if>
-      <if test="nickName != null" >
-        nick_name = #{nickName,jdbcType=VARCHAR},
-      </if>
-      <if test="gender != null" >
-        gender = #{gender,jdbcType=INTEGER},
-      </if>
-      <if test="city != null" >
-        city = #{city,jdbcType=VARCHAR},
-      </if>
-      <if test="province != null" >
-        province = #{province,jdbcType=VARCHAR},
-      </if>
-      <if test="country != null" >
-        country = #{country,jdbcType=VARCHAR},
-      </if>
-      <if test="headimgurl != null" >
-        headimgurl = #{headimgurl,jdbcType=VARCHAR},
-      </if>
-      <if test="subscribeTime != null" >
-        subscribe_time = #{subscribeTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="status != null" >
-        status = #{status,jdbcType=INTEGER},
-      </if>
-      <if test="subscribe != null" >
-        subscribe = #{subscribe,jdbcType=INTEGER},
-      </if>
-      <if test="language != null" >
-        language = #{language,jdbcType=VARCHAR},
-      </if>
-      <if test="unionid != null" >
-        unionid = #{unionid,jdbcType=VARCHAR},
-      </if>
-      <if test="remark != null" >
-        remark = #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="groupid != null" >
-        groupid = #{groupid,jdbcType=INTEGER},
-      </if>
-      <if test="tagidList != null" >
-        tagid_list = #{tagidList,jdbcType=VARCHAR},
-      </if>
-      <if test="phone != null" >
-        phone = #{phone,jdbcType=VARCHAR},
-      </if>
-      <if test="isBind != null" >
-        is_bind = #{isBind,jdbcType=BIT},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.ihelin.car.db.entity.User" >
-    update User
-    set name = #{name,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      open_id = #{openId,jdbcType=VARCHAR},
-      nick_name = #{nickName,jdbcType=VARCHAR},
-      gender = #{gender,jdbcType=INTEGER},
-      city = #{city,jdbcType=VARCHAR},
-      province = #{province,jdbcType=VARCHAR},
-      country = #{country,jdbcType=VARCHAR},
-      headimgurl = #{headimgurl,jdbcType=VARCHAR},
-      subscribe_time = #{subscribeTime,jdbcType=TIMESTAMP},
-      status = #{status,jdbcType=INTEGER},
-      subscribe = #{subscribe,jdbcType=INTEGER},
-      language = #{language,jdbcType=VARCHAR},
-      unionid = #{unionid,jdbcType=VARCHAR},
-      remark = #{remark,jdbcType=VARCHAR},
-      groupid = #{groupid,jdbcType=INTEGER},
-      tagid_list = #{tagidList,jdbcType=VARCHAR},
-      phone = #{phone,jdbcType=VARCHAR},
-      is_bind = #{isBind,jdbcType=BIT}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+<mapper namespace="com.ihelin.car.db.mapper.UserMapper">
+	<resultMap id="BaseResultMap" type="com.ihelin.car.db.entity.User">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="password" property="password" jdbcType="VARCHAR" />
+		<result column="open_id" property="openId" jdbcType="VARCHAR" />
+		<result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+		<result column="gender" property="gender" jdbcType="INTEGER" />
+		<result column="city" property="city" jdbcType="VARCHAR" />
+		<result column="province" property="province" jdbcType="VARCHAR" />
+		<result column="country" property="country" jdbcType="VARCHAR" />
+		<result column="headimgurl" property="headimgurl" jdbcType="VARCHAR" />
+		<result column="subscribe_time" property="subscribeTime"
+			jdbcType="TIMESTAMP" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+		<result column="subscribe" property="subscribe" jdbcType="INTEGER" />
+		<result column="language" property="language" jdbcType="VARCHAR" />
+		<result column="unionid" property="unionid" jdbcType="VARCHAR" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+		<result column="groupid" property="groupid" jdbcType="INTEGER" />
+		<result column="tagid_list" property="tagidList" jdbcType="VARCHAR" />
+		<result column="phone" property="phone" jdbcType="VARCHAR" />
+		<result column="is_bind" property="isBind" jdbcType="BIT" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, name, password, open_id, nick_name, gender, city, province, country,
+		headimgurl,
+		subscribe_time, status, subscribe, language, unionid, remark, groupid, tagid_list,
+		phone, is_bind
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from User
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<select id="selectByOpenId" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from User
+		where open_id = #{openId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from User
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ihelin.car.db.entity.User"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into User (name, password, open_id,
+		nick_name, gender, city,
+		province, country, headimgurl,
+		subscribe_time, status, subscribe,
+		language, unionid, remark,
+		groupid, tagid_list, phone,
+		is_bind)
+		values (#{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+		#{openId,jdbcType=VARCHAR},
+		#{nickName,jdbcType=VARCHAR}, #{gender,jdbcType=INTEGER}, #{city,jdbcType=VARCHAR},
+		#{province,jdbcType=VARCHAR}, #{country,jdbcType=VARCHAR},
+		#{headimgurl,jdbcType=VARCHAR},
+		#{subscribeTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, #{subscribe,jdbcType=INTEGER},
+		#{language,jdbcType=VARCHAR}, #{unionid,jdbcType=VARCHAR},
+		#{remark,jdbcType=VARCHAR},
+		#{groupid,jdbcType=INTEGER}, #{tagidList,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
+		#{isBind,jdbcType=BIT})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ihelin.car.db.entity.User"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into User
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="name != null">
+				name,
+			</if>
+			<if test="password != null">
+				password,
+			</if>
+			<if test="openId != null">
+				open_id,
+			</if>
+			<if test="nickName != null">
+				nick_name,
+			</if>
+			<if test="gender != null">
+				gender,
+			</if>
+			<if test="city != null">
+				city,
+			</if>
+			<if test="province != null">
+				province,
+			</if>
+			<if test="country != null">
+				country,
+			</if>
+			<if test="headimgurl != null">
+				headimgurl,
+			</if>
+			<if test="subscribeTime != null">
+				subscribe_time,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="subscribe != null">
+				subscribe,
+			</if>
+			<if test="language != null">
+				language,
+			</if>
+			<if test="unionid != null">
+				unionid,
+			</if>
+			<if test="remark != null">
+				remark,
+			</if>
+			<if test="groupid != null">
+				groupid,
+			</if>
+			<if test="tagidList != null">
+				tagid_list,
+			</if>
+			<if test="phone != null">
+				phone,
+			</if>
+			<if test="isBind != null">
+				is_bind,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null">
+				#{password,jdbcType=VARCHAR},
+			</if>
+			<if test="openId != null">
+				#{openId,jdbcType=VARCHAR},
+			</if>
+			<if test="nickName != null">
+				#{nickName,jdbcType=VARCHAR},
+			</if>
+			<if test="gender != null">
+				#{gender,jdbcType=INTEGER},
+			</if>
+			<if test="city != null">
+				#{city,jdbcType=VARCHAR},
+			</if>
+			<if test="province != null">
+				#{province,jdbcType=VARCHAR},
+			</if>
+			<if test="country != null">
+				#{country,jdbcType=VARCHAR},
+			</if>
+			<if test="headimgurl != null">
+				#{headimgurl,jdbcType=VARCHAR},
+			</if>
+			<if test="subscribeTime != null">
+				#{subscribeTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="subscribe != null">
+				#{subscribe,jdbcType=INTEGER},
+			</if>
+			<if test="language != null">
+				#{language,jdbcType=VARCHAR},
+			</if>
+			<if test="unionid != null">
+				#{unionid,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="groupid != null">
+				#{groupid,jdbcType=INTEGER},
+			</if>
+			<if test="tagidList != null">
+				#{tagidList,jdbcType=VARCHAR},
+			</if>
+			<if test="phone != null">
+				#{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="isBind != null">
+				#{isBind,jdbcType=BIT},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ihelin.car.db.entity.User">
+		update User
+		<set>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null">
+				password = #{password,jdbcType=VARCHAR},
+			</if>
+			<if test="openId != null">
+				open_id = #{openId,jdbcType=VARCHAR},
+			</if>
+			<if test="nickName != null">
+				nick_name = #{nickName,jdbcType=VARCHAR},
+			</if>
+			<if test="gender != null">
+				gender = #{gender,jdbcType=INTEGER},
+			</if>
+			<if test="city != null">
+				city = #{city,jdbcType=VARCHAR},
+			</if>
+			<if test="province != null">
+				province = #{province,jdbcType=VARCHAR},
+			</if>
+			<if test="country != null">
+				country = #{country,jdbcType=VARCHAR},
+			</if>
+			<if test="headimgurl != null">
+				headimgurl = #{headimgurl,jdbcType=VARCHAR},
+			</if>
+			<if test="subscribeTime != null">
+				subscribe_time = #{subscribeTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="subscribe != null">
+				subscribe = #{subscribe,jdbcType=INTEGER},
+			</if>
+			<if test="language != null">
+				language = #{language,jdbcType=VARCHAR},
+			</if>
+			<if test="unionid != null">
+				unionid = #{unionid,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				remark = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="groupid != null">
+				groupid = #{groupid,jdbcType=INTEGER},
+			</if>
+			<if test="tagidList != null">
+				tagid_list = #{tagidList,jdbcType=VARCHAR},
+			</if>
+			<if test="phone != null">
+				phone = #{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="isBind != null">
+				is_bind = #{isBind,jdbcType=BIT},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ihelin.car.db.entity.User">
+		update User
+		set name = #{name,jdbcType=VARCHAR},
+		password = #{password,jdbcType=VARCHAR},
+		open_id = #{openId,jdbcType=VARCHAR},
+		nick_name = #{nickName,jdbcType=VARCHAR},
+		gender = #{gender,jdbcType=INTEGER},
+		city = #{city,jdbcType=VARCHAR},
+		province = #{province,jdbcType=VARCHAR},
+		country = #{country,jdbcType=VARCHAR},
+		headimgurl = #{headimgurl,jdbcType=VARCHAR},
+		subscribe_time = #{subscribeTime,jdbcType=TIMESTAMP},
+		status = #{status,jdbcType=INTEGER},
+		subscribe = #{subscribe,jdbcType=INTEGER},
+		language = #{language,jdbcType=VARCHAR},
+		unionid = #{unionid,jdbcType=VARCHAR},
+		remark = #{remark,jdbcType=VARCHAR},
+		groupid = #{groupid,jdbcType=INTEGER},
+		tagid_list = #{tagidList,jdbcType=VARCHAR},
+		phone = #{phone,jdbcType=VARCHAR},
+		is_bind = #{isBind,jdbcType=BIT}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<select id="listUserByCondition" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from User
+		<where>
+			<if test="nickName!=null">nick_name like "%"#{nickName,jdbcType=VARCHAR}"%"</if>
+		</where>
+	</select>
+	<select id="listUserCount" resultType="int" parameterType="java.util.Map">
+		select
+		count(id)
+		from User
+		<where>
+			<if test="nickName!=null">nick_name like "%"#{nickName,jdbcType=VARCHAR}"%"</if>
+		</where>
+	</select>
 </mapper>

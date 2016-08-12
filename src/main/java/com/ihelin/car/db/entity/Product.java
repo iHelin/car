@@ -4,123 +4,133 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class Product {
-    private Integer id;
+	private Integer id;
 
-    private String name;
+	private String name;
 
-    private BigDecimal price;
+	private BigDecimal price;
 
-    private BigDecimal bargin;
+	private BigDecimal bargin;
 
-    private String img;
+	private String img;
 
-    private Integer sellCount;
+	private Integer sellCount;
 
-    private String detail;
+	private String detail;
 
-    private Boolean isFreePostage;
+	private Boolean isFreePostage;
 
-    private Integer stock;
+	private Integer stock;
 
-    private Date createTime;
+	private Date createTime;
 
-    private Integer status;
+	private Integer status;
 
-    private Integer productType;
+	private Integer productType;
 
-    public Integer getId() {
-        return id;
-    }
+	private String promo;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public BigDecimal getPrice() {
-        return price;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
+	public BigDecimal getPrice() {
+		return price;
+	}
 
-    public BigDecimal getBargin() {
-        return bargin;
-    }
+	public void setPrice(BigDecimal price) {
+		this.price = price;
+	}
 
-    public void setBargin(BigDecimal bargin) {
-        this.bargin = bargin;
-    }
+	public BigDecimal getBargin() {
+		return bargin;
+	}
 
-    public String getImg() {
-        return img;
-    }
+	public void setBargin(BigDecimal bargin) {
+		this.bargin = bargin;
+	}
 
-    public void setImg(String img) {
-        this.img = img;
-    }
+	public String getImg() {
+		return img;
+	}
 
-    public Integer getSellCount() {
-        return sellCount;
-    }
+	public void setImg(String img) {
+		this.img = img;
+	}
 
-    public void setSellCount(Integer sellCount) {
-        this.sellCount = sellCount;
-    }
+	public Integer getSellCount() {
+		return sellCount;
+	}
 
-    public String getDetail() {
-        return detail;
-    }
+	public void setSellCount(Integer sellCount) {
+		this.sellCount = sellCount;
+	}
 
-    public void setDetail(String detail) {
-        this.detail = detail;
-    }
+	public String getDetail() {
+		return detail;
+	}
 
-    public Boolean getIsFreePostage() {
-        return isFreePostage;
-    }
+	public void setDetail(String detail) {
+		this.detail = detail;
+	}
 
-    public void setIsFreePostage(Boolean isFreePostage) {
-        this.isFreePostage = isFreePostage;
-    }
+	public Boolean getIsFreePostage() {
+		return isFreePostage;
+	}
 
-    public Integer getStock() {
-        return stock;
-    }
+	public void setIsFreePostage(Boolean isFreePostage) {
+		this.isFreePostage = isFreePostage;
+	}
 
-    public void setStock(Integer stock) {
-        this.stock = stock;
-    }
+	public Integer getStock() {
+		return stock;
+	}
 
-    public Date getCreateTime() {
-        return createTime;
-    }
+	public void setStock(Integer stock) {
+		this.stock = stock;
+	}
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
+	public Date getCreateTime() {
+		return createTime;
+	}
 
-    public Integer getStatus() {
-        return status;
-    }
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
 
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
+	public Integer getStatus() {
+		return status;
+	}
 
-    public Integer getProductType() {
-        return productType;
-    }
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
 
-    public void setProductType(Integer productType) {
-        this.productType = productType;
-    }
+	public Integer getProductType() {
+		return productType;
+	}
+
+	public void setProductType(Integer productType) {
+		this.productType = productType;
+	}
+
+	public String getPromo() {
+		return promo;
+	}
+
+	public void setPromo(String promo) {
+		this.promo = promo;
+	}
 }

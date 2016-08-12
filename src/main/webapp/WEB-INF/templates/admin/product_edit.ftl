@@ -95,7 +95,7 @@
 								<div class="form-group">
 									<label class="col-sm-4 control-label" for="product_name_inp">名称</label>
 							  		<div class="col-sm-8">
-							 			<input type="text" name="name" id="product_name_inp" class="form-control" <#if product?? && product.name??>value="${product.name?html}"</#if> data-required="true" data-rangelength="[1,20]" />
+							 			<input type="text" name="name" id="product_name_inp" placeholder="名称" class="form-control" <#if product?? && product.name??>value="${product.name?html}"</#if> data-required="true" data-rangelength="[1,20]" />
 							  		</div>
 							  	</div>
 						  	</div>
@@ -103,7 +103,7 @@
 								<div class="form-group">
 									<label class="col-sm-4 control-label" for="stock_input">库存</label>
 							  		<div class="col-sm-8">
-							 			<input type="text" id="stock_input" name="stock" <#if product?? && product.stock??>value="${product.stock?html}"</#if> class="form-control" data-required="true" data-trigger="keyup" data-type="number" />
+							 			<input type="text" id="stock_input" name="stock" placeholder="库存" <#if product?? && product.stock??>value="${product.stock?html}"</#if> class="form-control" data-required="true" data-trigger="keyup" data-type="number" />
 							  		</div>
 								</div>
 							</div>
@@ -111,7 +111,7 @@
 							  	<div class="form-group">
 							  		<label class="col-sm-4 control-label" for="price_input">原价</label>
 							  		<div class="col-sm-8">
-							 			<input type="text" name="price" id="price_input" class="form-control" <#if product?? && product.price??>value="${product.price?html}"</#if> data-required="true" data-trigger="keyup" data-type="number" />
+							 			<input type="text" name="price" id="price_input" placeholder="原价" class="form-control" <#if product?? && product.price??>value="${product.price?html}"</#if> data-required="true" data-trigger="keyup" data-type="number" />
 							  		</div>
 								</div>
 							</div>
@@ -119,7 +119,7 @@
 							  	<div class="form-group">
 							  		<label class="col-sm-4 control-label" for="bargin_input">促销价</label>
 							  		<div class="col-sm-8">
-							 			<input type="text" name="bargin" id="bargin_input" class="form-control" <#if product?? && product.bargin??>value="${product.bargin?html}"</#if> data-required="true" data-trigger="keyup" data-type="number" />
+							 			<input type="text" name="bargin" id="bargin_input" placeholder="促销价" class="form-control" <#if product?? && product.bargin??>value="${product.bargin?html}"</#if> data-required="true" data-trigger="keyup" data-type="number" />
 							  		</div>
 								</div>
 							</div>

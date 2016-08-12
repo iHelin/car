@@ -14,7 +14,7 @@ import com.ihelin.car.filed.ProductStatus;
 import com.ihelin.car.utils.ResponseUtil;
 
 @Controller
-public class AdminProductController extends AdminBaseController {
+public class AdminProductController extends BaseAdminController {
 
 	@RequestMapping("product_admin")
 	public String productAdmin(Model model, Integer pageNum, String productName, Integer status) {
@@ -52,7 +52,7 @@ public class AdminProductController extends AdminBaseController {
 			oldProduct.setStock(product.getStock());
 			oldProduct.setIsFreePostage(product.getIsFreePostage());
 			oldProduct.setBargin(product.getBargin());
-			// oldProduct.setPromo(product.getPromo());
+			oldProduct.setPromo(product.getPromo());
 			oldProduct.setStatus(product.getStatus());
 			oldProduct.setImg(product.getImg());
 			oldProduct.setDetail(product.getDetail());

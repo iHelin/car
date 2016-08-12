@@ -139,8 +139,8 @@
 											<td>${menu.content!}</td>
 											<td>${menu.sort!}</td>
 											<td>
-												<a href="javascript:;" onclick="editMenu(${menu.id!});" class="btn btn-default btn-sm"><i class="fa fa-pencil-square-o"></i>编辑</a>
-												<a href="javascript:;" onclick="deleteMenu(${menu.id!});" class="btn btn-default btn-sm"><i class="fa fa-times-circle"></i>删除</a>
+												<a href="javascript:;" onclick="editMenu(${menu.id!});" class="btn btn-primary-alt btn-sm"><i class="fa fa-pencil-square-o"></i> 编辑</a>
+												<a href="javascript:;" onclick="deleteMenu(${menu.id!});" class="btn btn-danger-alt btn-sm"><i class="fa fa-trash"></i> 删除</a>
 											</td>
 										</tr>
 										<#list menus as subMenu>
@@ -151,8 +151,8 @@
 													<td>${subMenu.content!}</td>
 													<td>${subMenu.sort!}</td>
 													<td>
-														<a href="javascript:;" onclick="editMenu(${subMenu.id!});" class="btn btn-default btn-sm"><i class="fa fa-pencil-square-o"></i>编辑</a>
-														<a href="javascript:;" onclick="deleteMenu(${subMenu.id!});" class="btn btn-default btn-sm"><i class="fa fa-times-circle"></i>删除</a>
+														<a href="javascript:;" onclick="editMenu(${subMenu.id!});" class="btn btn-primary-alt btn-sm"><i class="fa fa-pencil-square-o"></i> 编辑</a>
+														<a href="javascript:;" onclick="deleteMenu(${subMenu.id!});" class="btn btn-danger-alt btn-sm"><i class="fa fa-trash"></i> 删除</a>
 													</td>
 												</tr>
 											</#if>

@@ -14,7 +14,7 @@ import com.ihelin.car.db.entity.ServiceMenu;
 import com.ihelin.car.utils.ResponseUtil;
 
 @Controller
-public class AdminMenuController extends AdminBaseController {
+public class AdminMenuController extends BaseAdminController {
 
 	@RequestMapping("menu_admin")
 	public String menuAdmin(Model model) {

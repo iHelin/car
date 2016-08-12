@@ -24,7 +24,7 @@
 			  <li class="disabled"><span>...</span></li>
 			</#if>
 			<#list pagination.startPage..pagination.endPage as page>
-			  <li<#if page=pagination.currentPage> class="active"</#if>><a href="${url}pageNum=#{page}">#{page}</a></li>
+			  <li<#if page=pagination.currentPage> class="active"</#if>><a href="javascript:void(0);">#{page}</a></li>
 			</#list>
 			<#if pagination.endPage &lt; pagination.totalPageNum>
 			  <li class="disabled"><span>...</span></li>

@@ -12,7 +12,7 @@ import com.ihelin.car.config.MallConfig;
 import com.ihelin.car.utils.ResponseUtil;
 
 @Controller
-public class AdminMallcontroller extends AdminBaseController {
+public class AdminMallcontroller extends BaseAdminController {
 
 	@RequestMapping("mall_admin")
 	public String mallAdmin(Model model) {

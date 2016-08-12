@@ -10,7 +10,8 @@
 	<meta name="author" content="" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
    	<link href="${request.contextPath}/css/styles.min.css" rel="stylesheet" type='text/css' media="all" />
-   	<script type='text/javascript' src='${request.contextPath}/js/jquery-2.2.1.min.js'></script>
+   	<link href="${request.contextPath}/fonts/font-awesome/css/font-awesome.css" rel="stylesheet" type='text/css' media="all" />
+   	<script src='${request.contextPath}/js/jquery-2.2.1.min.js'></script>
    	<script src="${request.contextPath}/plugins/layer/layer.js"></script>
 </head>
 <body class="">
@@ -21,7 +22,7 @@
         </div>
 		<ul class="nav navbar-nav pull-left">
         	<li class="dropdown">
-        		<a href="index" class="username" ><span class="hidden-xs">E品居后台管理</span></a>
+        		<a href="index" class="username" ><span class="hidden-xs">车友1048后台管理</span></a>
         	</li>
         </ul>       
         <ul class="nav navbar-nav  pull-right toolbar">
@@ -55,6 +56,16 @@
                 <li>
           			<a href="${request.contextPath}/admin/product_admin"><i class ="fa fa-gift"></i>
 						<span>商品管理</span>
+		            </a>
+			    </li>
+			    <li>
+          			<a href="${request.contextPath}/admin/user_admin"><i class ="fa fa-user"></i>
+						<span>会员管理</span>
+		            </a>
+			    </li>
+			    <li>
+          			<a href="${request.contextPath}/admin/order_admin"><i class ="fa fa-file-text"></i>
+						<span>订单管理</span>
 		            </a>
 			    </li>
                 <li>
@@ -92,13 +103,12 @@
 	    <footer role="contentinfo">
 	        <div class="clearfix">
 	            <ul class="list-unstyled list-inline">
-	                <li>E品居 &copy; ${.now?string('yyyy')}</li>
+	                <li>车友1048 &copy; ${.now?string('yyyy')}</li>
 	                <button class="pull-right btn btn-inverse btn-xs" id="back-to-top" style="margin-top: -1px; text-transform: uppercase;"><i class="fa fa-arrow-up"></i></button>
 	            </ul>
 	        </div>
 	    </footer>
 	</div> <!-- page-container -->
-
 <script type='text/javascript' src='${request.contextPath}/js/bootstrap.min.js'></script> 
 <script type='text/javascript' src='${request.contextPath}/js/enquire.js'></script> 
 <script type='text/javascript' src='${request.contextPath}/js/jquery.cookie.js'></script> 
@@ -108,7 +118,11 @@
 <script type='text/javascript' src='${request.contextPath}/plugins/form-parsley/parsley.min.js'></script> 
 <script type='text/javascript' src='${request.contextPath}/js/formvalidation.js'></script> 
 <script type='text/javascript'>
-
+	$(function(){
+		$(function(){
+			$('.tips').tooltip();
+		});
+	});
 </script>
 ${html_other_script!}
 </body>

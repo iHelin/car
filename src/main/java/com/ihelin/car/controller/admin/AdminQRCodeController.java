@@ -13,7 +13,7 @@ import com.ihelin.car.utils.QRCode;
 import com.ihelin.car.utils.ResponseUtil;
 
 @Controller
-public class AdminQRCodeController extends AdminBaseController {
+public class AdminQRCodeController extends BaseAdminController {
 
 	@RequestMapping("qrcode")
 	public String qRCode() {
