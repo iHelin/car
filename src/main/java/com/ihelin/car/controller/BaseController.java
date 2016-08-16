@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 
 import com.ihelin.car.db.entity.User;
 import com.ihelin.car.db.manager.AccessTokenManager;
+import com.ihelin.car.db.manager.CarouselManager;
 import com.ihelin.car.db.manager.ProductManager;
 import com.ihelin.car.db.manager.ServiceMenuMannger;
 import com.ihelin.car.db.manager.UserManager;
@@ -21,6 +22,8 @@ public abstract class BaseController {
 	protected UserManager userManager;
 	@Resource
 	protected ProductManager productManager;
+	@Resource
+	protected CarouselManager carouselManager;
 
 	protected static final int PAGE_LENGTH = 10;
 	protected static final int MAX_LENGTH = 1000;

@@ -92,6 +92,11 @@
 						<span>商城配置</span>
 		            </a>
 			    </li>
+			    <li>
+          			<a href="${request.contextPath}/admin/carousel_admin"><i class ="fa fa-picture-o"></i>
+						<span>轮播图配置</span>
+		            </a>
+			    </li>
             </ul>
             <!-- END SIDEBAR MENU -->
         </nav> 
