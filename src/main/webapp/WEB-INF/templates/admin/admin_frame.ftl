@@ -124,9 +124,7 @@
 <script type='text/javascript' src='${request.contextPath}/js/formvalidation.js'></script> 
 <script type='text/javascript'>
 	$(function(){
-		$(function(){
-			$('.tips').tooltip();
-		});
+		$('.tips').tooltip();
 	});
 </script>
 ${html_other_script!}

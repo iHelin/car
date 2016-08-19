@@ -127,15 +127,15 @@
 														</#if>
 													</td>
 													<td class="text-center">
-														<button class="btn btn-sm btn-orange-alt" onclick="upDownProduct(${product.id!});" type="button">
+														<button class="btn btn-sm btn-orange-alt tips" title="<#if product.status??><#if product.status==1>下架<#elseif product.status==2>上架</#if></#if>" onclick="upDownProduct(${product.id!});" type="button">
 															<#if product.status?? && product.status==1>
-																<i class="fa fa-arrow-down"></i> 下架
+																<i class="fa fa-arrow-down"></i>
 															<#elseif product.status?? && product.status==2>
-																<i class="fa fa-arrow-up"></i> 上架
+																<i class="fa fa-arrow-up"></i>
 															</#if>
 														</button>
-														<a class="btn btn-sm btn-primary-alt" href="${request.contextPath}/admin/product_admin_edit?productId=${product.id!}" type="button"><i class="fa fa-edit"></i> 编辑</a>
-														<button class="btn btn-sm btn-danger-alt" onclick="deleteProduct(${product.id!});" type="button"><i class="fa fa-trash"></i> 删除</button>
+														<a class="btn btn-sm btn-primary-alt tips" title="编辑" href="${request.contextPath}/admin/product_admin_edit?productId=${product.id!}" type="button"><i class="fa fa-edit"></i></a>
+														<button class="btn btn-sm btn-danger-alt tips" title="删除" onclick="deleteProduct(${product.id!});" type="button"><i class="fa fa-trash"></i></button>
 													</td>
 												</tr>
 											</#if>

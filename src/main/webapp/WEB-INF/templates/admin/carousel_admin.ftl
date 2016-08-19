@@ -132,8 +132,8 @@
 												<td class="text-center" style="vertical-align: middle;">${carousel.sort!}</td>
 												<td class="text-center" style="vertical-align: middle;">${carousel.createTime?string("yyyy-MM-dd HH:mm:ss")}</td>
 												<td class="text-center" style="vertical-align: middle;">
-													<button class="btn btn-sm btn-primary-alt" onclick="editCarousel(${carousel.id!});"><i class="fa fa-edit"></i> 编辑</button>
-													<button class="btn btn-sm btn-danger-alt" onclick="deleteCarousel(${carousel.id!});"><i class="fa fa-times"></i> 删除</button>
+													<button class="btn btn-sm btn-primary-alt tips" title="编辑" onclick="editCarousel(${carousel.id!});"><i class="fa fa-edit"></i></button>
+													<button class="btn btn-sm btn-danger-alt tips" title="删除" onclick="deleteCarousel(${carousel.id!});"><i class="fa fa-trash"></i></button>
 												</td>
 											</tr>
 										</#if>
