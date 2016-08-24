@@ -1,4 +1,4 @@
-package com.ihelin.car.wechat.model;
+package com.ihelin.car.message.resp;
 
 public class Music {
 	private String Title;

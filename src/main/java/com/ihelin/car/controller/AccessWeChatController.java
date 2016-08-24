@@ -14,10 +14,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ihelin.car.db.entity.ServiceMenu;
+import com.ihelin.car.message.req.LocationMessage;
 import com.ihelin.car.utils.CheckUtil;
 import com.ihelin.car.utils.MessageUtil;
+import com.ihelin.car.utils.ResponseUtil;
 import com.ihelin.car.utils.WechatUtil;
-import com.ihelin.car.wechat.model.LocationMessage;
 
 @Controller
 public class AccessWeChatController extends BaseController {
@@ -28,9 +29,10 @@ public class AccessWeChatController extends BaseController {
 			HttpServletResponse response) throws IOException {
 		boolean isGet = request.getMethod().toLowerCase().equals("get");
 		if (isGet) {
-			logger.info("开始验证access");
+			logger.info("验证access");
 			if (CheckUtil.checkSignature(signature, timestamp, nonce)) {
-				response.getWriter().write(echostr);
+				//response.getWriter().write(echostr);
+				ResponseUtil.writeHtml(response, echostr);
 				logger.info("验证成功，echostr：" + echostr);
 			} else {
 				logger.info("认证失败");

@@ -1,11 +1,10 @@
-package com.ihelin.car.wechat.model;
+package com.ihelin.car.message.req;
 
 public class LocationMessage extends BaseMessage {
-	private String Location_X;
-	private String Location_Y;
+	private String Location_X;// 纬度
+	private String Location_Y;// 经度
 	private Integer Scale;// 地图缩放大小
 	private String Label;// 地理位置信息
-	private String MsgId;// 消息id，64位整型
 
 	public String getLocation_X() {
 		return Location_X;
@@ -37,14 +36,6 @@ public class LocationMessage extends BaseMessage {
 
 	public void setLabel(String label) {
 		Label = label;
-	}
-
-	public String getMsgId() {
-		return MsgId;
-	}
-
-	public void setMsgId(String msgId) {
-		MsgId = msgId;
 	}
 
 }

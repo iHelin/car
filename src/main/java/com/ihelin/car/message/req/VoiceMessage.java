@@ -1,9 +1,14 @@
-package com.ihelin.car.wechat.model;
+package com.ihelin.car.message.req;
 
+/**
+ * 音频消息
+ * 
+ * @author ihelin
+ *
+ */
 public class VoiceMessage extends BaseMessage {
 	private String MediaId;
 	private String Format;
-	private String MsgId;// 消息ID
 
 	public String getMediaId() {
 		return MediaId;
@@ -19,14 +24,6 @@ public class VoiceMessage extends BaseMessage {
 
 	public void setFormat(String format) {
 		Format = format;
-	}
-
-	public String getMsgId() {
-		return MsgId;
-	}
-
-	public void setMsgId(String msgId) {
-		MsgId = msgId;
 	}
 
 }

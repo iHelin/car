@@ -1,10 +1,10 @@
-package com.ihelin.car.wechat.model;
+package com.ihelin.car.message.resp;
 
 import java.util.List;
 
-public class ArticleMessage extends BaseMessage {
-	private int ArticleCount;
-	private List<Article> Articles;
+public class NewsMessage extends BaseMessage {
+	private int ArticleCount;// 图文消息个数，限制为10条以内
+	private List<Article> Articles;// 多条图文消息信息，默认第一个item为大图
 
 	public int getArticleCount() {
 		return ArticleCount;

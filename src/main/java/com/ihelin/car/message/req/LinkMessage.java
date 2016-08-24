@@ -1,10 +1,12 @@
-package com.ihelin.car.wechat.model;
+package com.ihelin.car.message.req;
 
 public class LinkMessage extends BaseMessage {
+	// 消息标题
 	private String Title;
+	// 消息描述
 	private String Description;
+	// 消息链接
 	private String Url;
-	private String MsgId;
 
 	public String getTitle() {
 		return Title;
@@ -29,13 +31,4 @@ public class LinkMessage extends BaseMessage {
 	public void setUrl(String url) {
 		Url = url;
 	}
-
-	public String getMsgId() {
-		return MsgId;
-	}
-
-	public void setMsgId(String msgId) {
-		MsgId = msgId;
-	}
-
 }

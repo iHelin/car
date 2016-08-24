@@ -1,4 +1,4 @@
-package com.ihelin.car.wechat.model;
+package com.ihelin.car.menu;
 
 import java.util.Date;
 

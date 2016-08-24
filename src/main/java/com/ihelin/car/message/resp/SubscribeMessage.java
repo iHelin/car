@@ -1,4 +1,4 @@
-package com.ihelin.car.wechat.model;
+package com.ihelin.car.message.resp;
 
 public class SubscribeMessage extends BaseMessage {
 	private String Event;// 关注或取关

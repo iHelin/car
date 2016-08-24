@@ -31,8 +31,8 @@ import com.ihelin.car.menu.Button;
 import com.ihelin.car.menu.ClickButton;
 import com.ihelin.car.menu.Menu;
 import com.ihelin.car.menu.ViewButton;
-import com.ihelin.car.wechat.model.LocationMessage;
-import com.ihelin.car.wechat.model.WXAccessToken;
+import com.ihelin.car.menu.WXAccessToken;
+import com.ihelin.car.message.req.LocationMessage;
 
 public class WechatUtil {
 	private static final String ACCESS_TOKEN_URL = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET";
@@ -152,7 +152,7 @@ public class WechatUtil {
 		location.setLocation_X(map.get("Location_X"));
 		location.setLocation_Y(map.get("Location_Y"));
 		location.setScale(Integer.parseInt(map.get("Scale")));
-		location.setMsgId(map.get("MsgId"));
+		location.setMsgId(Long.valueOf(map.get("MsgId")));
 		return location;
 	}
 

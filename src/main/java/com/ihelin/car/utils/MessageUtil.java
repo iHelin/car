@@ -14,10 +14,10 @@ import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
-import com.ihelin.car.wechat.model.Article;
-import com.ihelin.car.wechat.model.ArticleMessage;
-import com.ihelin.car.wechat.model.ImageMessage;
-import com.ihelin.car.wechat.model.TextMessage;
+import com.ihelin.car.message.resp.Article;
+import com.ihelin.car.message.resp.NewsMessage;
+import com.ihelin.car.message.resp.ImageMessage;
+import com.ihelin.car.message.resp.TextMessage;
 import com.thoughtworks.xstream.XStream;
 
 public class MessageUtil {
@@ -45,36 +45,25 @@ public class MessageUtil {
 	 * @throws IOException
 	 * @throws DocumentException
 	 */
+	@SuppressWarnings("unchecked")
 	public static Map<String, String> xmlToMap(HttpServletRequest request) throws IOException, DocumentException {
-		Map<String, String> msgMap = new HashMap<String, String>();
-		InputStream inStream = request.getInputStream();
-		SAXReader reader = new SAXReader();
+		Map<String, String> msgMap = new HashMap<String, String>();// 将解析结果存储在Map中
+		InputStream inStream = request.getInputStream();// 从request中取得输入流
+		SAXReader reader = new SAXReader();// 读取输入流
 		Document doc = reader.read(inStream);
-		Element root = doc.getRootElement();
-		@SuppressWarnings("unchecked")
-		List<Element> elementList = root.elements();
+		Element root = doc.getRootElement();// 得到xml根元素
+		List<Element> elementList = root.elements();// 得到根元素的所有子节点
+		// 遍历所有子节点
 		for (Element e : elementList) {
 			msgMap.put(e.getName(), e.getText());
 		}
+		// 释放资源
 		inStream.close();
 		return msgMap;
 	}
 
 	/**
-	 * 主菜单
-	 * 
-	 * @return
-	 */
-	public static String menuText() {
-		StringBuffer sb = new StringBuffer();
-		sb.append("欢迎关注E品居，请按照菜单提示进行操作：\n\n");
-		sb.append("1、E品居介绍\n\n");
-		sb.append("回复？调出此菜单");
-		return sb.toString();
-	}
-
-	/**
-	 * 文本消息组装
+	 * 文本消息组装成xml
 	 * 
 	 * @param toUserName
 	 * @param fromUserName
@@ -98,7 +87,7 @@ public class MessageUtil {
 	 * @param fromUserName
 	 * @return
 	 */
-	public static String sendArticleMsg(String toUserName, String fromUserName, ArticleMessage newsMessage) {
+	public static String sendArticleMsg(String toUserName, String fromUserName, NewsMessage newsMessage) {
 		String message = "";
 		newsMessage.setToUserName(fromUserName);
 		newsMessage.setFromUserName(toUserName);
@@ -165,7 +154,7 @@ public class MessageUtil {
 	 * @param newsMessage
 	 * @return
 	 */
-	public static String newsMessageToXml(ArticleMessage newsMessage) {
+	public static String newsMessageToXml(NewsMessage newsMessage) {
 		XStream xstream = new XStream();
 		xstream.alias("xml", newsMessage.getClass());
 		xstream.alias("item", new Article().getClass());
@@ -194,6 +183,19 @@ public class MessageUtil {
 		XStream xstream = new XStream();
 		xstream.alias("xml", imageMessage.getClass());
 		return xstream.toXML(imageMessage);
+	}
+	
+	/**
+	 * 主菜单
+	 * 
+	 * @return
+	 */
+	public static String menuText() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("欢迎关注E品居，请按照菜单提示进行操作：\n\n");
+		sb.append("1、E品居介绍\n\n");
+		sb.append("回复？调出此菜单");
+		return sb.toString();
 	}
 
 }

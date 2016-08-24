@@ -1,4 +1,4 @@
-package com.ihelin.car.wechat.model;
+package com.ihelin.car.menu;
 
 public class WXAccessToken {
 	private String access_token;

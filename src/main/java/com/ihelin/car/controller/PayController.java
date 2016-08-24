@@ -121,8 +121,8 @@ public class PayController extends BaseController {
 		Iterator<Entry<String, Object>> it = es.iterator();
 		while (it.hasNext()) {
 			Entry<String, Object> entry = it.next();
-			String k = (String) entry.getKey();
-			Object v = entry.getValue();
+			String k =  entry.getKey();
+			String v = (String) entry.getValue();
 			if (null != v && !"".equals(v) && !"sign".equals(k) && !"key".equals(k)) {
 				sb.append(k + "=" + v + "&");
 			}
