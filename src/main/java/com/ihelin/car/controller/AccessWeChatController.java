@@ -1,6 +1,9 @@
 package com.ihelin.car.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ihelin.car.db.entity.ServiceMenu;
 import com.ihelin.car.message.req.LocationMessage;
+import com.ihelin.car.message.resp.Article;
+import com.ihelin.car.message.resp.NewsMessage;
 import com.ihelin.car.utils.CheckUtil;
 import com.ihelin.car.utils.MessageUtil;
 import com.ihelin.car.utils.ResponseUtil;
@@ -31,7 +36,7 @@ public class AccessWeChatController extends BaseController {
 		if (isGet) {
 			logger.info("验证access");
 			if (CheckUtil.checkSignature(signature, timestamp, nonce)) {
-				//response.getWriter().write(echostr);
+				// response.getWriter().write(echostr);
 				ResponseUtil.writeHtml(response, echostr);
 				logger.info("验证成功，echostr：" + echostr);
 			} else {
@@ -40,26 +45,40 @@ public class AccessWeChatController extends BaseController {
 		} else {
 			try {
 				Map<String, String> msgMap = MessageUtil.xmlToMap(request);
-				String wxUserName = msgMap.get("FromUserName");
-				String publicUserName = msgMap.get("ToUserName");
+				String fromUserName = msgMap.get("FromUserName");
+				String toUserName = msgMap.get("ToUserName");
 				String msgType = msgMap.get("MsgType");
 				String content = msgMap.get("Content");
 				System.out.println("消息类型：" + msgType);
 				String message = "";
-				if (MessageUtil.MESSAGE_TEXT.equals(msgType)) {
-					// 处理文本消息
+				switch (msgType) {
+				case MessageUtil.MESSAGE_TEXT:
 					System.out.println("用户发送的消息是：" + content);
-					message = textMessage(content, publicUserName, wxUserName);
-				} else if (MessageUtil.MESSAGE_IMAGE.equals(msgType)) {
-					// 处理图片消息
-					message = MessageUtil.sendTextMsg(publicUserName, wxUserName, "我已经收到了你的图片！");
-				} else if (MessageUtil.MESSAGE_EVNET.equals(msgType)) {
-					// 处理事件消息
-					message = eventMessage(publicUserName, wxUserName, msgMap);
-				} else if (MessageUtil.MESSAGE_LOCATION.equals(msgType)) {
+					message = textMessage(content, toUserName, fromUserName);
+					break;
+				case MessageUtil.MESSAGE_IMAGE:
+					message = MessageUtil.sendTextMsg(toUserName, fromUserName, "我已经收到了你的图片！");
+					break;
+				case MessageUtil.MESSAGE_LOCATION:
 					// 处理地理位置消息
 					LocationMessage locationMsg = WechatUtil.MapToLocation(msgMap);
-					message = MessageUtil.sendTextMsg(publicUserName, wxUserName, locationMsg.getLabel());
+					message = MessageUtil.sendTextMsg(toUserName, fromUserName, locationMsg.getLabel());
+					break;
+				case MessageUtil.MESSAGE_LINK:
+					// 链接消息
+					message = MessageUtil.sendTextMsg(toUserName, fromUserName, "我已经收到了你的链接！");
+					break;
+				case MessageUtil.MESSAGE_VOICE:
+					// 音频消息
+					message = MessageUtil.sendTextMsg(toUserName, fromUserName, "我已经收到了你的音频！");
+					break;
+				case MessageUtil.MESSAGE_EVNET:
+					// 处理事件消息
+					message = eventMessage(toUserName, fromUserName, msgMap);
+					break;
+				default:
+					message = MessageUtil.sendTextMsg(toUserName, fromUserName, "未知的消息。");
+					break;
 				}
 				System.out.println(message);
 				response.getWriter().print(message);
@@ -67,11 +86,6 @@ public class AccessWeChatController extends BaseController {
 				e.printStackTrace();
 			}
 		}
-	}
-
-	public static String otherText(String content, String fromUserName) {
-		String message = "你好";
-		return message;
 	}
 
 	/**
@@ -94,6 +108,27 @@ public class AccessWeChatController extends BaseController {
 		case "？":
 			message = MessageUtil.sendTextMsg(toUserName, fromUserName, MessageUtil.menuText());
 			break;
+		case "0":
+			// 创建图文消息
+			NewsMessage newsMessage = new NewsMessage();
+			newsMessage.setToUserName(fromUserName);
+			newsMessage.setFromUserName(toUserName);
+			newsMessage.setCreateTime(new Date().getTime());
+			newsMessage.setMsgType(MessageUtil.MESSAGE_NEWS);
+			newsMessage.setFuncFlag(0);
+			List<Article> articleList = new ArrayList<Article>();
+			Article article = new Article();
+			article.setTitle("欢迎关注车友1048");
+			article.setDescription("Powered By iHelin");
+			article.setPicUrl("");
+			article.setUrl("http://car.520lyx.cn/h5/index");
+			articleList.add(article);
+			// 设置图文消息个数
+			newsMessage.setArticleCount(articleList.size());
+			// 设置图文消息包含的图文集合
+			newsMessage.setArticles(articleList);
+			message = MessageUtil.sendArticleMsg(toUserName, fromUserName, newsMessage);
+			break;
 		default:
 			message = MessageUtil.sendTextMsg(toUserName, fromUserName, otherText(content, fromUserName));
 			break;
@@ -102,7 +137,7 @@ public class AccessWeChatController extends BaseController {
 	}
 
 	/**
-	 * 处理事件类消息
+	 * 事件类消息处理
 	 * 
 	 * @param map
 	 * @return
@@ -111,8 +146,7 @@ public class AccessWeChatController extends BaseController {
 		String eventType = map.get("Event");
 		String message = "";
 		if (MessageUtil.MESSAGE_SUBSCRIBE.equals(eventType)) {
-			// 关注事件
-			message = MessageUtil.sendTextMsg(toUserName, fromUserName, MessageUtil.menuText());
+			message = MessageUtil.sendTextMsg(toUserName, fromUserName, "谢谢您的关注！");// 关注事件
 		} else if (MessageUtil.MESSAGE_CLICK.equals(eventType)) {
 			// 点击菜单事件
 			Integer id = Integer.parseInt(map.get("EventKey"));
@@ -127,6 +161,11 @@ public class AccessWeChatController extends BaseController {
 			String key = map.get("EventKey");
 			message = MessageUtil.sendTextMsg(toUserName, fromUserName, key);
 		}
+		return message;
+	}
+
+	public static String otherText(String content, String fromUserName) {
+		String message = "[难过] /难过 /::(";
 		return message;
 	}
 

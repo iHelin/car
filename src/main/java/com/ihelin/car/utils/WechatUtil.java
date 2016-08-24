@@ -80,12 +80,6 @@ public class WechatUtil {
 		String url = ACCESS_TOKEN_URL.replace("APPID", appid).replace("APPSECRET", secret);
 		String res = doGetStr(url);
 		WXAccessToken token = JSON.parseObject(res, WXAccessToken.class);
-		/*
-		 * JSONObject jsonObject = new JSONObject(doGetStr(url)); if (jsonObject
-		 * != null) {
-		 * token.setAccess_token(jsonObject.getString("access_token"));
-		 * token.setExpires_in(jsonObject.getInt("expires_in")); }
-		 */
 		return token;
 	}
 

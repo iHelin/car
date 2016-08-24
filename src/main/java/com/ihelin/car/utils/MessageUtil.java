@@ -2,7 +2,7 @@ package com.ihelin.car.utils;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Date;
+import java.io.Writer;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,8 +17,13 @@ import org.dom4j.io.SAXReader;
 import com.ihelin.car.message.resp.Article;
 import com.ihelin.car.message.resp.NewsMessage;
 import com.ihelin.car.message.resp.ImageMessage;
+import com.ihelin.car.message.resp.MusicMessage;
 import com.ihelin.car.message.resp.TextMessage;
 import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.core.util.QuickWriter;
+import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
+import com.thoughtworks.xstream.io.xml.PrettyPrintWriter;
+import com.thoughtworks.xstream.io.xml.XppDriver;
 
 public class MessageUtil {
 
@@ -38,7 +43,7 @@ public class MessageUtil {
 	public static final String MESSAGE_SCANCODE = "scancode_push";
 
 	/**
-	 * xml转为Map
+	 * 解析微信发来的请求 xml转为Map
 	 * 
 	 * @param request
 	 * @return
@@ -63,7 +68,7 @@ public class MessageUtil {
 	}
 
 	/**
-	 * 文本消息组装成xml
+	 * 文本消息组装
 	 * 
 	 * @param toUserName
 	 * @param fromUserName
@@ -75,7 +80,7 @@ public class MessageUtil {
 		text.setFromUserName(toUserName);
 		text.setToUserName(fromUserName);
 		text.setMsgType(MessageUtil.MESSAGE_TEXT);
-		text.setCreateTime(new Date().getTime());
+		text.setCreateTime(System.currentTimeMillis());
 		text.setContent(content);
 		return textMessageToXml(text);
 	}
@@ -143,7 +148,6 @@ public class MessageUtil {
 	 * @return
 	 */
 	public static String textMessageToXml(TextMessage textMessage) {
-		XStream xstream = new XStream();
 		xstream.alias("xml", textMessage.getClass());
 		return xstream.toXML(textMessage);
 	}
@@ -155,7 +159,6 @@ public class MessageUtil {
 	 * @return
 	 */
 	public static String newsMessageToXml(NewsMessage newsMessage) {
-		XStream xstream = new XStream();
 		xstream.alias("xml", newsMessage.getClass());
 		xstream.alias("item", new Article().getClass());
 		return xstream.toXML(newsMessage);
@@ -167,11 +170,10 @@ public class MessageUtil {
 	 * @param musicMessage
 	 * @return
 	 */
-	/*
-	 * public static String musicMessageToXml(MusicMessage musicMessage) {
-	 * XStream xstream = new XStream(); xstream.alias("xml",
-	 * musicMessage.getClass()); return xstream.toXML(musicMessage); }
-	 */
+	public static String musicMessageToXml(MusicMessage musicMessage) {
+		xstream.alias("xml", musicMessage.getClass());
+		return xstream.toXML(musicMessage);
+	}
 
 	/**
 	 * 图片消息转XML
@@ -180,11 +182,10 @@ public class MessageUtil {
 	 * @return
 	 */
 	public static String imageMessageToXml(ImageMessage imageMessage) {
-		XStream xstream = new XStream();
 		xstream.alias("xml", imageMessage.getClass());
 		return xstream.toXML(imageMessage);
 	}
-	
+
 	/**
 	 * 主菜单
 	 * 
@@ -196,6 +197,40 @@ public class MessageUtil {
 		sb.append("1、E品居介绍\n\n");
 		sb.append("回复？调出此菜单");
 		return sb.toString();
+	}
+
+	/**
+	 * 扩展xstream，使其支持CDATA块
+	 * 
+	 */
+	private static XStream xstream = new XStream(new XppDriver() {
+		public HierarchicalStreamWriter createWriter(Writer out) {
+			return new PrettyPrintWriter(out) {
+				@SuppressWarnings("rawtypes")
+				public void startNode(String name, Class clazz) {
+					super.startNode(name, clazz);
+				}
+
+				protected void writeText(QuickWriter writer, String text) {
+					if (IsNumeric(text)) {
+						writer.write(text);
+					} else {
+						writer.write("<![CDATA[");
+						writer.write(text);
+						writer.write("]]>");
+					}
+				}
+			};
+		}
+	});
+
+	public static boolean IsNumeric(String str) {
+		try {
+			Long.parseLong(str);
+		} catch (Exception e) {
+			return false;
+		}
+		return true;
 	}
 
 }
