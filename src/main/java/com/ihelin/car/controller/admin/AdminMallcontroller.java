@@ -1,7 +1,5 @@
 package com.ihelin.car.controller.admin;
 
-import java.util.Map;
-
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
@@ -16,9 +14,8 @@ public class AdminMallcontroller extends BaseAdminController {
 
 	@RequestMapping("mall_admin")
 	public String mallAdmin(Model model) {
-		Map<String, Object> config = DataConfig.getValue();
-		double postage = (double) config.get(POSTAGE);
-		double unionPostage = (double) config.get(UNION_POSTAGE);
+		double postage = (double) DataConfig.getValue(POSTAGE);
+		double unionPostage = (double) DataConfig.getValue(UNION_POSTAGE);
 		model.addAttribute("postage", postage);
 		model.addAttribute("unionPostage", unionPostage);
 		return ftl("mall_admin");

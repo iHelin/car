@@ -2,72 +2,48 @@ package com.ihelin.car.config;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.annotation.PostConstruct;
 
 import org.ho.yaml.Yaml;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
 
 import com.google.common.collect.Maps;
 
+@Repository
 public class DataConfig {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(DataConfig.class);
 	private static Map<String, Object> configMap = Maps.newHashMap();
+	public static final String fileName = "mall_config.yml";
 
 	@SuppressWarnings("unchecked")
-	public static Map<String, Object> getValue() {
-		File file = new File(CommonConfig.getWebInfDir(), getFileName());
-		if (!file.exists()) {
-			try {
-				file.createNewFile();
-			} catch (IOException e) {
-				LOGGER.warn("create file throws exception" + e.getMessage());
-				return Maps.newHashMap();
-			}
-		}
+	@PostConstruct
+	public static void getMap() {
+		File file = new File(CommonConfig.getWebInfDir(), fileName);
 		try {
 			configMap = Yaml.loadType(file, HashMap.class);
 		} catch (Exception e) {
-			LOGGER.warn("loading throws exception, file path: " + getFileName() + ", errMsg: " + e.getMessage());
-			return Maps.newHashMap();
+			LOGGER.warn("loading throws exception, file path: " + fileName + ", errMsg: " + e.getMessage());
 		}
-		return configMap;
+	}
+
+	public static Object getValue(String key) {
+		return configMap.get(key);
 	}
 
 	public static void setValue(String name, Object value) {
 		configMap.put(name, value);
-		File file = new File(CommonConfig.getWebInfDir(), getFileName());
+		File file = new File(CommonConfig.getWebInfDir(), fileName);
 		try {
 			Yaml.dump(configMap, file);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-	}
-
-	@SuppressWarnings("unchecked")
-	public static void main(String[] args) {
-		File dumpFile = new File("/Users/ihelin/git/lube-mall/src/main/webapp/WEB-INF", getFileName());
-		Map<String, Object> res = Maps.newHashMap();
-		double value = 88;
-		res.put("unionpostage", value);
-		Map<String, Object> configMap;
-		try {
-			Yaml.dump(res, dumpFile);
-			configMap = Yaml.loadType(dumpFile, HashMap.class);
-			for (Object key : configMap.keySet()) {
-				System.out.println(key + ":" + configMap.get(key).toString());
-			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-
-	}
-
-	private static String getFileName() {
-		return "mall_config.yml";
 	}
 
 }

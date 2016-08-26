@@ -23,6 +23,7 @@ public class IndexConroller extends BaseController {
 	@RequestMapping(value = "test")
 	public String test() {
 		logger.info("呵呵");
+		//accessTokenManager.forceUpdateAccessToken();
 		return "index";
 	}
 

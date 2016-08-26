@@ -7,6 +7,7 @@
 			$.post("${request.contextPath}/admin/set_config",$('#config_form').serialize(),function(data){
 				if(data.status=="success"){
 					layer.msg("保存成功！");
+					window.location.reload();
 				}else{
 					layer.msg("保存失败！");
 				}
