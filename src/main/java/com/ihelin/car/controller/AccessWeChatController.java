@@ -36,7 +36,6 @@ public class AccessWeChatController extends BaseController {
 		if (isGet) {
 			logger.info("验证access");
 			if (CheckUtil.checkSignature(signature, timestamp, nonce)) {
-				// response.getWriter().write(echostr);
 				ResponseUtil.writeHtml(response, echostr);
 				logger.info("验证成功，echostr：" + echostr);
 			} else {

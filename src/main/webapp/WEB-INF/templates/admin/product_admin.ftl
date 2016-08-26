@@ -101,7 +101,7 @@
 										<#list products as product>
 											<#if product??>
 												<tr>
-													<td class="text-center">${product.id!}</td>
+													<td class="text-center">#{product.id!}</td>
 													<td class="text-center">${product.name!}<#if product.isFreePostage>&nbsp;<small><span class="label label-warning">包邮</span></small></#if></td>
 													<td class="text-center">
 														<span class="tips" data-toggle="tooltip" title="原价：${product.price!?string.currency}" >${product.bargin!?string.currency}</span>
@@ -127,15 +127,15 @@
 														</#if>
 													</td>
 													<td class="text-center">
-														<button class="btn btn-sm btn-orange-alt tips" title="<#if product.status??><#if product.status==1>下架<#elseif product.status==2>上架</#if></#if>" onclick="upDownProduct(${product.id!});" type="button">
+														<button class="btn btn-sm btn-orange-alt tips" title="<#if product.status??><#if product.status==1>下架<#elseif product.status==2>上架</#if></#if>" onclick="upDownProduct(#{product.id!});" type="button">
 															<#if product.status?? && product.status==1>
 																<i class="fa fa-arrow-down"></i>
 															<#elseif product.status?? && product.status==2>
 																<i class="fa fa-arrow-up"></i>
 															</#if>
 														</button>
-														<a class="btn btn-sm btn-primary-alt tips" title="编辑" href="${request.contextPath}/admin/product_admin_edit?productId=${product.id!}" type="button"><i class="fa fa-edit"></i></a>
-														<button class="btn btn-sm btn-danger-alt tips" title="删除" onclick="deleteProduct(${product.id!});" type="button"><i class="fa fa-trash"></i></button>
+														<a class="btn btn-sm btn-primary-alt tips" title="编辑" href="${request.contextPath}/admin/product_admin_edit?productId=#{product.id!}" type="button"><i class="fa fa-edit"></i></a>
+														<button class="btn btn-sm btn-danger-alt tips" title="删除" onclick="deleteProduct(#{product.id!});" type="button"><i class="fa fa-trash"></i></button>
 													</td>
 												</tr>
 											</#if>

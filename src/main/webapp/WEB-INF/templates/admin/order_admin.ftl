@@ -71,7 +71,7 @@
 													<td class="text-center" style="vertical-align: middle;">${user.province!}${user.city!}</td>
 													<td class="text-center" style="vertical-align: middle;">${user.phone!"未设置"}</td>
 													<td class="text-center" style="vertical-align: middle;">
-														<button class="btn btn-sm btn-danger-alt" onclick="deleteUser(${user.id!});"><i class="fa fa-trash"></i> 删除</button>
+														<button class="btn btn-sm btn-danger-alt" onclick="deleteUser(#{user.id!});"><i class="fa fa-trash"></i> 删除</button>
 													</td>
 												</tr>
 											</#if>
