@@ -12,9 +12,9 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.Maps;
 
-public class MallConfig {
+public class DataConfig {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(MallConfig.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(DataConfig.class);
 	private static Map<String, Object> configMap = Maps.newHashMap();
 
 	@SuppressWarnings("unchecked")

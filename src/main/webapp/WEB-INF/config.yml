@@ -5,10 +5,10 @@ jdbc_password: 246260
 admin_user: admin
 admin_password: admin
 
-wx_appId: wxe1f745f9ac6a37a6
-wx_appSecret: de73fb1b199b13b3853a23897633df69
-
-test_appId: wx2bc2718db9216693
-test_appSecret: 78bbcdc96727e0d539bd6e08fb289a87
-
 domain_url: http://car.520lyx.cn
+
+#wx_appId: wxe1f745f9ac6a37a6
+#wx_appSecret: de73fb1b199b13b3853a23897633df69
+#以下为测试微信号
+wx_appId: wx2bc2718db9216693
+wx_appSecret: 78bbcdc96727e0d539bd6e08fb289a87

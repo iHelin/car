@@ -51,19 +51,25 @@ public class MessageUtil {
 	 * @throws DocumentException
 	 */
 	@SuppressWarnings("unchecked")
-	public static Map<String, String> xmlToMap(HttpServletRequest request) throws IOException, DocumentException {
+	public static Map<String, String> xmlToMap(HttpServletRequest request) {
 		Map<String, String> msgMap = new HashMap<String, String>();// 将解析结果存储在Map中
-		InputStream inStream = request.getInputStream();// 从request中取得输入流
 		SAXReader reader = new SAXReader();// 读取输入流
-		Document doc = reader.read(inStream);
-		Element root = doc.getRootElement();// 得到xml根元素
-		List<Element> elementList = root.elements();// 得到根元素的所有子节点
-		// 遍历所有子节点
-		for (Element e : elementList) {
-			msgMap.put(e.getName(), e.getText());
+		InputStream inStream;
+		try {
+			// 从request中取得输入流
+			inStream = request.getInputStream();
+			Document doc = reader.read(inStream);
+			Element root = doc.getRootElement();// 得到xml根元素
+			List<Element> elementList = root.elements();// 得到根元素的所有子节点
+			// 遍历所有子节点
+			for (Element e : elementList) {
+				msgMap.put(e.getName(), e.getText());
+			}
+			// 释放资源
+			inStream.close();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		// 释放资源
-		inStream.close();
 		return msgMap;
 	}
 

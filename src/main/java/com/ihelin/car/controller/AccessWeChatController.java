@@ -11,8 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.http.ParseException;
-import org.dom4j.DocumentException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -25,6 +23,12 @@ import com.ihelin.car.utils.MessageUtil;
 import com.ihelin.car.utils.ResponseUtil;
 import com.ihelin.car.utils.WechatUtil;
 
+/**
+ * 微信消息接入
+ * 
+ * @author ihelin
+ *
+ */
 @Controller
 public class AccessWeChatController extends BaseController {
 	private static final Log logger = LogFactory.getLog(AccessWeChatController.class);
@@ -32,69 +36,68 @@ public class AccessWeChatController extends BaseController {
 	@RequestMapping(value = "access_wechat")
 	public void test(String signature, String timestamp, String nonce, String echostr, HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
-		boolean isGet = request.getMethod().toLowerCase().equals("get");
+		boolean isGet = "get".equals(request.getMethod().toLowerCase());
 		if (isGet) {
 			logger.info("验证access");
 			if (CheckUtil.checkSignature(signature, timestamp, nonce)) {
 				ResponseUtil.writeHtml(response, echostr);
-				logger.info("验证成功，echostr：" + echostr);
+				logger.info("验证成功");
 			} else {
-				logger.info("认证失败");
+				logger.info("认证失败，echostr：" + echostr);
 			}
 		} else {
-			try {
-				Map<String, String> msgMap = MessageUtil.xmlToMap(request);
-				String fromUserName = msgMap.get("FromUserName");
-				String toUserName = msgMap.get("ToUserName");
-				String msgType = msgMap.get("MsgType");
-				String content = msgMap.get("Content");
-				System.out.println("消息类型：" + msgType);
-				String message = "";
-				switch (msgType) {
-				case MessageUtil.MESSAGE_TEXT:
-					System.out.println("用户发送的消息是：" + content);
-					message = textMessage(content, toUserName, fromUserName);
-					break;
-				case MessageUtil.MESSAGE_IMAGE:
-					message = MessageUtil.sendTextMsg(toUserName, fromUserName, "我已经收到了你的图片！");
-					break;
-				case MessageUtil.MESSAGE_LOCATION:
-					// 处理地理位置消息
-					LocationMessage locationMsg = WechatUtil.MapToLocation(msgMap);
-					message = MessageUtil.sendTextMsg(toUserName, fromUserName, locationMsg.getLabel());
-					break;
-				case MessageUtil.MESSAGE_LINK:
-					// 链接消息
-					message = MessageUtil.sendTextMsg(toUserName, fromUserName, "我已经收到了你的链接！");
-					break;
-				case MessageUtil.MESSAGE_VOICE:
-					// 音频消息
-					message = MessageUtil.sendTextMsg(toUserName, fromUserName, "我已经收到了你的音频！");
-					break;
-				case MessageUtil.MESSAGE_EVNET:
-					// 处理事件消息
-					message = eventMessage(toUserName, fromUserName, msgMap);
-					break;
-				default:
-					message = MessageUtil.sendTextMsg(toUserName, fromUserName, "未知的消息。");
-					break;
-				}
-				System.out.println(message);
-				response.getWriter().print(message);
-			} catch (DocumentException e) {
-				e.printStackTrace();
-			}
+			String respMessage = msgProcess(request);
+			System.out.println(respMessage);
+			response.getWriter().print(respMessage);
 		}
 	}
 
 	/**
-	 * 文本消息处理
+	 * 处理微信发来的请求
 	 * 
-	 * @param content
-	 *            消息内容
-	 * @return
-	 * @throws ParseException
-	 * @throws IOException
+	 */
+	public String msgProcess(HttpServletRequest request) {
+		String message = "";
+		Map<String, String> msgMap = MessageUtil.xmlToMap(request);
+		String fromUserName = msgMap.get("FromUserName");
+		String toUserName = msgMap.get("ToUserName");
+		String msgType = msgMap.get("MsgType");
+		String content = msgMap.get("Content");
+		System.out.println("消息类型：" + msgType);
+		switch (msgType) {
+		case MessageUtil.MESSAGE_TEXT:
+			System.out.println("用户发送的消息是：" + content);
+			message = textMessage(content, toUserName, fromUserName);
+			break;
+		case MessageUtil.MESSAGE_IMAGE:
+			message = MessageUtil.sendTextMsg(toUserName, fromUserName, "我已经收到了你的图片！");
+			break;
+		case MessageUtil.MESSAGE_LOCATION:
+			// 处理地理位置消息
+			LocationMessage locationMsg = WechatUtil.MapToLocation(msgMap);
+			message = MessageUtil.sendTextMsg(toUserName, fromUserName, locationMsg.getLabel());
+			break;
+		case MessageUtil.MESSAGE_LINK:
+			// 链接消息
+			message = MessageUtil.sendTextMsg(toUserName, fromUserName, "我已经收到了你的链接！");
+			break;
+		case MessageUtil.MESSAGE_VOICE:
+			// 音频消息
+			message = MessageUtil.sendTextMsg(toUserName, fromUserName, "我已经收到了你的音频！");
+			break;
+		case MessageUtil.MESSAGE_EVNET:
+			// 处理事件消息
+			message = eventMessage(toUserName, fromUserName, msgMap);
+			break;
+		default:
+			message = MessageUtil.sendTextMsg(toUserName, fromUserName, "未知的消息。");
+			break;
+		}
+		return message;
+	}
+
+	/**
+	 * 文本消息处理
 	 */
 	public static String textMessage(String content, String toUserName, String fromUserName) {
 		String message = "";
