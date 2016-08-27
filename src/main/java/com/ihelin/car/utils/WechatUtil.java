@@ -25,6 +25,8 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.Lists;
 import com.ihelin.car.menu.Button;
@@ -40,6 +42,7 @@ public class WechatUtil {
 	private static final String CREATE_MENU_URL = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=ACCESS_TOKEN";
 	private static final String QUERY_MENU_URL = "https://api.weixin.qq.com/cgi-bin/menu/get?access_token=ACCESS_TOKEN";
 	private static final String DELETE_MENU_URL = "https://api.weixin.qq.com/cgi-bin/menu/delete?access_token=ACCESS_TOKEN";
+	private static final Logger LOGGER = LoggerFactory.getLogger(WechatUtil.class);
 
 	// get请求，返回String
 	public static String doGetStr(String url) {
@@ -53,7 +56,7 @@ public class WechatUtil {
 				result = EntityUtils.toString(entity, "UTF-8");
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			result = "";
 		}
 		return result;
 	}
@@ -70,16 +73,17 @@ public class WechatUtil {
 			HttpEntity respEntity = response.getEntity();
 			result = EntityUtils.toString(respEntity, "UTF-8");
 		} catch (Exception e) {
-			e.printStackTrace();
+			result = "";
 		}
 		return result;
 	}
 
-	// 获取access_token
+	// 获取微信access_token
 	public static WXAccessToken getAccessToken(String appid, String secret) {
 		String url = ACCESS_TOKEN_URL.replace("APPID", appid).replace("APPSECRET", secret);
 		String res = doGetStr(url);
 		WXAccessToken token = JSON.parseObject(res, WXAccessToken.class);
+		LOGGER.info("从微信服务器获取token成功，有效期为" + token.getExpires_in() + "秒");
 		return token;
 	}
 

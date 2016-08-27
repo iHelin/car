@@ -1,7 +1,3 @@
 --- 
 postage: !java.lang.Double 20.0
-updateTime: "2016-08-26 22:35:27"
-genTime: !java.util.Date "1472222127511"
 union_postage: !java.lang.Double 88.0
-expiresTime: !java.util.Date "1472229327511"
-token: QOqk_IjvYdUXHkgvvMHzQ6JhNhvAb_ZJvz-Jllq347Yb8VmZsbdsxxIr23rU5g_lO6ayI4yY311xK9zlbiXhUPKPuXiB4q3edajN2CALc8FLByrDC3KHGl4KVDkBntFpYJZjAJAFQG
