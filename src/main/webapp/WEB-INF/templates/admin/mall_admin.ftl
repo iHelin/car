@@ -34,19 +34,25 @@
 							<div class="" style="width:60%;margin:0 auto;" >
 								<form class="form-horizontal myform" data-validate="parsley" method="post" id="config_form">
 									<div class="form-group">
-										<label for="postage" class="col-sm-2 control-label"><strong>商品邮费</strong></label>
-								    	<div class="col-sm-10">
+										<label for="access_token" class="col-sm-4 control-label"><strong>Access Token</strong></label>
+								    	<div class="col-sm-8">
+								      		<input type="text" class="form-control" name="accessToken" data-required="true" value="${accessToken.token?substring(0,6)}******" id="access_token" readonly>
+								    	</div>
+								 	</div>
+								 	<div class="form-group">
+										<label for="postage" class="col-sm-4 control-label"><strong>商品邮费</strong></label>
+								    	<div class="col-sm-8">
 								      		<input type="text" class="form-control" name="postage" data-type="number" data-required="true" value="${postage!0}" id="postage" placeholder="商品邮费">
 								    	</div>
 								 	</div>
 									<div class="form-group">
-										<label for="" class="col-sm-2 control-label"><strong>最低包邮费</strong></label>
-										<div class="col-sm-10">
+										<label for="" class="col-sm-4 control-label"><strong>最低包邮费</strong></label>
+										<div class="col-sm-8">
 											<input type="text" class="form-control" name="unionPostage" data-type="number" data-required="true" value="${unionPostage!0}" id="" placeholder="最低包邮费">
 										</div>
 								  	</div>
 								  	<div class="form-group">
-								    	<div class="col-sm-offset-2 col-sm-10 text-center">
+								    	<div class="col-sm-offset-1 col-sm-10 text-center">
 								      		<button type="button" onclick="save();" class="btn btn-primary" >保存</button>
 								    	</div>
 								  	</div>

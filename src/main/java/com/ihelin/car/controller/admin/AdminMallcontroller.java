@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ihelin.car.config.DataConfig;
+import com.ihelin.car.db.entity.AccessToken;
 import com.ihelin.car.utils.ResponseUtil;
 
 @Controller
@@ -16,7 +17,9 @@ public class AdminMallcontroller extends BaseAdminController {
 	public String mallAdmin(Model model) {
 		double postage = (double) DataConfig.getValue(POSTAGE);
 		double unionPostage = (double) DataConfig.getValue(UNION_POSTAGE);
+		AccessToken accessToken = accessTokenManager.getAccessToken();
 		model.addAttribute("postage", postage);
+		model.addAttribute("accessToken", accessToken);
 		model.addAttribute("unionPostage", unionPostage);
 		return ftl("mall_admin");
 	}

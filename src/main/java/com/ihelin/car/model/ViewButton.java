@@ -1,4 +1,4 @@
-package com.ihelin.car.menu;
+package com.ihelin.car.model;
 
 public class ViewButton extends Button {
 	private String url;

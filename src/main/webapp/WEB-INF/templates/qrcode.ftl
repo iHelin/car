@@ -23,7 +23,7 @@
 		var index = layer.load(1, {
 		  	shade: [0.1,'#000']
 		});
-		$.post('${request.contextPath}/admin/generate_img',{content:content},function(data){
+		$.post('${request.contextPath}/generate_img',{content:content},function(data){
 			layer.close(index);
 			if(data.status=='success'){
 				$('#img_id').attr("src",data.url);

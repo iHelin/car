@@ -29,14 +29,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.Lists;
-import com.ihelin.car.menu.Button;
-import com.ihelin.car.menu.ClickButton;
-import com.ihelin.car.menu.Menu;
-import com.ihelin.car.menu.ViewButton;
-import com.ihelin.car.menu.WXAccessToken;
+import com.ihelin.car.db.manager.MediaManager.PostData;
 import com.ihelin.car.message.req.LocationMessage;
+import com.ihelin.car.model.Button;
+import com.ihelin.car.model.ClickButton;
+import com.ihelin.car.model.Item;
+import com.ihelin.car.model.Menu;
+import com.ihelin.car.model.RootMedia;
+import com.ihelin.car.model.ViewButton;
+import com.ihelin.car.model.WXAccessToken;
 
 public class WechatUtil {
+	private static final String MEDIA_COUNT_URL = "https://api.weixin.qq.com/cgi-bin/material/get_materialcount?access_token=ACCESS_TOKEN";
+	private static final String GET_MEDIA_URL = "https://api.weixin.qq.com/cgi-bin/material/batchget_material?access_token=ACCESS_TOKEN";
 	private static final String ACCESS_TOKEN_URL = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET";
 	private static final String UPLOAD_URL = "https://api.weixin.qq.com/cgi-bin/media/upload?access_token=ACCESS_TOKEN&type=TYPE";
 	private static final String CREATE_MENU_URL = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=ACCESS_TOKEN";
@@ -85,6 +90,21 @@ public class WechatUtil {
 		WXAccessToken token = JSON.parseObject(res, WXAccessToken.class);
 		LOGGER.info("从微信服务器获取token成功，有效期为" + token.getExpires_in() + "秒");
 		return token;
+	}
+
+	public static List<Item> selectMediaByPage(String type,String accessToken, int offset, int size) {
+		String url = GET_MEDIA_URL.replace("ACCESS_TOKEN", accessToken);
+		PostData postDate = new PostData(type, offset, size);
+		String res = WechatUtil.doPostStr(url, JSON.toJson(postDate));
+		RootMedia rootMedia = JSON.parseObject(res, RootMedia.class);
+		return rootMedia.getItem();
+	}
+
+	public static int selectMediaCount(String accessToken, String type) {
+		String url = MEDIA_COUNT_URL.replace("ACCESS_TOKEN", accessToken);
+		String res = WechatUtil.doGetStr(url);
+		Map<String, Integer> resMap = JSON.parseMap(res, String.class, Integer.class);
+		return resMap.get(type);
 	}
 
 	// 组装菜单

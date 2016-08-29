@@ -68,6 +68,11 @@
 						<span>订单管理</span>
 		            </a>
 			    </li>
+			    <li>
+          			<a href="${request.contextPath}/admin/media_admin"><i class ="fa fa-th"></i>
+						<span>素材管理</span>
+		            </a>
+			    </li>
                 <li>
           			<a href="${request.contextPath}/admin/menu_admin"><i class ="fa fa-th"></i>
 						<span>自定义菜单</span>

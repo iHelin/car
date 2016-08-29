@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 import com.google.common.collect.Maps;
 import com.ihelin.car.config.CommonConfig;
 import com.ihelin.car.db.entity.AccessToken;
-import com.ihelin.car.menu.WXAccessToken;
+import com.ihelin.car.model.WXAccessToken;
 import com.ihelin.car.utils.DateTimeUtil;
 import com.ihelin.car.utils.WechatUtil;
 

@@ -1,4 +1,4 @@
-package com.ihelin.car.menu;
+package com.ihelin.car.model;
 
 import java.util.Date;
 

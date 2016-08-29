@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ihelin.car.config.CommonConfig;
 import com.ihelin.car.db.entity.User;
-import com.ihelin.car.menu.WeixinUserInfo;
+import com.ihelin.car.model.WeixinUserInfo;
 import com.ihelin.car.utils.JSON;
 import com.ihelin.car.utils.WechatUtil;
 

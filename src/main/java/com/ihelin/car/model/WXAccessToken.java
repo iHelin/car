@@ -1,4 +1,4 @@
-package com.ihelin.car.menu;
+package com.ihelin.car.model;
 
 public class WXAccessToken {
 	private String access_token;

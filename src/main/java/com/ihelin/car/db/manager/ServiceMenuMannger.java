@@ -16,10 +16,10 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.ihelin.car.db.entity.ServiceMenu;
 import com.ihelin.car.db.mapper.ServiceMenuMapper;
-import com.ihelin.car.menu.Button;
-import com.ihelin.car.menu.ClickButton;
-import com.ihelin.car.menu.Menu;
-import com.ihelin.car.menu.ViewButton;
+import com.ihelin.car.model.Button;
+import com.ihelin.car.model.ClickButton;
+import com.ihelin.car.model.Menu;
+import com.ihelin.car.model.ViewButton;
 import com.ihelin.car.utils.WechatUtil;
 
 @Service

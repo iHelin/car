@@ -1,4 +1,4 @@
-package com.ihelin.car.controller.admin;
+package com.ihelin.car.controller;
 
 import java.util.Map;
 import javax.servlet.ServletContext;
@@ -13,11 +13,11 @@ import com.ihelin.car.utils.QRCode;
 import com.ihelin.car.utils.ResponseUtil;
 
 @Controller
-public class AdminQRCodeController extends BaseAdminController {
+public class AdminQRCodeController extends BaseController {
 
 	@RequestMapping("qrcode")
 	public String qRCode() {
-		return ftl("qrcode");
+		return "qrcode";
 	}
 
 	@RequestMapping("generate_img")
