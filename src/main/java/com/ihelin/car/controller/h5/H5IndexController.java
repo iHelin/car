@@ -1,16 +1,12 @@
 package com.ihelin.car.controller.h5;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.ihelin.car.config.CommonConfig;
 import com.ihelin.car.db.entity.Carousel;
-import com.ihelin.car.db.entity.User;
 
 @Controller
 public class H5IndexController extends H5BaseController {
@@ -20,20 +16,6 @@ public class H5IndexController extends H5BaseController {
 		List<Carousel> carousels = carouselManager.selectCarousel();
 		model.addAttribute("carousels", carousels);
 		return ftl("index");
-	}
-
-	@RequestMapping(value = "user_center")
-	public String userCenter(Model model) throws UnsupportedEncodingException {
-		User wxUser = getWeixinUser();
-		if (wxUser == null) {
-			String usercenterUrl = "h5/user_center";
-			usercenterUrl = URLEncoder.encode(usercenterUrl, "utf-8");
-			String url = CommonConfig.getDomainUrl() + "/oauth_url?url=REDIRECT_URI";
-			url = url.replace("REDIRECT_URI",
-					URLEncoder.encode(CommonConfig.getDomainUrl() + "/weixin_login.do?from=" + usercenterUrl, "utf-8"));
-			return "redirect:" + url;
-		}
-		return ftl("user_center");
 	}
 
 	@RequestMapping(value = "user_info")

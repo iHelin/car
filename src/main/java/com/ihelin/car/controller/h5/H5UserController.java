@@ -4,11 +4,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class H5UserController extends H5BaseController{
-	
+public class H5UserController extends H5BaseController {
 	@RequestMapping("become_user")
-	public String becomeUser(){
+	public String becomeUser() {
 		return ftl("become_user");
 	}
-
 }

@@ -21,8 +21,8 @@ public class CommonConfig {
 
 		public String wx_appId;
 		public String wx_appSecret;
-		// public String test_appId;
-		// public String test_appSecret;
+		public String mch_id;
+		public String key;
 	}
 
 	private static ConfigEntry configEntry;
@@ -63,6 +63,14 @@ public class CommonConfig {
 
 	public static String getAppSecret() {
 		return configEntry.wx_appSecret;
+	}
+
+	public static String getMchId() {
+		return configEntry.mch_id;
+	}
+
+	public static String getKey() {
+		return configEntry.key;
 	}
 
 	public static String getContextUrl() {

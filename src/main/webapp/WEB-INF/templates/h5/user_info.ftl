@@ -18,20 +18,20 @@
 					<span class="" style="line-height: 40px;">
 						头像
 						<span class="mui-media-body">
-							<img class="mui-media-object mui-pull-right head-img" style="float:right;right:20px;position:absolute" src="${(wxUser.headimgurl)!}">
+							<img class="mui-media-object mui-pull-right head-img" style="float:right;right:20px;position:absolute" src="${(weixinUser.headimgurl)!}">
 						</span>
 					</span>
 				</li>
 				<li class="mui-table-view-cell">
 					<a style="padding-right:15px;">
 						昵称
-						<span class="mui-pull-right" style="color: #999;">${(wxUser.nickName)!}</span>
+						<span class="mui-pull-right" style="color: #999;">${(weixinUser.nickName)!}</span>
 					</a>
 				</li>
 				<li class="mui-table-view-cell">
 					<a style="padding-right:15px;">
 						账号
-						<span class="mui-pull-right" style="color: #999;">${(wxUser.name)!"未设置"}</span>
+						<span class="mui-pull-right" style="color: #999;">${(weixinUser.name)!"未设置"}</span>
 					</a>
 				</li>
 			</ul>
@@ -40,10 +40,10 @@
 					<a style="padding-right:15px;">
 						性别
 						<span class="mui-pull-right" style="color: #999;">
-							<#if (wxUser.gender)??>
-								<#if wxUser.gender==1>
+							<#if (weixinUser.gender)??>
+								<#if weixinUser.gender==1>
 									男
-								<#elseif wxUser.gender==2>
+								<#elseif weixinUser.gender==2>
 									女
 								</#if>
 							</#if>
@@ -53,7 +53,7 @@
 				<li class="mui-table-view-cell">
 					<a style="padding-right:15px;">
 						地区
-						<span class="mui-pull-right" style="color: #999;">${(wxUser.country)!}${(wxUser.province)!}${(wxUser.city)!}</span>
+						<span class="mui-pull-right" style="color: #999;">${(weixinUser.country)!}${(weixinUser.province)!}${(weixinUser.city)!}</span>
 					</a>
 				</li>
 			</ul>
@@ -61,7 +61,7 @@
 				<li class="mui-table-view-cell">
 					<a style="padding-right:15px;">
 						手机号
-						<span class="mui-pull-right" style="color: #999;">${(wxUser.phone)!"未设置"}</span>
+						<span class="mui-pull-right" style="color: #999;">${(weixinUser.phone)!"未设置"}</span>
 					</a>
 				</li>
 			</ul>

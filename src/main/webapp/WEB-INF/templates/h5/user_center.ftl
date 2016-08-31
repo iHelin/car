@@ -14,15 +14,15 @@
 			<ul class="mui-table-view mui-table-view-chevron">
 				<li class="mui-table-view-cell mui-media">
 					<a class="mui-navigate-right" href="${request.contextPath}/h5/user_info">
-						<img class="mui-media-object mui-pull-left head-img" id="head-img" src="${(wxUser.headimgurl)!}">
+						<img class="mui-media-object mui-pull-left head-img" id="head-img" src="${(weixinUser.headimgurl)!}">
 						<div class="mui-media-body">
-							${(wxUser.nickName)!}
-							<#if wxUser.status==0>
+							${(weixinUser.nickName)!}
+							<#if weixinUser.status==0>
 								<span class="mui-badge">普通用户</span>
-							<#elseif wxUser.status==1>
+							<#elseif weixinUser.status==1>
 								<span class="mui-badge mui-badge-danger">会员</span>
 							</#if>
-							<p class='mui-ellipsis'>账号:${(wxUser.name)!"未设置"}</p>
+							<p class='mui-ellipsis'>账号:${(weixinUser.name)!"未设置"}</p>
 						</div>
 					</a>
 				</li>

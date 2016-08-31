@@ -28,9 +28,6 @@
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">成为会员</h1>
 		</header>
-		<footer class="mui-bar mui-bar-footer">
-			<a href="#bottomPopover" class="mui-btn mui-btn-link mui-pull-right">菜单</a>
-		</footer>
 		<div class="mui-content">
 			<div class="mui-content-padded">
 				<p>popover（弹出菜单是）mobile App中常见的UI组件，在用户点击位置附近弹出悬浮菜单，向用户展示更多信息或提供快捷操作。</p>
@@ -42,10 +39,12 @@
 				<h1 align="center">支付：10元</h1>
 				<p align="center">
 					<a href="${request.contextPath}/testpay/abc" class="mui-btn mui-btn-primary mui-btn-block mui-btn-outlined" style="padding: 5px 20px;">立即支付</a>
+					<a href="javascript:;" id="pay_money" class="mui-btn mui-btn-primary mui-btn-block mui-btn-outlined" style="padding: 5px 20px;">立即支付</a>
 				</p>
 			</div>
 		</div>
 		<script src="${request.contextPath}/plugins/mui/js/mui.min.js"></script>
+		<script src="${request.contextPath}/js/zepto.min.js"></script>
 		<script>
 			mui.init({
 				swipeBack: true //启用右滑关闭功能
@@ -53,7 +52,16 @@
 			
 			var payObj = document.getElementById("pay_money");
 			payObj.addEventListener("tap",function(){
-				mui.alert('a');
+				$.post('${request.contextPath}/h5/user/submit_order',$('#buy_form').serialize(),function(data){
+					data = JSON.parse(data);
+					if(data.status=="success"){
+						window.location.href="${request.contextPath}/h5/user/pay?orderId="+data.orderId;
+					}else if(dara.error=='product_info_error'){
+						mui.alert('商品信息错误！');
+					}else{
+						mui.alert('未知错误！');
+					}
+				});
 			});
 		</script>
 	</body>

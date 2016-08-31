@@ -117,7 +117,7 @@
 		            	</a>
 		        	</li>
 		        	<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-		            	<a href="${request.contextPath}/h5/user_center">
+		            	<a href="${request.contextPath}/h5/user/user_center">
 		                    <span class="fa fa-user"></span>
 		                    <div class="mui-media-body">个人中心</div>
 		            	</a>
