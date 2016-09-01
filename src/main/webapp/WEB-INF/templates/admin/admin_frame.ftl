@@ -84,8 +84,8 @@
 		                <span>加盟商管理</span>
 		            </a>
 		            <ul class="acc-menu">
-						<li><a href="javascript:;">
-							<span>汽车美容</span></a>
+						<li><a href="${request.contextPath}/admin/business_admin">
+							<span>商家管理</span></a>
 						</li>
 						<li><a href="javascript:;">
 							<span>汽车保养</span></a>

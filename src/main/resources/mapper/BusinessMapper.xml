@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ihelin.car.db.mapper.BusinessMapper">
+	<resultMap id="BaseResultMap" type="com.ihelin.car.db.entity.Business">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="name" jdbcType="VARCHAR" property="name" />
+		<result column="img" jdbcType="VARCHAR" property="img" />
+		<result column="contact_name" jdbcType="VARCHAR" property="contactName" />
+		<result column="phone" jdbcType="VARCHAR" property="phone" />
+		<result column="service" jdbcType="VARCHAR" property="service" />
+		<result column="zone" jdbcType="VARCHAR" property="zone" />
+		<result column="address" jdbcType="VARCHAR" property="address" />
+		<result column="discount" jdbcType="REAL" property="discount" />
+		<result column="latitude" jdbcType="REAL" property="latitude" />
+		<result column="longitude" jdbcType="REAL" property="longitude" />
+		<result column="rank" jdbcType="INTEGER" property="rank" />
+		<result column="detail" jdbcType="VARCHAR" property="detail" />
+		<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, name, img, contact_name, phone, service, zone, address,
+		discount,
+		latitude, longitude,
+		rank, detail, create_time
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from Business
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		Business
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" keyProperty="id"
+		parameterType="com.ihelin.car.db.entity.Business" useGeneratedKeys="true">
+		insert into Business (name, img, contact_name,
+		phone, service, zone,
+		address, discount, latitude,
+		longitude, rank, detail,
+		create_time)
+		values (#{name,jdbcType=VARCHAR}, #{img,jdbcType=VARCHAR},
+		#{contactName,jdbcType=VARCHAR},
+		#{phone,jdbcType=VARCHAR},
+		#{service,jdbcType=VARCHAR}, #{zone,jdbcType=VARCHAR},
+		#{address,jdbcType=VARCHAR}, #{discount,jdbcType=REAL},
+		#{latitude,jdbcType=REAL},
+		#{longitude,jdbcType=REAL},
+		#{rank,jdbcType=INTEGER}, #{detail,jdbcType=VARCHAR},
+		#{createTime,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" keyProperty="id"
+		parameterType="com.ihelin.car.db.entity.Business" useGeneratedKeys="true">
+		insert into Business
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="name != null">
+				name,
+			</if>
+			<if test="img != null">
+				img,
+			</if>
+			<if test="contactName != null">
+				contact_name,
+			</if>
+			<if test="phone != null">
+				phone,
+			</if>
+			<if test="service != null">
+				service,
+			</if>
+			<if test="zone != null">
+				zone,
+			</if>
+			<if test="address != null">
+				address,
+			</if>
+			<if test="discount != null">
+				discount,
+			</if>
+			<if test="latitude != null">
+				latitude,
+			</if>
+			<if test="longitude != null">
+				longitude,
+			</if>
+			<if test="rank != null">
+				rank,
+			</if>
+			<if test="detail != null">
+				detail,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="img != null">
+				#{img,jdbcType=VARCHAR},
+			</if>
+			<if test="contactName != null">
+				#{contactName,jdbcType=VARCHAR},
+			</if>
+			<if test="phone != null">
+				#{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="service != null">
+				#{service,jdbcType=VARCHAR},
+			</if>
+			<if test="zone != null">
+				#{zone,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				#{address,jdbcType=VARCHAR},
+			</if>
+			<if test="discount != null">
+				#{discount,jdbcType=REAL},
+			</if>
+			<if test="latitude != null">
+				#{latitude,jdbcType=REAL},
+			</if>
+			<if test="longitude != null">
+				#{longitude,jdbcType=REAL},
+			</if>
+			<if test="rank != null">
+				#{rank,jdbcType=INTEGER},
+			</if>
+			<if test="detail != null">
+				#{detail,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ihelin.car.db.entity.Business">
+		update Business
+		<set>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="img != null">
+				img = #{img,jdbcType=VARCHAR},
+			</if>
+			<if test="contactName != null">
+				contact_name = #{contactName,jdbcType=VARCHAR},
+			</if>
+			<if test="phone != null">
+				phone = #{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="service != null">
+				service = #{service,jdbcType=VARCHAR},
+			</if>
+			<if test="zone != null">
+				zone = #{zone,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				address = #{address,jdbcType=VARCHAR},
+			</if>
+			<if test="discount != null">
+				discount = #{discount,jdbcType=REAL},
+			</if>
+			<if test="latitude != null">
+				latitude = #{latitude,jdbcType=REAL},
+			</if>
+			<if test="longitude != null">
+				longitude = #{longitude,jdbcType=REAL},
+			</if>
+			<if test="rank != null">
+				rank = #{rank,jdbcType=INTEGER},
+			</if>
+			<if test="detail != null">
+				detail = #{detail,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ihelin.car.db.entity.Business">
+		update Business
+		set name = #{name,jdbcType=VARCHAR},
+		img = #{img,jdbcType=VARCHAR},
+		contact_name = #{contactName,jdbcType=VARCHAR},
+		phone =
+		#{phone,jdbcType=VARCHAR},
+		service = #{service,jdbcType=VARCHAR},
+		zone =
+		#{zone,jdbcType=VARCHAR},
+		address = #{address,jdbcType=VARCHAR},
+		discount = #{discount,jdbcType=REAL},
+		latitude =
+		#{latitude,jdbcType=REAL},
+		longitude = #{longitude,jdbcType=REAL},
+		rank
+		= #{rank,jdbcType=INTEGER},
+		detail = #{detail,jdbcType=VARCHAR},
+		create_time = #{createTime,jdbcType=TIMESTAMP}
+		where id =
+		#{id,jdbcType=INTEGER}
+	</update>
+	<select id="listByCondition" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from Business
+		<where>
+			<if test="name!=null">name like "%"#{name,jdbcType=VARCHAR}"%"</if>
+		</where>
+	</select>
+	<select id="listCount" parameterType="java.util.Map" resultType="int">
+		select
+		count(id)
+		from Business
+		<where>
+			<if test="name!=null">name like "%"#{name,jdbcType=VARCHAR}"%"</if>
+		</where>
+	</select>
+</mapper>
