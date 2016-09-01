@@ -100,11 +100,11 @@ public class H5LoginController extends H5BaseController {
 			setWeixinUser(user);
 		} else {
 			LOGGER.error("openid is blank");
-			return "redirect:index";
+			return "redirect:/h5/index";
 		}
 		if (StringUtils.isNotBlank(from))
 			return "redirect:" + from;
-		return "redirect:index";
+		return "redirect:/h5/index";
 	}
 
 	static class OauthModel {

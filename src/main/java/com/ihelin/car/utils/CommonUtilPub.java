@@ -51,21 +51,21 @@ public class CommonUtilPub {
 	/**
 	 * 作用：格式化参数，签名过程需要使用
 	 */
-	public static String formatBizQueryParaMap(Map<String, String> paraMap, boolean urlencode) {
+	public static String formatBizQueryParaMap(Map<String, Object> paraMap, boolean urlencode) {
 		String buff = "";
-		List<Map.Entry<String, String>> infoIds = new ArrayList<Map.Entry<String, String>>(paraMap.entrySet());
+		List<Map.Entry<String, Object>> infoIds = new ArrayList<Map.Entry<String, Object>>(paraMap.entrySet());
 
-		Collections.sort(infoIds, new Comparator<Map.Entry<String, String>>() {
-			public int compare(Map.Entry<String, String> o1, Map.Entry<String, String> o2) {
+		Collections.sort(infoIds, new Comparator<Map.Entry<String, Object>>() {
+			public int compare(Map.Entry<String, Object> o1, Map.Entry<String, Object> o2) {
 				return (o1.getKey()).toString().compareTo(o2.getKey());
 			}
 		});
 
 		for (int i = 0; i < infoIds.size(); i++) {
-			Map.Entry<String, String> item = infoIds.get(i);
+			Map.Entry<String, Object> item = infoIds.get(i);
 			if (item.getKey() != "") {
 				String key = item.getKey();
-				String val = item.getValue();
+				String val = (String) item.getValue();
 				if (urlencode) {
 					try {
 						val = URLEncoder.encode(val, "utf-8");
@@ -85,7 +85,7 @@ public class CommonUtilPub {
 	/**
 	 * 作用：生成签名
 	 */
-	public static String getSign(Map<String, String> payApiMap, String key) {
+	public static String getSign(Map<String, Object> payApiMap, String key) {
 		// 生成字符串
 		String string = formatBizQueryParaMap(payApiMap, false);
 		// 连接商户key：
@@ -99,14 +99,14 @@ public class CommonUtilPub {
 	/**
 	 * 作用：array转xml
 	 */
-	public static String mapToXml(HashMap<String, String> arr) {
+	public static String mapToXml(HashMap<String, Object> arr) {
 		String xml = "<xml>";
 
-		Iterator<Entry<String, String>> iter = arr.entrySet().iterator();
+		Iterator<Entry<String, Object>> iter = arr.entrySet().iterator();
 		while (iter.hasNext()) {
-			Entry<String, String> entry = iter.next();
+			Entry<String, Object> entry = iter.next();
 			String key = entry.getKey();
-			String val = entry.getValue();
+			String val = (String) entry.getValue();
 			if (IsNumeric(val)) {
 				xml += "<" + key + ">" + val + "</" + key + ">";
 

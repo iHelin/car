@@ -36,33 +36,55 @@
 				</p>
 				<p>除了页面顶部导航栏、底部工具栏固定位置之外，其它区域要使用弹出菜单，都要准确计算物理位置，从而实现弹出菜单的绝对定位； mui封装的手势事件中，可以获得点击位置，通过这些位置可实现任意区域的弹出菜单显示，点击如下按钮体验：
 				</p>
-				<h1 align="center">支付：10元</h1>
+				<h1 align="center">支付：0.01元</h1>
 				<p align="center">
-					<a href="${request.contextPath}/testpay/abc" class="mui-btn mui-btn-primary mui-btn-block mui-btn-outlined" style="padding: 5px 20px;">立即支付</a>
 					<a href="javascript:;" id="pay_money" class="mui-btn mui-btn-primary mui-btn-block mui-btn-outlined" style="padding: 5px 20px;">立即支付</a>
 				</p>
 			</div>
 		</div>
 		<script src="${request.contextPath}/plugins/mui/js/mui.min.js"></script>
 		<script src="${request.contextPath}/js/zepto.min.js"></script>
+		<script src="${request.contextPath}/plugins/layer_mobile/layer.js"></script>
 		<script>
 			mui.init({
 				swipeBack: true //启用右滑关闭功能
 			});
 			
-			var payObj = document.getElementById("pay_money");
-			payObj.addEventListener("tap",function(){
+			$('#pay_money').click(function(){
+				var x = layer.open({type: 2});
 				$.post('${request.contextPath}/h5/user/submit_order',$('#buy_form').serialize(),function(data){
+					layer.close(x);
 					data = JSON.parse(data);
 					if(data.status=="success"){
-						window.location.href="${request.contextPath}/h5/user/pay?orderId="+data.orderId;
-					}else if(dara.error=='product_info_error'){
-						mui.alert('商品信息错误！');
+						pay(data.appId,data.timeStamp,data.nonceStr,data.package,data.signType,data.paySign);
 					}else{
-						mui.alert('未知错误！');
+						mui.alert(data.error);
 					}
 				});
 			});
+			
+			function pay(appId,timeStamp,nonceStr,package,signType,paySign){
+				WeixinJSBridge.invoke(
+					'getBrandWCPayRequest', {
+			           	"appId":appId,
+			           	"timeStamp":timeStamp,
+			           	"nonceStr":nonceStr,
+			           	"package":package,
+			           	"signType":signType,
+			           	"paySign":paySign
+			       	},
+			       	function(res){
+			       		if(res.err_msg == "get_brand_wcpay_request:ok") {
+			       			alert('支付成功。');
+			           	}else if(res.err_msg == "get_brand_wcpay_request:cancel"){
+			           		alert('取消');
+						}else{
+			           		alert('支付失败。');
+						}
+			       	}
+			   	);
+			}
+		
 		</script>
 	</body>
 

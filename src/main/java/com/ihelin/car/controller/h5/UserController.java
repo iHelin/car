@@ -48,9 +48,8 @@ public class UserController extends H5BaseController {
 	@Transactional
 	public synchronized void submitOrder(HttpServletResponse response, HttpServletRequest request) {
 		String orderId = OrderManager.createOrderId();
-		Map<String, Object> res = Maps.newConcurrentMap();
 		User user = getWeixinUser();
-		HashMap<String, String> paramMap = Maps.newHashMap();
+		HashMap<String, Object> paramMap = Maps.newHashMap();
 		paramMap.put("openid", user.getOpenId());
 		paramMap.put("trade_type", "JSAPI");
 		String ip = RequestUtil.getRealIp(request);
@@ -95,14 +94,14 @@ public class UserController extends H5BaseController {
 		}
 		prepayId = piEle.getText();
 		logger.info("prepay_id:" + prepayId);
-		Map<String, String> payApiMap = Maps.newHashMap();
+		Map<String, Object> payApiMap = Maps.newHashMap();
 		payApiMap.put("signType", "MD5");
 		payApiMap.put("appId", CommonConfig.getAppID());
 		payApiMap.put("package", "prepay_id=" + prepayId);
 		payApiMap.put("nonceStr", CommonUtilPub.createNoncestr(32));
 		payApiMap.put("timeStamp", Long.toString(System.currentTimeMillis() / 1000));
 		payApiMap.put("paySign", CommonUtilPub.getSign(payApiMap, CommonConfig.getKey()));
-		ResponseUtil.writeSuccessJSON(response, res);
+		ResponseUtil.writeSuccessJSON(response, payApiMap);
 	}
 
 	/**
@@ -113,7 +112,7 @@ public class UserController extends H5BaseController {
 	@RequestMapping(value = "pay")
 	public String pay(String orderId, Model model, HttpServletRequest request) {
 		User user = getWeixinUser();
-		HashMap<String, String> paramMap = Maps.newHashMap();
+		HashMap<String, Object> paramMap = Maps.newHashMap();
 		paramMap.put("openid", user.getOpenId());
 		paramMap.put("trade_type", "JSAPI");
 		String ip = RequestUtil.getRealIp(request);
@@ -158,7 +157,7 @@ public class UserController extends H5BaseController {
 		}
 		prepayId = piEle.getText();
 		logger.info("prepay_id:" + prepayId);
-		Map<String, String> payApiMap = Maps.newHashMap();
+		Map<String, Object> payApiMap = Maps.newHashMap();
 		payApiMap.put("signType", "MD5");
 		payApiMap.put("appId", CommonConfig.getAppID());
 		payApiMap.put("package", "prepay_id=" + prepayId);
@@ -172,6 +171,11 @@ public class UserController extends H5BaseController {
 	@RequestMapping(value = "user_center")
 	public String userCenter() {
 		return ftl("user_center");
+	}
+	
+	@RequestMapping("become_user")
+	public String becomeUser() {
+		return ftl("become_user");
 	}
 
 }
