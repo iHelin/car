@@ -126,8 +126,8 @@ $(function () {
     });
 
     //set minimum height of page
-    dh=($(document).height()-40);
-    $("#page-content").css("min-height",dh+"px");
+    //dh=($(document).height()-40);
+    //$("#page-content").css("min-height",dh+"px");
     //checkpageheight();
 
 });

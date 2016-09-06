@@ -64,7 +64,7 @@
 				shade: [0.1,'#000']
 			});
 			var zone = $('#city_picker').val().replace(/\//g,"");
-			var address = zone+$('#shop_address_inp').val();
+			var address = zone+$('#address_inp').val();
 			var map = new BMap.Map("allmap");
 			var myGeo = new BMap.Geocoder();
 			myGeo.getPoint(address, function(point){
@@ -107,6 +107,8 @@
 						<#if business?? && business.id??>
 				  			<input type="hidden" value="#{business.id}" id="businessId" name="businessId"/>
 				  		</#if>
+				  		<input type="hidden" name="longitude" id="longitude_inp">
+	            		<input type="hidden" name="latitude" id="latitude_inp">
 						<div class="row">
 							<div class="col-sm-6">
 								<div class="form-group">

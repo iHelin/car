@@ -16,7 +16,7 @@ import com.ihelin.car.db.plugin.Pagination;
 import com.ihelin.car.utils.ResponseUtil;
 
 @Controller
-public class BusinessController extends BaseAdminController {
+public class AdminBusinessController extends BaseAdminController {
 
 	@RequestMapping("business_admin")
 	public String businessAdmin(Model model, String keyword, Integer pageNum) {
@@ -38,8 +38,9 @@ public class BusinessController extends BaseAdminController {
 	}
 
 	@RequestMapping("add_business.do")
-	public void addBusiness(Integer businessId, String businessName,String img,String detail,String zone, String address, String contactName,
-			String phone, Float longitude, Float latitude, HttpServletResponse response) {
+	public void addBusiness(Integer businessId, String businessName, String img, String detail, String zone,
+			String address, String contactName, String phone, Float longitude, Float latitude,
+			HttpServletResponse response) {
 		Business business = null;
 		if (businessId == null) {
 			business = new Business();
