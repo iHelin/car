@@ -13,6 +13,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ihelin.car.db.entity.ServiceMenu;
 import com.ihelin.car.message.req.LocationMessage;
@@ -33,32 +34,49 @@ import com.ihelin.car.utils.WechatUtil;
 public class AccessWeChatController extends BaseController {
 	private static final Log logger = LogFactory.getLog(AccessWeChatController.class);
 
-	@RequestMapping(value = "access_wechat")
-	public void test(String signature, String timestamp, String nonce, String echostr, HttpServletRequest request,
+	@RequestMapping(value = "access_wechat", method = RequestMethod.GET)
+	public void doGet(String signature, String timestamp, String nonce, String echostr, HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
-		boolean isGet = "get".equals(request.getMethod().toLowerCase());
-		if (isGet) {
-			logger.info("验证access");
-			if (CheckUtil.checkSignature(signature, timestamp, nonce)) {
-				ResponseUtil.writeHtml(response, echostr);
-				logger.info("验证成功");
-			} else {
-				logger.info("认证失败，echostr：" + echostr);
-			}
+		logger.info("验证access");
+		if (CheckUtil.checkSignature(signature, timestamp, nonce)) {
+			ResponseUtil.writeHtml(response, echostr);
+			logger.info("验证成功");
 		} else {
-			String respMessage = msgProcess(request);
-			System.out.println(respMessage);
-			response.getWriter().print(respMessage);
+			logger.info("认证失败，echostr：" + echostr);
 		}
 	}
 
 	/**
-	 * 处理微信发来的请求
+	 * 处理post消息
+	 * 
+	 * @param signature
+	 * @param timestamp
+	 * @param nonce
+	 * @param echostr
+	 * @param request
+	 * @param response
+	 * @throws IOException
+	 */
+	@RequestMapping(value = "access_wechat", method = RequestMethod.POST)
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		Map<String, String> msgMap = MessageUtil.xmlToMap(request);
+		String msgType = msgMap.get("MsgType");
+		String respMessage = null;
+		if (MessageUtil.MESSAGE_EVNET.equals(msgType)) {
+			respMessage = processEvent(msgMap); // 进入事件处理
+		} else {
+			respMessage = processMessage(msgMap); // 进入消息处理
+		}
+		System.out.println(respMessage);
+		response.getWriter().print(respMessage);
+	}
+
+	/**
+	 * 普通消息处理
 	 * 
 	 */
-	public String msgProcess(HttpServletRequest request) {
+	public String processMessage(Map<String, String> msgMap) {
 		String message = "";
-		Map<String, String> msgMap = MessageUtil.xmlToMap(request);
 		String fromUserName = msgMap.get("FromUserName");
 		String toUserName = msgMap.get("ToUserName");
 		String msgType = msgMap.get("MsgType");
@@ -66,10 +84,12 @@ public class AccessWeChatController extends BaseController {
 		System.out.println("消息类型：" + msgType);
 		switch (msgType) {
 		case MessageUtil.MESSAGE_TEXT:
+			// 处理文本消息
 			System.out.println("用户发送的消息是：" + content);
 			message = textMessage(content, toUserName, fromUserName);
 			break;
 		case MessageUtil.MESSAGE_IMAGE:
+			// 图片消息处理
 			message = MessageUtil.sendTextMsg(toUserName, fromUserName, "我已经收到了你的图片！");
 			break;
 		case MessageUtil.MESSAGE_LOCATION:
@@ -81,17 +101,47 @@ public class AccessWeChatController extends BaseController {
 			// 链接消息
 			message = MessageUtil.sendTextMsg(toUserName, fromUserName, "我已经收到了你的链接！");
 			break;
+		case MessageUtil.MESSAGE_VIDEO:
+			// 视频消息
+			message = MessageUtil.sendTextMsg(toUserName, fromUserName, "我已经收到了你的视频！");
+			break;
 		case MessageUtil.MESSAGE_VOICE:
 			// 音频消息
 			message = MessageUtil.sendTextMsg(toUserName, fromUserName, "我已经收到了你的音频！");
 			break;
-		case MessageUtil.MESSAGE_EVNET:
-			// 处理事件消息
-			message = eventMessage(toUserName, fromUserName, msgMap);
-			break;
 		default:
 			message = MessageUtil.sendTextMsg(toUserName, fromUserName, "未知的消息。");
 			break;
+		}
+		return message;
+	}
+	
+	/**
+	 * 事件类消息处理
+	 * 
+	 * @param map
+	 * @return
+	 */
+	public String processEvent(Map<String, String> msgMap) {
+		String eventType = msgMap.get("Event");
+		String fromUserName = msgMap.get("FromUserName");
+		String toUserName = msgMap.get("ToUserName");
+		String message = "";
+		if (MessageUtil.MESSAGE_SUBSCRIBE.equals(eventType)) {
+			message = MessageUtil.sendTextMsg(toUserName, fromUserName, "感谢您的关注，我会继续努力！");// 关注事件
+		} else if (MessageUtil.MESSAGE_CLICK.equals(eventType)) {
+			// 点击菜单事件
+			Integer id = Integer.parseInt(msgMap.get("EventKey"));
+			ServiceMenu sMenu = serviceMenuMannger.getMenuById(id);
+			message = MessageUtil.sendTextMsg(toUserName, fromUserName, sMenu.getContent());
+		} else if (MessageUtil.MESSAGE_VIEW.equals(eventType)) {
+			// view类型事件，访问网页
+			String url = msgMap.get("EventKey");
+			message = MessageUtil.sendTextMsg(toUserName, fromUserName, url);
+		} else if (MessageUtil.MESSAGE_SCANCODE.equals(eventType)) {
+			// 扫码事件
+			String key = msgMap.get("EventKey");
+			message = MessageUtil.sendTextMsg(toUserName, fromUserName, key);
 		}
 		return message;
 	}
@@ -134,34 +184,6 @@ public class AccessWeChatController extends BaseController {
 		default:
 			message = MessageUtil.sendTextMsg(toUserName, fromUserName, otherText(content, fromUserName));
 			break;
-		}
-		return message;
-	}
-
-	/**
-	 * 事件类消息处理
-	 * 
-	 * @param map
-	 * @return
-	 */
-	public String eventMessage(String toUserName, String fromUserName, Map<String, String> map) {
-		String eventType = map.get("Event");
-		String message = "";
-		if (MessageUtil.MESSAGE_SUBSCRIBE.equals(eventType)) {
-			message = MessageUtil.sendTextMsg(toUserName, fromUserName, "谢谢您的关注！");// 关注事件
-		} else if (MessageUtil.MESSAGE_CLICK.equals(eventType)) {
-			// 点击菜单事件
-			Integer id = Integer.parseInt(map.get("EventKey"));
-			ServiceMenu sMenu = serviceMenuMannger.getMenuById(id);
-			message = MessageUtil.sendTextMsg(toUserName, fromUserName, sMenu.getContent());
-		} else if (MessageUtil.MESSAGE_VIEW.equals(eventType)) {
-			// view类型事件，访问网页
-			String url = map.get("EventKey");
-			message = MessageUtil.sendTextMsg(toUserName, fromUserName, url);
-		} else if (MessageUtil.MESSAGE_SCANCODE.equals(eventType)) {
-			// 扫码事件
-			String key = map.get("EventKey");
-			message = MessageUtil.sendTextMsg(toUserName, fromUserName, key);
 		}
 		return message;
 	}

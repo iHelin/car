@@ -7,8 +7,8 @@ package com.ihelin.car.message.req;
  *
  */
 public class VoiceMessage extends BaseMessage {
-	private String MediaId;
-	private String Format;
+	private String MediaId;// 媒体 ID
+	private String Format;// 语音格式
 
 	public String getMediaId() {
 		return MediaId;

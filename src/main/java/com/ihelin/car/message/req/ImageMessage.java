@@ -6,7 +6,7 @@ package com.ihelin.car.message.req;
  * @author ihelin
  */
 public class ImageMessage extends BaseMessage {
-	private String PicUrl;
+	private String PicUrl;// 图片链接
 
 	public String getPicUrl() {
 		return PicUrl;
