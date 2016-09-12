@@ -34,9 +34,12 @@ import com.ihelin.car.utils.WechatUtil;
 public class AccessWeChatController extends BaseController {
 	private static final Log logger = LogFactory.getLog(AccessWeChatController.class);
 
+	/**
+	 * 处理get消息-消息验证
+	 * 
+	 */
 	@RequestMapping(value = "access_wechat", method = RequestMethod.GET)
-	public void doGet(String signature, String timestamp, String nonce, String echostr, HttpServletRequest request,
-			HttpServletResponse response) throws IOException {
+	public void doGet(String signature, String timestamp, String nonce, String echostr, HttpServletResponse response) {
 		logger.info("验证access");
 		if (CheckUtil.checkSignature(signature, timestamp, nonce)) {
 			ResponseUtil.writeHtml(response, echostr);
@@ -49,13 +52,8 @@ public class AccessWeChatController extends BaseController {
 	/**
 	 * 处理post消息
 	 * 
-	 * @param signature
-	 * @param timestamp
-	 * @param nonce
-	 * @param echostr
-	 * @param request
-	 * @param response
 	 * @throws IOException
+	 * 
 	 */
 	@RequestMapping(value = "access_wechat", method = RequestMethod.POST)
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -65,7 +63,7 @@ public class AccessWeChatController extends BaseController {
 		if (MessageUtil.MESSAGE_EVNET.equals(msgType)) {
 			respMessage = processEvent(msgMap); // 进入事件处理
 		} else {
-			respMessage = processMessage(msgMap); // 进入消息处理
+			respMessage = processMessage(msgMap); // 进入普通消息处理
 		}
 		System.out.println(respMessage);
 		response.getWriter().print(respMessage);
@@ -115,7 +113,7 @@ public class AccessWeChatController extends BaseController {
 		}
 		return message;
 	}
-	
+
 	/**
 	 * 事件类消息处理
 	 * 
@@ -123,6 +121,7 @@ public class AccessWeChatController extends BaseController {
 	 * @return
 	 */
 	public String processEvent(Map<String, String> msgMap) {
+		System.out.println(msgMap);
 		String eventType = msgMap.get("Event");
 		String fromUserName = msgMap.get("FromUserName");
 		String toUserName = msgMap.get("ToUserName");
