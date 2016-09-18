@@ -2,7 +2,7 @@ package com.ihelin.car.model;
 
 import java.util.List;
 
-public class WeixinUserInfo {
+public class WXUser {
 
 	private Integer subscribe;
 

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ihelin.car.config.CommonConfig;
 import com.ihelin.car.db.entity.User;
-import com.ihelin.car.model.WeixinUserInfo;
+import com.ihelin.car.model.WXUser;
 import com.ihelin.car.utils.JSON;
 import com.ihelin.car.utils.WechatUtil;
 
@@ -80,7 +80,7 @@ public class H5LoginController extends H5BaseController {
 				String api = "https://api.weixin.qq.com/cgi-bin/user/info?access_token="
 						+ accessTokenManager.getAccessToken().getToken() + "&openid=" + openId + "&lang=zh_CN";
 				String res = WechatUtil.doGetStr(api);
-				WeixinUserInfo wxUser = JSON.parseObject(res, WeixinUserInfo.class);
+				WXUser wxUser = JSON.parseObject(res, WXUser.class);
 				user.setCity(wxUser.getCity());
 				user.setCountry(wxUser.getCountry());
 				user.setGender(wxUser.getSex());

@@ -16,7 +16,7 @@
 </head>
 <body class="">
     <header class="navbar navbar-inverse navbar-fixed-top" role="banner">
-        <a id="leftmenu-trigger" class="pull-left" data-toggle="tooltip" data-placement="bottom" title="打开/关闭边栏"></a>
+        <a id="leftmenu-trigger" class="pull-left tips" data-toggle="tooltip" data-placement="bottom" title="打开/关闭侧边栏"></a>
         <div class="navbar-header pull-left">
             <a class="navbar-brand" href="index" style='background:url("${request.contextPath}/img/车友标志6.jpg") no-repeat center center;background-size: contain'></a>
         </div>
