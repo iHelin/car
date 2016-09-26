@@ -45,7 +45,7 @@ public class AccessWeChatController extends BaseController {
 			ResponseUtil.writeHtml(response, echostr);
 			logger.info("验证成功");
 		} else {
-			logger.info("认证失败，echostr：" + echostr);
+			logger.info("验证失败，echostr：" + echostr);
 		}
 	}
 

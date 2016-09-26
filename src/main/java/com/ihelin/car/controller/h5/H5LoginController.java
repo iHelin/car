@@ -2,11 +2,7 @@ package com.ihelin.car.controller.h5;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.Date;
-
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +20,14 @@ public class H5LoginController extends H5BaseController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(H5LoginController.class);
 
+	/**
+	 * 第一步：用户同意授权，获取code
+	 * 
+	 * @param from
+	 * @param request
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 */
 	@RequestMapping(value = "/wx_login")
 	public String loginVerify(String from, HttpServletRequest request) throws UnsupportedEncodingException {
 		LOGGER.info("Browser's user-agent: " + request.getHeader("User-Agent"));
@@ -37,6 +41,14 @@ public class H5LoginController extends H5BaseController {
 		return "redirect:" + wxUrl;
 	}
 
+	/**
+	 * 第二步：通过code换取网页授权access_token
+	 * 
+	 * @param url
+	 * @param code
+	 * @param state
+	 * @return
+	 */
 	@RequestMapping(value = "oauth_url_callback")
 	public String oauthUrlCallback(String url, String code, String state) {
 		LOGGER.info("code: " + code + ", state: " + state);
@@ -69,32 +81,26 @@ public class H5LoginController extends H5BaseController {
 		return "redirect:404";
 	}
 
+	/**
+	 * 第三步：获取用户信息
+	 * 
+	 * @param openId
+	 * @param from
+	 * @param accessToken
+	 * @param code
+	 * @param state
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping(value = "weixin_login.do")
-	public String doWeixinLogin(String openId, String from, String accessToken, String code, String state,
-			HttpSession session) {
+	public String doWeixinLogin(String openId, String from, String accessToken, String code, String state) {
 		LOGGER.info("请求微信登录，openid: " + openId);
 		if (StringUtils.isNotBlank(openId)) {
 			User user = userManager.selectUserByOpenId(openId);
 			if (user == null) {
-				user = new User();
-				String api = "https://api.weixin.qq.com/cgi-bin/user/info?access_token="
-						+ accessTokenManager.getAccessToken().getToken() + "&openid=" + openId + "&lang=zh_CN";
-				String res = WechatUtil.doGetStr(api);
-				WXUser wxUser = JSON.parseObject(res, WXUser.class);
-				user.setCity(wxUser.getCity());
-				user.setCountry(wxUser.getCountry());
-				user.setGender(wxUser.getSex());
-				user.setGroupid(wxUser.getGroupid());
-				user.setHeadimgurl(wxUser.getHeadimgurl());
-				user.setLanguage(wxUser.getLanguage());
-				user.setNickName(wxUser.getNickname());
-				user.setOpenId(openId);
-				user.setStatus(0);
-				user.setProvince(wxUser.getProvince());
-				user.setRemark(wxUser.getRemark());
-				user.setSubscribe(wxUser.getSubscribe());
-				user.setSubscribeTime(new Date(wxUser.getSubscribe_time() * 1000));
-				user.setTagidList(JSON.toJson(wxUser.getTagid_list()));
+				WXUser wxUser = userManager.selectWXUserByOpenId(openId,
+						accessTokenManager.getAccessToken().getToken());
+				user = userManager.transWXUserToUser(wxUser);
 				userManager.insertUser(user);
 			}
 			setWeixinUser(user);
