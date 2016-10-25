@@ -51,10 +51,10 @@ public class WechatUtil {
 
 	// get请求，返回String
 	public static String doGetStr(String url) {
-		DefaultHttpClient client = new DefaultHttpClient();
 		HttpGet httpGet = new HttpGet(url);
 		String result = null;
 		try {
+			DefaultHttpClient client = new DefaultHttpClient();
 			HttpResponse httpResponse = client.execute(httpGet);
 			HttpEntity entity = httpResponse.getEntity();
 			if (entity != null) {
@@ -68,10 +68,10 @@ public class WechatUtil {
 
 	// post请求
 	public static String doPostStr(String url, String outStr) {
-		DefaultHttpClient client = new DefaultHttpClient();
 		HttpPost httpPost = new HttpPost(url);
 		String result = null;
 		try {
+			DefaultHttpClient client = new DefaultHttpClient();
 			HttpEntity reqEntity = new StringEntity(outStr, ContentType.APPLICATION_JSON);
 			httpPost.setEntity(reqEntity);
 			HttpResponse response = client.execute(httpPost);

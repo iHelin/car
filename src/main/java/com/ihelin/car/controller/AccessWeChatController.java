@@ -35,7 +35,7 @@ public class AccessWeChatController extends BaseController {
 	private static final Log logger = LogFactory.getLog(AccessWeChatController.class);
 
 	/**
-	 * 处理get消息-消息验证
+	 * 处理get消息：消息验证
 	 * 
 	 */
 	@RequestMapping(value = "access_wechat", method = RequestMethod.GET)
