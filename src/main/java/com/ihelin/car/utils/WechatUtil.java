@@ -92,7 +92,7 @@ public class WechatUtil {
 		return token;
 	}
 
-	public static List<Item> selectMediaByPage(String type,String accessToken, int offset, int size) {
+	public static List<Item> selectMediaByPage(String type, String accessToken, int offset, int size) {
 		String url = GET_MEDIA_URL.replace("ACCESS_TOKEN", accessToken);
 		PostData postDate = new PostData(type, offset, size);
 		String res = WechatUtil.doPostStr(url, JSON.toJson(postDate));

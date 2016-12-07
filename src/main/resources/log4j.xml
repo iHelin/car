@@ -16,7 +16,7 @@
 		<param name="Encoding" value="UTF-8" />
 		<param name="File" value="/logs/car.log" />
 		<param name="Append" value="true" />
-		<param name="MaxFileSize" value="20MB" />
+		<param name="MaxFileSize" value="20KB" />
 		<param name="MaxBackupIndex" value="50" />
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern"
